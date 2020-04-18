@@ -41,9 +41,23 @@ public class BoardBuilder
 	
 	public Board makeBoard()
 	{
+		Board board; 
 		// Change next when we have Hex boards too.
-        SquareBoard board = new SquareBoard(bi.getxMax(), bi.getyMax());
-        initializeBoard(board, bi.getLocationInitializers());
+        switch(bi.getCoordinateId()) {
+			case HEX:
+				return null;
+			case ORTHOSQUARE:
+				return null;
+			case SQUARE:
+				board = new SquareBoard(bi.getxMax(), bi.getyMax());		
+				break;
+			default:
+				return null;
+        }
+		
+        
+        
+        //initializeBoard(board, bi.getLocationInitializers());
         return board;
 	}
 	

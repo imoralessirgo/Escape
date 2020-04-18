@@ -1,0 +1,15 @@
+TODO
+ Coordinate Tests
+ 
+ SQUARE (distanceTo)
+ (1,1).distanceTo(3,3) : 2 
+ (1,1).distanceTo(4,2) : 4
+ (4,2).distanceTo(1,1) : 4
+ (3,3).distanceTo(1,1) : 2
+ 
+ 
+
+ ORTHOSQUARE (distanceTo)
+ 
+ HEX (distanceTo)
+ 

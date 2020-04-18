@@ -12,10 +12,86 @@
 
 package escape.board.coordinate;
 
+import java.util.Objects;
+
 /**
  * Description
  * @version Apr 13, 2020
  */
-public class OrthoSquareCoordinate {
+public class OrthoSquareCoordinate implements Coordinate {
+
+    private final int x;
+    private final int y;
+    
+    private OrthoSquareCoordinate(int x, int y)
+    {
+    	this.x = x;
+    	this.y = y;
+    }
+    
+    public static OrthoSquareCoordinate makeCoordinate(int x, int y)
+    {
+    	return new OrthoSquareCoordinate(x, y);
+    }
+    
+	
+	/*
+	 * @see escape.board.coordinate.Coordinate#distanceTo(escape.board.coordinate.Coordinate)
+	 */
+	@Override
+	public int distanceTo(Coordinate c) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	
+	/**
+	 * @return the x
+	 */
+	public int getX()
+	{
+		return x;
+	}
+
+	/**
+	 * @return the y
+	 */
+	public int getY()
+	{
+		return y;
+	}
+
+	/*
+	 * @see java.lang.Object#hashCode()
+	 */
+	@Override
+	public int hashCode()
+	{
+		return Objects.hash(x, y);
+	}
+
+	/*
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
+	@Override
+	public boolean equals(Object obj)
+	{
+		if (this == obj) {
+			return true;
+		}
+		if (!(obj instanceof SquareCoordinate)) {
+			return false;
+		}
+		OrthoSquareCoordinate other = (OrthoSquareCoordinate) obj;
+		return x == other.x && y == other.y;
+	}
+
+	/*
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString()
+	{
+		return "(" + x + ", " + y + ")";
+	}
 
 }
