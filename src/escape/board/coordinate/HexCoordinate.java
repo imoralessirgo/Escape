@@ -17,43 +17,39 @@ import java.util.Objects;
  */
 public class HexCoordinate implements Coordinate {
 
-    private final int x;
-    private final int y;
-    
-    private HexCoordinate(int x, int y)
-    {
-    	this.x = x;
-    	this.y = y;
-    }
-    
-    public static HexCoordinate makeCoordinate(int x, int y)
-    {
-    	return new HexCoordinate(x, y);
-    }
-    
-	
+	private final int x;
+	private final int y;
+
+	private HexCoordinate(int x, int y) {
+		this.x = x;
+		this.y = y;
+	}
+
+	public static HexCoordinate makeCoordinate(int x, int y) {
+		return new HexCoordinate(x, y);
+	}
+
 	/*
-	 * @see escape.board.coordinate.Coordinate#distanceTo(escape.board.coordinate.Coordinate)
+	 * @see
+	 * escape.board.coordinate.Coordinate#distanceTo(escape.board.coordinate.Coordinate)
 	 */
 	@Override
 	public int distanceTo(Coordinate c) {
-		
+
 		return 0;
 	}
-	
+
 	/**
 	 * @return the x
 	 */
-	public int getX()
-	{
+	public int getX() {
 		return x;
 	}
 
 	/**
 	 * @return the y
 	 */
-	public int getY()
-	{
+	public int getY() {
 		return y;
 	}
 
@@ -61,8 +57,7 @@ public class HexCoordinate implements Coordinate {
 	 * @see java.lang.Object#hashCode()
 	 */
 	@Override
-	public int hashCode()
-	{
+	public int hashCode() {
 		return Objects.hash(x, y);
 	}
 
@@ -70,8 +65,7 @@ public class HexCoordinate implements Coordinate {
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
 	@Override
-	public boolean equals(Object obj)
-	{
+	public boolean equals(Object obj) {
 		if (this == obj) {
 			return true;
 		}
@@ -86,8 +80,7 @@ public class HexCoordinate implements Coordinate {
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
-	public String toString()
-	{
+	public String toString() {
 		return "(" + x + ", " + y + ")";
 	}
 

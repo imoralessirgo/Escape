@@ -13,6 +13,7 @@
 package escape.board.coordinate;
 
 import java.util.Objects;
+import escape.exception.EscapeException;
 
 /**
  * Description
@@ -40,7 +41,15 @@ public class OrthoSquareCoordinate implements Coordinate {
 	 */
 	@Override
 	public int distanceTo(Coordinate c) {
-		// TODO Auto-generated method stub
+		if(c instanceof SquareCoordinate) {
+			SquareCoordinate to = (SquareCoordinate) c;
+			int changeInX = Math.abs(this.x - to.getX());
+			int changeInY = Math.abs(this.y - to.getY());
+			
+			
+		}else {
+			throw new EscapeException("Incompatible coordinate types");
+		}
 		return 0;
 	}
 	

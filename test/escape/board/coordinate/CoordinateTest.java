@@ -17,5 +17,9 @@ import org.junit.jupiter.api.Test;
  * @version Mar 28, 2020
  */
 class CoordinateTest {
-
+		/** SQUARE BOARD TESTS **/
+		
+		
+	
+	
 }
