@@ -31,8 +31,9 @@ public class HexCoordinate implements Coordinate {
 	}
 
 	/*
-	 * @see
-	 * escape.board.coordinate.Coordinate#distanceTo(escape.board.coordinate.Coordinate)
+	 * 
+	 * Formula retrieved from https://www.redblobgames.com/grids/hexagons/
+	 * 
 	 */
 	@Override
 	public int distanceTo(Coordinate c) {
