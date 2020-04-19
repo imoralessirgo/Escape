@@ -39,7 +39,7 @@ public class SquareCoordinate implements Coordinate {
 			SquareCoordinate to = (SquareCoordinate) c;
 			int changeInX = Math.abs(this.x - to.getX());
 			int changeInY = Math.abs(this.y - to.getY());
-
+			
 			if(changeInX > changeInY) {
 				result = changeInY;
 				result += changeInX - changeInY;
@@ -47,8 +47,9 @@ public class SquareCoordinate implements Coordinate {
 				result = changeInX;
 				result += changeInY - changeInX;
 			}
-			
+		
 		}else {
+			// Calculating distance to a different coordinate type is not allowed
 			throw new EscapeException("Incompatible coordinate types");
 		}
 		return result;
@@ -68,28 +69,6 @@ public class SquareCoordinate implements Coordinate {
 		return y;
 	}
 
-	/*
-	 * @see java.lang.Object#hashCode()
-	 */
-	@Override
-	public int hashCode() {
-		return Objects.hash(x, y);
-	}
-
-	/*
-	 * @see java.lang.Object#equals(java.lang.Object)
-	 */
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj) {
-			return true;
-		}
-		if (!(obj instanceof SquareCoordinate)) {
-			return false;
-		}
-		SquareCoordinate other = (SquareCoordinate) obj;
-		return x == other.x && y == other.y;
-	}
 
 	/*
 	 * @see java.lang.Object#toString()

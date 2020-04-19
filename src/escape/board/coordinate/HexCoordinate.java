@@ -9,6 +9,7 @@
 package escape.board.coordinate;
 
 import java.util.Objects;
+import escape.exception.EscapeException;
 
 /**
  * Description
@@ -35,8 +36,17 @@ public class HexCoordinate implements Coordinate {
 	 */
 	@Override
 	public int distanceTo(Coordinate c) {
-
-		return 0;
+		int result = 0;
+		if (c instanceof HexCoordinate) {
+			HexCoordinate to = (HexCoordinate) c;
+			result = (Math.abs(this.x - to.getX())
+					+ Math.abs(this.x + this.y - to.getX() - to.getY())
+					+ Math.abs(this.y - to.getY()));
+			result /= 2;
+		} else {
+			throw new EscapeException("Incompatible coordinate types");
+		}
+		return result;
 	}
 
 	/**
@@ -51,29 +61,6 @@ public class HexCoordinate implements Coordinate {
 	 */
 	public int getY() {
 		return y;
-	}
-
-	/*
-	 * @see java.lang.Object#hashCode()
-	 */
-	@Override
-	public int hashCode() {
-		return Objects.hash(x, y);
-	}
-
-	/*
-	 * @see java.lang.Object#equals(java.lang.Object)
-	 */
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj) {
-			return true;
-		}
-		if (!(obj instanceof SquareCoordinate)) {
-			return false;
-		}
-		HexCoordinate other = (HexCoordinate) obj;
-		return x == other.x && y == other.y;
 	}
 
 	/*

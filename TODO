@@ -16,4 +16,10 @@ TODO
  
  
  HEX (distanceTo)
+ (0,0).distanceTo(-1,2) : 2
+ (-1,2).distanceTo(2,-2) : 4
  
+ Exception
+ hex.distanceTo(square) : True
+ square.distanceTo(ortho) : True
+ ortho.distanceTo(square) : True

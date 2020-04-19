@@ -10,9 +10,10 @@ package escape.board.coordinate;
 
 import static org.junit.jupiter.api.Assertions.*;
 import java.util.stream.Stream;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.*;
+import escape.exception.EscapeException;
 
 /**
  * Tests for various coordinates
@@ -55,5 +56,37 @@ class CoordinateTest {
 				Arguments.of(OrthoSquareCoordinate.makeCoordinate(3,3), OrthoSquareCoordinate.makeCoordinate(1,1), 4, true) 
 				);
 	}
+
+	/** HEX BOARD TESTS **/
+	@ParameterizedTest
+	@MethodSource("HexBoardTestProvider")
+	void HexBoardTests(Coordinate from, Coordinate to, int r, boolean expected) {
+		assertEquals(expected, from.distanceTo(to) == r);
+	}
 	
+	static Stream<Arguments> HexBoardTestProvider() {
+		return Stream.of(
+				Arguments.of(HexCoordinate.makeCoordinate(0,0), HexCoordinate.makeCoordinate(-1,2), 2, true),
+				Arguments.of(HexCoordinate.makeCoordinate(-1,2), HexCoordinate.makeCoordinate(2,-2), 4, true),
+				Arguments.of(HexCoordinate.makeCoordinate(4,2), HexCoordinate.makeCoordinate(1,1), 4, true),
+				Arguments.of(HexCoordinate.makeCoordinate(3,3), HexCoordinate.makeCoordinate(1,1), 4, true) 
+				);
+	}
+	
+	@FunctionalInterface
+	interface calculateDistance{
+		int execute(Coordinate from, Coordinate to);
+	}
+	
+	
+	@Test
+	void invalidDistance() {
+		SquareCoordinate square = SquareCoordinate.makeCoordinate(1,1);
+		OrthoSquareCoordinate ortho = OrthoSquareCoordinate.makeCoordinate(2,2);
+		HexCoordinate hex = HexCoordinate.makeCoordinate(3,3);
+
+		Assertions.assertThrows(EscapeException.class,  () -> hex.distanceTo(square) );
+		Assertions.assertThrows(EscapeException.class,  () -> square.distanceTo(ortho) );
+		Assertions.assertThrows(EscapeException.class,  () -> ortho.distanceTo(square) );
+	}
 }
