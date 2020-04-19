@@ -65,6 +65,16 @@ public class HexCoordinate implements Coordinate {
 	}
 
 	/*
+	 * @see java.lang.Object#hashCode()
+	 */
+	@Override
+	public int hashCode()
+	{
+		return Objects.hash(x, y);
+	}
+
+	
+	/*
 	 * @see java.lang.Object#toString()
 	 */
 	@Override

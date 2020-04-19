@@ -68,7 +68,31 @@ public class SquareCoordinate implements Coordinate {
 	public int getY() {
 		return y;
 	}
+	
+	/*
+	 * @see java.lang.Object#hashCode()
+	 */
+	@Override
+	public int hashCode()
+	{
+		return Objects.hash(x, y);
+	}
 
+	/*
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
+	@Override
+	public boolean equals(Object obj)
+	{
+		if (this == obj) {
+			return true;
+		}
+		if (!(obj instanceof SquareCoordinate)) {
+			return false;
+		}
+		SquareCoordinate other = (SquareCoordinate) obj;
+		return x == other.x && y == other.y;
+	}
 
 	/*
 	 * @see java.lang.Object#toString()

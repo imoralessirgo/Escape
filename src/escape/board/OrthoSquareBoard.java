@@ -10,6 +10,7 @@ package escape.board;
 
 import java.util.*;
 import escape.board.coordinate.*;
+import escape.exception.EscapeException;
 import escape.piece.EscapePiece;
 
 /**
@@ -35,7 +36,11 @@ public class OrthoSquareBoard implements Board<OrthoSquareCoordinate> {
 	 */
 	@Override
 	public EscapePiece getPieceAt(OrthoSquareCoordinate coord) {
-		return pieces.get(coord);
+		if (inBounds(coord)) {
+			return pieces.get(coord);
+		} else {
+			throw new EscapeException("getPiece: Coordinate out of board bounds");
+		}
 	}
 
 	/*
@@ -44,10 +49,29 @@ public class OrthoSquareBoard implements Board<OrthoSquareCoordinate> {
 	 */
 	@Override
 	public void putPieceAt(EscapePiece p, OrthoSquareCoordinate coord) {
-		pieces.put(coord, p);
+		if (inBounds(coord)) {
+			pieces.put(coord, p);
+		} else {
+			throw new EscapeException("putPiece: Coordinate out of board bounds");
+		}
 	}
 
+	
+	/**
+	 * maps location type to coordinate
+	 * 
+	 * @param c coordinate
+	 * @param lt location type
+	 */
 	public void setLocationType(OrthoSquareCoordinate c, LocationType lt) {
-		squares.put(c, lt);
+		if (inBounds(c)) {
+			squares.put(c, lt);
+		} else {
+			throw new EscapeException("setType: Coordinate out of board bounds");
+		}
+	}
+	
+	private boolean inBounds(OrthoSquareCoordinate c) {
+		return c.getX() <= xMax && c.getY() <= yMax;
 	}
 }

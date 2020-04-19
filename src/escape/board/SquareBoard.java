@@ -9,6 +9,7 @@ package escape.board;
 
 import java.util.*;
 import escape.board.coordinate.SquareCoordinate;
+import escape.exception.EscapeException;
 import escape.piece.EscapePiece;
 
 /**
@@ -34,9 +35,12 @@ public class SquareBoard implements Board<SquareCoordinate> {
 	 * @see escape.board.Board#getPieceAt(escape.board.coordinate.Coordinate)
 	 */
 	@Override
-	public EscapePiece getPieceAt(SquareCoordinate coord) {
-
-		return pieces.get(coord);
+	public EscapePiece getPieceAt(SquareCoordinate coord) throws EscapeException {
+		if (inBounds(coord)) {
+			return pieces.get(coord);
+		} else {
+			throw new EscapeException("getPiece: Coordinate out of board bounds");
+		}
 	}
 
 	/*
@@ -44,11 +48,24 @@ public class SquareBoard implements Board<SquareCoordinate> {
 	 * escape.board.coordinate.Coordinate)
 	 */
 	@Override
-	public void putPieceAt(EscapePiece p, SquareCoordinate coord) {
-		pieces.put(coord, p);
+	public void putPieceAt(EscapePiece p, SquareCoordinate coord)
+			throws EscapeException {
+		if (inBounds(coord)) {
+			pieces.put(coord, p);
+		} else {
+			throw new EscapeException("putPiece: Coordinate out of board bounds");
+		}
 	}
 
 	public void setLocationType(SquareCoordinate c, LocationType lt) {
-		squares.put(c, lt);
+		if (inBounds(c)) {
+			squares.put(c, lt);
+		} else {
+			throw new EscapeException("setType: Coordinate out of board bounds");
+		}
+	}
+
+	private boolean inBounds(SquareCoordinate c) {
+		return c.getX() <= xMax && c.getY() <= yMax;
 	}
 }
