@@ -31,9 +31,7 @@ public class HexCoordinate implements Coordinate {
 	}
 
 	/*
-	 * 
 	 * Formula retrieved from https://www.redblobgames.com/grids/hexagons/
-	 * 
 	 */
 	@Override
 	public int distanceTo(Coordinate c) {
@@ -68,12 +66,22 @@ public class HexCoordinate implements Coordinate {
 	 * @see java.lang.Object#hashCode()
 	 */
 	@Override
-	public int hashCode()
-	{
+	public int hashCode() {
 		return Objects.hash(x, y);
 	}
 
-	
+	/*
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		if (!(obj instanceof HexCoordinate)) {
+			return false;
+		}
+		HexCoordinate other = (HexCoordinate) obj;
+		return x == other.x && y == other.y;
+	}
+
 	/*
 	 * @see java.lang.Object#toString()
 	 */

@@ -36,7 +36,7 @@ public class BoardBuilder {
 	}
 
 	public Board makeBoard() {
-		Board board;
+		Board board = null;
 		switch (bi.getCoordinateId()) {
 			case HEX:
 				board = new HexBoard(bi.getxMax(), bi.getyMax());
@@ -50,8 +50,6 @@ public class BoardBuilder {
 				board = new SquareBoard(bi.getxMax(), bi.getyMax());
 				initializeBoard((SquareBoard)board, bi.getLocationInitializers());
 				break;
-			default:
-				return null;
 		}
 		return board;
 	}

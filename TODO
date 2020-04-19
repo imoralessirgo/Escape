@@ -23,3 +23,34 @@ TODO
  hex.distanceTo(square) : True
  square.distanceTo(ortho) : True
  ortho.distanceTo(square) : True
+ 
+ 
+ Board Tests
+SQUARE
+- make board
+- correct type
+- putPiece
+- correct Piece
+	-name
+	-player
+- Assert Escape exception out of bounds
+- put piece at blocked
+
+ORTHOSQUARE
+- make board
+- correct type
+- putPiece
+- correct Piece
+	-name
+	-player
+- Assert Escape exception out of bounds 
+- put piece at blocked
+
+HEX
+- make board
+- correct type
+- putPiece
+- correct Piece
+	-name
+	-player
+- put piece at blocked

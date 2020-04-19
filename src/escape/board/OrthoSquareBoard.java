@@ -37,7 +37,8 @@ public class OrthoSquareBoard implements Board<OrthoSquareCoordinate> {
 	@Override
 	public EscapePiece getPieceAt(OrthoSquareCoordinate coord) {
 		if (inBounds(coord)) {
-			return pieces.get(coord);
+			EscapePiece p = pieces.get(coord);
+			return p;
 		} else {
 			throw new EscapeException("getPiece: Coordinate out of board bounds");
 		}
@@ -50,18 +51,24 @@ public class OrthoSquareBoard implements Board<OrthoSquareCoordinate> {
 	@Override
 	public void putPieceAt(EscapePiece p, OrthoSquareCoordinate coord) {
 		if (inBounds(coord)) {
-			pieces.put(coord, p);
+			if (squares.get(coord) == LocationType.BLOCK) {
+				throw new EscapeException("putPiece: Coordinate blocked");
+			}else if (squares.get(coord) != LocationType.EXIT) {
+				pieces.put(coord, p);
+				setLocationType(coord, LocationType.CLEAR);
+			}
 		} else {
 			throw new EscapeException("putPiece: Coordinate out of board bounds");
 		}
 	}
 
-	
 	/**
 	 * maps location type to coordinate
 	 * 
-	 * @param c coordinate
-	 * @param lt location type
+	 * @param c
+	 *            coordinate
+	 * @param lt
+	 *            location type
 	 */
 	public void setLocationType(OrthoSquareCoordinate c, LocationType lt) {
 		if (inBounds(c)) {
@@ -70,8 +77,8 @@ public class OrthoSquareBoard implements Board<OrthoSquareCoordinate> {
 			throw new EscapeException("setType: Coordinate out of board bounds");
 		}
 	}
-	
+
 	private boolean inBounds(OrthoSquareCoordinate c) {
-		return c.getX() <= xMax && c.getY() <= yMax;
+		return c.getX() <= xMax && c.getY() <= yMax && c.getX() > 0 && c.getY() > 0;
 	}
 }

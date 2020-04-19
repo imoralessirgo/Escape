@@ -48,6 +48,28 @@ public class OrthoSquareCoordinate implements Coordinate {
 		return result;
 	}
 
+	/*
+	 * @see java.lang.Object#hashCode()
+	 */
+	@Override
+	public int hashCode()
+	{
+		return Objects.hash(x, y);
+	}
+
+	/*
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
+	@Override
+	public boolean equals(Object obj)
+	{
+		if (!(obj instanceof OrthoSquareCoordinate)) {
+			return false;
+		}
+		OrthoSquareCoordinate other = (OrthoSquareCoordinate) obj;
+		return x == other.x && y == other.y;
+	}
+	
 	/**
 	 * @return the x
 	 */

@@ -12,6 +12,7 @@ import java.io.File;
 import org.junit.jupiter.api.*;
 import escape.board.coordinate.*;
 import escape.exception.EscapeException;
+import escape.piece.*;
 
 /**
  * Description
@@ -30,51 +31,68 @@ class BoardTest {
 		assertTrue(b instanceof SquareBoard);
 		SquareBoard sb = (SquareBoard) b;
 		assertNull(sb.getPieceAt(SquareCoordinate.makeCoordinate(3, 3)));
-		assertNotNull(sb.getPieceAt(SquareCoordinate.makeCoordinate(2, 2)));
+		EscapePiece ep = sb.getPieceAt(SquareCoordinate.makeCoordinate(2, 2));
+		assertNotNull(ep);
+		assertEquals(ep.getName(), PieceName.HORSE);
+		assertEquals(ep.getPlayer(), Player.PLAYER1);
 		Assertions.assertThrows(EscapeException.class,
 				() -> sb.getPieceAt(SquareCoordinate.makeCoordinate(9, 9)));
 		Assertions.assertThrows(EscapeException.class,
 				() -> sb.putPieceAt(null, SquareCoordinate.makeCoordinate(9, 9)));
 		Assertions.assertThrows(EscapeException.class, () -> sb
 				.setLocationType(SquareCoordinate.makeCoordinate(9, 9), null));
+		Assertions.assertThrows(EscapeException.class,
+				() -> sb.putPieceAt(null, SquareCoordinate.makeCoordinate(3, 5)));
 	}
-//
-//	/** ORTHOSQUARE BOARD TESTS **/
+
+	//
+	// /** ORTHOSQUARE BOARD TESTS **/
 	@Test
 	void orthoSquareBoard() throws Exception {
-		BoardBuilder bb = new BoardBuilder(
-				new File("config/board/OrthoTest.xml"));
+		BoardBuilder bb = new BoardBuilder(new File("config/board/OrthoTest.xml"));
 		Board b = bb.makeBoard();
 		assertNotNull(b);
 		assertTrue(b instanceof OrthoSquareBoard);
 		OrthoSquareBoard sb = (OrthoSquareBoard) b;
 		assertNull(sb.getPieceAt(OrthoSquareCoordinate.makeCoordinate(3, 3)));
-		//assertNotNull(sb.getPieceAt(OrthoSquareCoordinate.makeCoordinate(2, 2)));
+		EscapePiece ep = sb.getPieceAt(OrthoSquareCoordinate.makeCoordinate(2, 2));
+		assertNotNull(ep);
+		assertEquals(ep.getName(), PieceName.HORSE);
+		assertEquals(ep.getPlayer(), Player.PLAYER1);
 		Assertions.assertThrows(EscapeException.class,
 				() -> sb.getPieceAt(OrthoSquareCoordinate.makeCoordinate(9, 9)));
-		Assertions.assertThrows(EscapeException.class,
-				() -> sb.putPieceAt(null, OrthoSquareCoordinate.makeCoordinate(9, 9)));
+		Assertions.assertThrows(EscapeException.class, () -> sb.putPieceAt(null,
+				OrthoSquareCoordinate.makeCoordinate(9, 9)));
 		Assertions.assertThrows(EscapeException.class, () -> sb
 				.setLocationType(OrthoSquareCoordinate.makeCoordinate(9, 9), null));
+		Assertions.assertThrows(EscapeException.class,
+				() -> sb.putPieceAt(null, OrthoSquareCoordinate.makeCoordinate(3, 5)));
 	}
 
 	/** HEX BOARD TESTS **/
 	@Test
 	void hexBoard() throws Exception {
-		BoardBuilder bb = new BoardBuilder(
-				new File("config/board/HexTest.xml"));
+		BoardBuilder bb = new BoardBuilder(new File("config/board/HexTest.xml"));
 		Board b = bb.makeBoard();
 		assertNotNull(b);
 		assertTrue(b instanceof HexBoard);
 		HexBoard sb = (HexBoard) b;
 		assertNull(sb.getPieceAt(HexCoordinate.makeCoordinate(3, 3)));
-//		assertNotNull(sb.getPieceAt(HexCoordinate.makeCoordinate(2, 2)));
-//		Assertions.assertThrows(EscapeException.class,
-//				() -> sb.getPieceAt(SquareCoordinate.makeCoordinate(9, 9)));
-//		Assertions.assertThrows(EscapeException.class,
-//				() -> sb.putPieceAt(null, SquareCoordinate.makeCoordinate(9, 9)));
-//		Assertions.assertThrows(EscapeException.class, () -> sb
-//				.setLocationType(SquareCoordinate.makeCoordinate(9, 9), null));
+		EscapePiece ep = sb.getPieceAt(HexCoordinate.makeCoordinate(2, 2));
+		assertNotNull(ep);
+		assertEquals(ep.getName(), PieceName.HORSE);
+		assertEquals(ep.getPlayer(), Player.PLAYER1);
+		Assertions.assertThrows(EscapeException.class,
+				() -> sb.putPieceAt(null, HexCoordinate.makeCoordinate(3, 5)));
+
+	}
+
+	/** FAKE BOARD TESTS **/
+	@Test
+	void fakeBoard() throws Exception {
+		BoardBuilder bb = new BoardBuilder(
+				new File("config/board/BoardConfig2.xml"));
+		Assertions.assertThrows(NullPointerException.class, () -> bb.makeBoard());
 	}
 
 }

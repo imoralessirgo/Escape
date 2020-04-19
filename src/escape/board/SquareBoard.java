@@ -51,7 +51,12 @@ public class SquareBoard implements Board<SquareCoordinate> {
 	public void putPieceAt(EscapePiece p, SquareCoordinate coord)
 			throws EscapeException {
 		if (inBounds(coord)) {
-			pieces.put(coord, p);
+			if (squares.get(coord) == LocationType.BLOCK) {
+				throw new EscapeException("putPiece: Coordinate blocked");
+			} else if (squares.get(coord) != LocationType.EXIT) {
+				pieces.put(coord, p);
+				setLocationType(coord, LocationType.CLEAR);
+			}
 		} else {
 			throw new EscapeException("putPiece: Coordinate out of board bounds");
 		}
@@ -66,6 +71,6 @@ public class SquareBoard implements Board<SquareCoordinate> {
 	}
 
 	private boolean inBounds(SquareCoordinate c) {
-		return c.getX() <= xMax && c.getY() <= yMax;
+		return c.getX() <= xMax && c.getY() <= yMax && c.getX() > 0 && c.getY() > 0;
 	}
 }

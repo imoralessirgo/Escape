@@ -10,14 +10,13 @@ package escape.board;
 
 import java.util.*;
 import escape.board.coordinate.*;
+import escape.exception.EscapeException;
 import escape.piece.EscapePiece;
 
 /**
- *  This board has hexagonal coordinates.
- *  This board can be both infinite and finite, xMax and YMax
- *  are set to define boundries.
- *  
- *  For this implementation, the board will be infinite.
+ * This board has hexagonal coordinates. This board can be both infinite and finite, xMax
+ * and YMax are set to define boundries. For this implementation, the board will be
+ * infinite.
  * 
  * @version Apr 18, 2020
  */
@@ -26,6 +25,7 @@ public class HexBoard implements Board<HexCoordinate> {
 	Map<HexCoordinate, EscapePiece> pieces;
 
 	private final int xMax, yMax;
+
 	public HexBoard(int xMax, int yMax) {
 		this.xMax = xMax;
 		this.yMax = yMax;
@@ -47,7 +47,12 @@ public class HexBoard implements Board<HexCoordinate> {
 	 */
 	@Override
 	public void putPieceAt(EscapePiece p, HexCoordinate coord) {
-		pieces.put(coord, p);
+		if (hexagons.get(coord) == LocationType.BLOCK) {
+			throw new EscapeException("putPiece: Coordinate blocked");
+		} else if (hexagons.get(coord) != LocationType.EXIT) {
+			pieces.put(coord, p);
+			setLocationType(coord, LocationType.CLEAR);
+		}
 	}
 
 	public void setLocationType(HexCoordinate c, LocationType lt) {

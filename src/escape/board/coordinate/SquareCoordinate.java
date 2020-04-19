@@ -84,9 +84,6 @@ public class SquareCoordinate implements Coordinate {
 	@Override
 	public boolean equals(Object obj)
 	{
-		if (this == obj) {
-			return true;
-		}
 		if (!(obj instanceof SquareCoordinate)) {
 			return false;
 		}
