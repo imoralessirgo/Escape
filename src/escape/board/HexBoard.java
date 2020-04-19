@@ -13,16 +13,19 @@ import escape.board.coordinate.*;
 import escape.piece.EscapePiece;
 
 /**
- * Description
+ *  This board has hexagonal coordinates.
+ *  This board can be both infinite and finite, xMax and YMax
+ *  are set to define boundries.
+ *  
+ *  For this implementation, the board will be infinite.
  * 
  * @version Apr 18, 2020
  */
-public class HexBoard implements Board {
+public class HexBoard implements Board<HexCoordinate> {
 	Map<HexCoordinate, LocationType> hexagons;
 	Map<HexCoordinate, EscapePiece> pieces;
 
 	private final int xMax, yMax;
-
 	public HexBoard(int xMax, int yMax) {
 		this.xMax = xMax;
 		this.yMax = yMax;
@@ -35,8 +38,7 @@ public class HexBoard implements Board {
 	 */
 	@Override
 	public EscapePiece getPieceAt(HexCoordinate coord) {
-		// TODO Auto-generated method stub
-		return null;
+		return pieces.get(coord);
 	}
 
 	/*
@@ -45,30 +47,11 @@ public class HexBoard implements Board {
 	 */
 	@Override
 	public void putPieceAt(EscapePiece p, HexCoordinate coord) {
-		// TODO Auto-generated method stub
-
+		pieces.put(coord, p);
 	}
 
-	public void setLocationType(SquareCoordinate c, LocationType lt) {
-		squares.put(c, lt);
+	public void setLocationType(HexCoordinate c, LocationType lt) {
+		hexagons.put(c, lt);
 	}
 
-	/*
-	 * @see escape.board.Board#getPieceAt(escape.board.coordinate.Coordinate)
-	 */
-	@Override
-	public EscapePiece getPieceAt(Coordinate coord) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	/*
-	 * @see escape.board.Board#putPieceAt(escape.piece.EscapePiece,
-	 * escape.board.coordinate.Coordinate)
-	 */
-	@Override
-	public void putPieceAt(EscapePiece p, Coordinate coord) {
-		// TODO Auto-generated method stub
-
-	}
 }

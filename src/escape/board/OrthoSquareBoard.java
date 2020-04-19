@@ -2,40 +2,39 @@
  * This files was developed for CS4233: Object-Oriented Analysis & Design. The course was
  * taken at Worcester Polytechnic Institute. All rights reserved. This program and the
  * accompanying materials are made available under the terms of the Eclipse Public License
- * v2.0 which accompanies this distribution, and is available at
- * https://www.eclipse.org/legal/epl-2.0/ Copyright ©2016-2020 Gary F. Pollice
+ * v1.0 which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html Copyright ©2016 Gary F. Pollice
  *******************************************************************************/
+
 package escape.board;
 
 import java.util.*;
-import escape.board.coordinate.SquareCoordinate;
+import escape.board.coordinate.*;
 import escape.piece.EscapePiece;
 
 /**
- * This board has square coordinates and finite bounds, represented by xMax and yMax. All
- * methods required by the Board interface have been implemented.
+ * Description
  * 
- * @version Apr 2, 2020
+ * @version Apr 19, 2020
  */
-public class SquareBoard implements Board<SquareCoordinate> {
-	Map<SquareCoordinate, LocationType> squares;
-	Map<SquareCoordinate, EscapePiece> pieces;
+public class OrthoSquareBoard implements Board<OrthoSquareCoordinate> {
+	Map<OrthoSquareCoordinate, LocationType> squares;
+	Map<OrthoSquareCoordinate, EscapePiece> pieces;
 
 	private final int xMax, yMax;
 
-	public SquareBoard(int xMax, int yMax) {
+	public OrthoSquareBoard(int xMax, int yMax) {
 		this.xMax = xMax;
 		this.yMax = yMax;
-		pieces = new HashMap<SquareCoordinate, EscapePiece>();
-		squares = new HashMap<SquareCoordinate, LocationType>();
+		pieces = new HashMap<OrthoSquareCoordinate, EscapePiece>();
+		squares = new HashMap<OrthoSquareCoordinate, LocationType>();
 	}
 
 	/*
 	 * @see escape.board.Board#getPieceAt(escape.board.coordinate.Coordinate)
 	 */
 	@Override
-	public EscapePiece getPieceAt(SquareCoordinate coord) {
-
+	public EscapePiece getPieceAt(OrthoSquareCoordinate coord) {
 		return pieces.get(coord);
 	}
 
@@ -44,11 +43,11 @@ public class SquareBoard implements Board<SquareCoordinate> {
 	 * escape.board.coordinate.Coordinate)
 	 */
 	@Override
-	public void putPieceAt(EscapePiece p, SquareCoordinate coord) {
+	public void putPieceAt(EscapePiece p, OrthoSquareCoordinate coord) {
 		pieces.put(coord, p);
 	}
 
-	public void setLocationType(SquareCoordinate c, LocationType lt) {
+	public void setLocationType(OrthoSquareCoordinate c, LocationType lt) {
 		squares.put(c, lt);
 	}
 }

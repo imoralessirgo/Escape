@@ -42,7 +42,6 @@ public class BoardBuilder
 	public Board makeBoard()
 	{
 		Board board; 
-		// Change next when we have Hex boards too.
         switch(bi.getCoordinateId()) {
 			case HEX:
 				return null;
