@@ -20,7 +20,7 @@ package escape.board.coordinate;
  *  an instance of the appropriate. For example in the 2D coordinate
  *  you might have:
  *  
- *  public static Coordinate2D makeCoordinate(int x, int y)
+ *  public static Coordinate2D mazoomkeCoordinate(int x, int y)
  *  
  * @version Mar 31, 2020
  */

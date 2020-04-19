@@ -34,16 +34,24 @@ public class SquareCoordinate implements Coordinate {
 	 */
 	@Override
 	public int distanceTo(Coordinate c) throws EscapeException{
+		int result = 0; 	
 		if(c instanceof SquareCoordinate) {
 			SquareCoordinate to = (SquareCoordinate) c;
 			int changeInX = Math.abs(this.x - to.getX());
 			int changeInY = Math.abs(this.y - to.getY());
-			
+
+			if(changeInX > changeInY) {
+				result = changeInY;
+				result += changeInX - changeInY;
+			}else {
+				result = changeInX;
+				result += changeInY - changeInX;
+			}
 			
 		}else {
 			throw new EscapeException("Incompatible coordinate types");
 		}
-		return 0;
+		return result;
 	}
 
 	/**

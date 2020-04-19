@@ -41,16 +41,16 @@ public class OrthoSquareCoordinate implements Coordinate {
 	 */
 	@Override
 	public int distanceTo(Coordinate c) {
-		if(c instanceof SquareCoordinate) {
-			SquareCoordinate to = (SquareCoordinate) c;
+		int result = 0;
+		if(c instanceof OrthoSquareCoordinate) {
+			OrthoSquareCoordinate to = (OrthoSquareCoordinate) c;
 			int changeInX = Math.abs(this.x - to.getX());
 			int changeInY = Math.abs(this.y - to.getY());
-			
-			
+			result = changeInX + changeInY;
 		}else {
 			throw new EscapeException("Incompatible coordinate types");
 		}
-		return 0;
+		return result;
 	}
 	
 	/**
