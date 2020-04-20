@@ -42,7 +42,9 @@ class BoardTest {
 		Assertions.assertThrows(EscapeException.class, () -> sb
 				.setLocationType(SquareCoordinate.makeCoordinate(9, 9), null));
 		Assertions.assertThrows(EscapeException.class,
-				() -> sb.putPieceAt(null, SquareCoordinate.makeCoordinate(3, 5)));
+				() -> sb.putPieceAt(ep, SquareCoordinate.makeCoordinate(3, 5)));
+		b.putPieceAt(null, SquareCoordinate.makeCoordinate(2, 2));
+		assertNull(sb.getPieceAt(SquareCoordinate.makeCoordinate(2, 2)));
 	}
 
 	//
@@ -66,7 +68,10 @@ class BoardTest {
 		Assertions.assertThrows(EscapeException.class, () -> sb
 				.setLocationType(OrthoSquareCoordinate.makeCoordinate(9, 9), null));
 		Assertions.assertThrows(EscapeException.class,
-				() -> sb.putPieceAt(null, OrthoSquareCoordinate.makeCoordinate(3, 5)));
+				() -> sb.putPieceAt(ep, OrthoSquareCoordinate.makeCoordinate(3, 5)));
+		b.putPieceAt(null, OrthoSquareCoordinate.makeCoordinate(2, 2));
+		assertNull(sb.getPieceAt(OrthoSquareCoordinate.makeCoordinate(2, 2)));
+		
 	}
 
 	/** HEX BOARD TESTS **/
@@ -83,8 +88,9 @@ class BoardTest {
 		assertEquals(ep.getName(), PieceName.HORSE);
 		assertEquals(ep.getPlayer(), Player.PLAYER1);
 		Assertions.assertThrows(EscapeException.class,
-				() -> sb.putPieceAt(null, HexCoordinate.makeCoordinate(3, 5)));
-
+				() -> sb.putPieceAt(ep, HexCoordinate.makeCoordinate(3, 5)));
+		b.putPieceAt(null, HexCoordinate.makeCoordinate(2, 2));
+		assertNull(sb.getPieceAt(HexCoordinate.makeCoordinate(2, 2)));
 	}
 
 	/** FAKE BOARD TESTS **/

@@ -47,7 +47,10 @@ public class HexBoard implements Board<HexCoordinate> {
 	 */
 	@Override
 	public void putPieceAt(EscapePiece p, HexCoordinate coord) {
-		if (hexagons.get(coord) == LocationType.BLOCK) {
+		if(p == null) {
+			hexagons.remove(coord);
+			pieces.remove(coord);
+		}else if (hexagons.get(coord) == LocationType.BLOCK) {
 			throw new EscapeException("putPiece: Coordinate blocked");
 		} else if (hexagons.get(coord) != LocationType.EXIT) {
 			pieces.put(coord, p);

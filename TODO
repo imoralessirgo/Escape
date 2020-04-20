@@ -35,6 +35,7 @@ SQUARE
 	-player
 - Assert Escape exception out of bounds
 - put piece at blocked
+- remove piece when given NULL
 
 ORTHOSQUARE
 - make board
@@ -45,6 +46,7 @@ ORTHOSQUARE
 	-player
 - Assert Escape exception out of bounds 
 - put piece at blocked
+- remove piece when given NULL
 
 HEX
 - make board
@@ -54,3 +56,4 @@ HEX
 	-name
 	-player
 - put piece at blocked
+- remove piece when given NULL

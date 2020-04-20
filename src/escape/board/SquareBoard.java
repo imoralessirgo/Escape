@@ -51,7 +51,10 @@ public class SquareBoard implements Board<SquareCoordinate> {
 	public void putPieceAt(EscapePiece p, SquareCoordinate coord)
 			throws EscapeException {
 		if (inBounds(coord)) {
-			if (squares.get(coord) == LocationType.BLOCK) {
+			if(p == null) {
+				squares.remove(coord);
+				pieces.remove(coord);
+			}else if (squares.get(coord) == LocationType.BLOCK) {
 				throw new EscapeException("putPiece: Coordinate blocked");
 			} else if (squares.get(coord) != LocationType.EXIT) {
 				pieces.put(coord, p);

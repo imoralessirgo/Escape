@@ -51,7 +51,10 @@ public class OrthoSquareBoard implements Board<OrthoSquareCoordinate> {
 	@Override
 	public void putPieceAt(EscapePiece p, OrthoSquareCoordinate coord) {
 		if (inBounds(coord)) {
-			if (squares.get(coord) == LocationType.BLOCK) {
+			if(p == null) {
+				squares.remove(coord);
+				pieces.remove(coord);
+			}else if (squares.get(coord) == LocationType.BLOCK) {
 				throw new EscapeException("putPiece: Coordinate blocked");
 			}else if (squares.get(coord) != LocationType.EXIT) {
 				pieces.put(coord, p);
