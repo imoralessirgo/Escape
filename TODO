@@ -57,3 +57,6 @@ HEX
 	-player
 - put piece at blocked
 - remove piece when given NULL
+
+FakeBoard
+- NullPointerException for invalid type
