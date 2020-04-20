@@ -35,6 +35,12 @@ public class BoardBuilder {
 		bi = (BoardInitializer) mub.unmarshal(new FileReader(fileName));
 	}
 
+	
+	/**
+	 * Builds the desired board and 
+	 * initializes it.
+	 * @return board of given type
+	 */
 	public Board makeBoard() {
 		Board board = null;
 		switch (bi.getCoordinateId()) {
