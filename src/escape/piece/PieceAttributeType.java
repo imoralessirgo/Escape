@@ -8,10 +8,10 @@
 package escape.piece;
 
 /**
- * Description
+ * Enum to identify the type of the attribute.
  * 
- * @version Mar 30, 2020
+ * @version Apr 22, 2020
  */
-public enum PieceName {
-	SNAIL, FROG, HUMMINGBIRD, FOX, HORSE;
+public enum PieceAttributeType {
+	INTEGER, BOOLEAN
 }

@@ -2,35 +2,55 @@
  * This files was developed for CS4233: Object-Oriented Analysis & Design. The course was
  * taken at Worcester Polytechnic Institute. All rights reserved. This program and the
  * accompanying materials are made available under the terms of the Eclipse Public License
- * v2.0 which accompanies this distribution, and is available at
- * https://www.eclipse.org/legal/epl-2.0/ Copyright ©2016-2020 Gary F. Pollice
+ * v1.0 which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html Copyright ©2020 Gary F. Pollice
  *******************************************************************************/
+
 package escape.util;
 
 import java.util.Arrays;
-import javax.xml.bind.annotation.*;
+import javax.xml.bind.annotation.XmlRootElement;
 import escape.board.coordinate.CoordinateID;
 
 /**
- * This class is basically a Java Bean that contains all of the information needed to
- * initialize a Board.
+ * An example of reading a game configuration file and the board and piece initializers
+ * that it
  * 
- * @version Mar 30, 2020
+ * @version Apr 22, 2020
  */
 @XmlRootElement
-public class BoardInitializer {
+public class EscapeGameInitializer {
+	private CoordinateID coordinateType;
+
+	// Board items
 	private int xMax, yMax;
-	private CoordinateID coordinateId;
 	private LocationInitializer[] locationInitializers;
 
-	public BoardInitializer() {
+	// Piece items
+	private PieceTypeInitializer[] pieceTypes; // At least one
+
+	public EscapeGameInitializer() {
 		// Needed for JAXB
+	}
+
+	/**
+	 * @return the coordinateType
+	 */
+	public CoordinateID getCoordinateType() {
+		return coordinateType;
+	}
+
+	/**
+	 * @param coordinateType
+	 *            the coordinateType to set
+	 */
+	public void setCoordinateType(CoordinateID coordinateType) {
+		this.coordinateType = coordinateType;
 	}
 
 	/**
 	 * @return the xMax
 	 */
-	@XmlElement
 	public int getxMax() {
 		return xMax;
 	}
@@ -46,7 +66,6 @@ public class BoardInitializer {
 	/**
 	 * @return the yMax
 	 */
-	@XmlElement
 	public int getyMax() {
 		return yMax;
 	}
@@ -60,25 +79,8 @@ public class BoardInitializer {
 	}
 
 	/**
-	 * @return the coordinateId
-	 */
-	@XmlElement
-	public CoordinateID getCoordinateId() {
-		return coordinateId;
-	}
-
-	/**
-	 * @param coordinateId
-	 *            the coordinateId to set
-	 */
-	public void setCoordinateId(CoordinateID coordinateId) {
-		this.coordinateId = coordinateId;
-	}
-
-	/**
 	 * @return the locationInitializers
 	 */
-	@XmlElement
 	public LocationInitializer[] getLocationInitializers() {
 		return locationInitializers;
 	}
@@ -92,13 +94,30 @@ public class BoardInitializer {
 		this.locationInitializers = locationInitializers;
 	}
 
+	/**
+	 * @return the types
+	 */
+	public PieceTypeInitializer[] getPieceTypes() {
+		return pieceTypes;
+	}
+
+	/**
+	 * @param types
+	 *            the types to set
+	 */
+	public void setPieceTypes(PieceTypeInitializer... types) {
+		this.pieceTypes = types;
+	}
+
 	/*
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
 	public String toString() {
-		return "BoardInitializer [xMax=" + xMax + ", yMax=" + yMax
-				+ ", coordinateId=" + coordinateId + ", locationInitializers="
-				+ Arrays.toString(locationInitializers) + "]";
+		return "EscapeGameInitializer [xMax=" + xMax + ", yMax=" + yMax
+				+ ", coordinateType=" + coordinateType + ", locationInitializers="
+				+ Arrays.toString(locationInitializers) + ", types="
+				+ Arrays.toString(pieceTypes) + "]";
 	}
+
 }

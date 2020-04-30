@@ -1,4 +1,5 @@
 TODO
+====== ALPHA =====
  Coordinate Tests
  
  SQUARE (distanceTo)
@@ -60,3 +61,10 @@ HEX
 
 FakeBoard
 - NullPointerException for invalid type
+
+
+
+====BETA====
+
+
+
