@@ -47,6 +47,21 @@ public class EscapeGameBuilder {
 	 */
 	public EscapeGameManager makeGameManager() {
 		// To be implemented
-		return null;
+		
+		EscapeGameManager gameController = null; 
+		switch(gameInitializer.getCoordinateType()) {
+			case HEX:
+				gameController = new HexGameController();
+				break;
+			case ORTHOSQUARE:
+				gameController = new OrthoGameController();
+				break;
+			case SQUARE:
+				gameController = new SquareGameContoller();
+				break;
+			default:
+				break;
+		}
+		return gameController;
 	}
 }

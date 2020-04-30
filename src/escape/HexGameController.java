@@ -12,23 +12,20 @@
 
 package escape;
 
-import escape.board.SquareBoard;
-import escape.board.coordinate.*;
+import escape.board.coordinate.HexCoordinate;
 import escape.piece.EscapePiece;
 
 /**
  * Description
  * @version Apr 29, 2020
  */
-public class SquareGameContoller implements EscapeGameManager<SquareCoordinate> {
+public class HexGameController implements EscapeGameManager<HexCoordinate> {
 
-	private SquareBoard board;
-	
 	/*
 	 * @see escape.EscapeGameManager#move(escape.board.coordinate.Coordinate, escape.board.coordinate.Coordinate)
 	 */
 	@Override
-	public boolean move(SquareCoordinate from, SquareCoordinate to) {
+	public boolean move(HexCoordinate from, HexCoordinate to) {
 		// TODO Auto-generated method stub
 		return false;
 	}
@@ -37,7 +34,7 @@ public class SquareGameContoller implements EscapeGameManager<SquareCoordinate> 
 	 * @see escape.EscapeGameManager#getPieceAt(escape.board.coordinate.Coordinate)
 	 */
 	@Override
-	public EscapePiece getPieceAt(SquareCoordinate coordinate) {
+	public EscapePiece getPieceAt(HexCoordinate coordinate) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -46,11 +43,9 @@ public class SquareGameContoller implements EscapeGameManager<SquareCoordinate> 
 	 * @see escape.EscapeGameManager#makeCoordinate(int, int)
 	 */
 	@Override
-	public SquareCoordinate makeCoordinate(int x, int y) {
+	public HexCoordinate makeCoordinate(int x, int y) {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
-
 
 }
