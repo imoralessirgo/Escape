@@ -21,7 +21,7 @@ import escape.*;
 class BetaEscapeGameTests {
 
 	/**
-	 * Example of how the game manager tests will be structured.
+	 * test proper controller for board
 	 * 
 	 * @throws Exception
 	 */
@@ -30,35 +30,32 @@ class BetaEscapeGameTests {
 		EscapeGameBuilder egb = new EscapeGameBuilder(
 				new File("config/SampleEscapeGame.xml"));
 		EscapeGameManager emg = egb.makeGameManager();
-		// Exercise the game now: make moves, check the board, etc.
 		assertTrue(emg instanceof SquareGameController);
 	}
 
 	/**
-	 * Example of how the game manager tests will be structured.
+	 * test proper controller for board
 	 * 
 	 * @throws Exception
 	 */
 	@Test
 	void orthoTest() throws Exception {
 		EscapeGameBuilder egb = new EscapeGameBuilder(
-				new File("config/SampleEscapeGame.xml"));
+				new File("config/SampleEscapeGame3.xml"));
 		EscapeGameManager emg = egb.makeGameManager();
-		// Exercise the game now: make moves, check the board, etc.
 		assertTrue(emg instanceof OrthoGameController);
 	}
 
 	/**
-	 * Example of how the game manager tests will be structured.
+	 * test proper controller for board
 	 * 
 	 * @throws Exception
 	 */
 	@Test
 	void hexTest() throws Exception {
 		EscapeGameBuilder egb = new EscapeGameBuilder(
-				new File("config/SampleEscapeGame.xml"));
+				new File("config/SampleEscapeGame2.xml"));
 		EscapeGameManager emg = egb.makeGameManager();
-		// Exercise the game now: make moves, check the board, etc.
 		assertTrue(emg instanceof HexGameController);
 	}
 

@@ -55,7 +55,7 @@ public class SquareGameController implements EscapeGameManager<SquareCoordinate>
 	@Override
 	public boolean move(SquareCoordinate from, SquareCoordinate to) {
 		int distance = from.distanceTo(to);
-		EscapePiece p = board.getPieceAt(from);
+		EscapePiece p = getPieceAt(from);
 		
 		return false;
 	}
@@ -65,8 +65,7 @@ public class SquareGameController implements EscapeGameManager<SquareCoordinate>
 	 */
 	@Override
 	public EscapePiece getPieceAt(SquareCoordinate coordinate) {
-		// TODO Auto-generated method stub
-		return null;
+		return board.getPieceAt(coordinate);
 	}
 
 	/*

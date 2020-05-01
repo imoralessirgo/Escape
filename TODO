@@ -65,6 +65,11 @@ FakeBoard
 
 
 ==== BETA ====
+BetaEscapeGameTests
+
+SampleEscapeGame instanceof SquareGameController : true
+SampleEscapeGame3 instanceof OrthoGameController : true
+SampleEscapeGame2 instanceof HexGameController : true
 
 
 
