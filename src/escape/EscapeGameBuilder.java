@@ -10,6 +10,8 @@ package escape;
 
 import java.io.*;
 import javax.xml.bind.*;
+import escape.board.*;
+import escape.exception.EscapeException;
 import escape.util.EscapeGameInitializer;
 
 /**
@@ -46,21 +48,29 @@ public class EscapeGameBuilder {
 	 * @return
 	 */
 	public EscapeGameManager makeGameManager() {
-		// To be implemented
 		
-		EscapeGameManager gameController = null; 
-		switch(gameInitializer.getCoordinateType()) {
+		EscapeGameManager gameController = null;
+		switch (gameInitializer.getCoordinateType()) {
 			case HEX:
-				gameController = new HexGameController();
+				gameController = new HexGameController(new HexBoard(
+						gameInitializer.getxMax(), gameInitializer.getyMax()),
+						gameInitializer.getPieceTypes(),
+						gameInitializer.getLocationInitializers());
 				break;
 			case ORTHOSQUARE:
-				gameController = new OrthoGameController();
+				gameController = new OrthoGameController(new OrthoSquareBoard(
+						gameInitializer.getxMax(), gameInitializer.getyMax()),
+						gameInitializer.getPieceTypes(),
+						gameInitializer.getLocationInitializers());
 				break;
 			case SQUARE:
-				gameController = new SquareGameContoller();
+				gameController = new SquareGameController(new SquareBoard(
+						gameInitializer.getxMax(), gameInitializer.getyMax()),
+						gameInitializer.getPieceTypes(),
+						gameInitializer.getLocationInitializers());
 				break;
 			default:
-				break;
+				throw new EscapeException("Invalid board type");
 		}
 		return gameController;
 	}

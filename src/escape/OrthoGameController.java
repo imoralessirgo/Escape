@@ -12,8 +12,11 @@
 
 package escape;
 
-import escape.board.coordinate.OrthoSquareCoordinate;
+import static escape.board.LocationType.CLEAR;
+import escape.board.*;
+import escape.board.coordinate.*;
 import escape.piece.EscapePiece;
+import escape.util.*;
 
 /**
  * Description
@@ -21,6 +24,29 @@ import escape.piece.EscapePiece;
  */
 public class OrthoGameController implements EscapeGameManager<OrthoSquareCoordinate> {
 
+	OrthoSquareBoard board;
+	PieceTypeInitializer[] pt;
+	
+	/**
+	 * Constructor
+	 * @param board
+	 * @param initializers
+	 */
+	OrthoGameController(OrthoSquareBoard board, PieceTypeInitializer[] pt, LocationInitializer... initializers) {
+		this.board = board;
+		this.pt = pt;
+		if(initializers == null) {return;}
+		for (LocationInitializer li : initializers) {
+			OrthoSquareCoordinate c = makeCoordinate(li.x, li.y);
+			if (li.pieceName != null) {
+				board.putPieceAt(new EscapePiece(li.player, li.pieceName), c);
+			}
+			if (li.locationType != null && li.locationType != CLEAR) {
+				board.setLocationType(c, li.locationType);
+			}
+		}
+	}
+	
 	/*
 	 * @see escape.EscapeGameManager#move(escape.board.coordinate.Coordinate, escape.board.coordinate.Coordinate)
 	 */
@@ -44,8 +70,7 @@ public class OrthoGameController implements EscapeGameManager<OrthoSquareCoordin
 	 */
 	@Override
 	public OrthoSquareCoordinate makeCoordinate(int x, int y) {
-		// TODO Auto-generated method stub
-		return null;
+		return OrthoSquareCoordinate.makeCoordinate(x, y);
 	}
 
 }

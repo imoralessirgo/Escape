@@ -62,6 +62,7 @@ public class BoardBuilder {
 
 	private void initializeBoard(SquareBoard b,
 			LocationInitializer... initializers) {
+		if(initializers == null) {return;}
 		for (LocationInitializer li : initializers) {
 			SquareCoordinate c = SquareCoordinate.makeCoordinate(li.x, li.y);
 			if (li.pieceName != null) {
@@ -76,6 +77,7 @@ public class BoardBuilder {
 
 	private void initializeBoard(OrthoSquareBoard b,
 			LocationInitializer... initializers) {
+		if(initializers == null) {return;}
 		for (LocationInitializer li : initializers) {
 			OrthoSquareCoordinate c = OrthoSquareCoordinate.makeCoordinate(li.x,
 					li.y);
@@ -91,6 +93,7 @@ public class BoardBuilder {
 
 	private void initializeBoard(HexBoard b,
 			LocationInitializer... initializers) {
+		if(initializers == null) {return;}
 		for (LocationInitializer li : initializers) {
 			HexCoordinate c = HexCoordinate.makeCoordinate(li.x,
 					li.y);

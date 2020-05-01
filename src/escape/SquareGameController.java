@@ -9,7 +9,7 @@
 package escape;
 
 import static escape.board.LocationType.CLEAR;
-import escape.board.HexBoard;
+import escape.board.SquareBoard;
 import escape.board.coordinate.*;
 import escape.piece.EscapePiece;
 import escape.util.*;
@@ -19,17 +19,18 @@ import escape.util.*;
  * 
  * @version Apr 29, 2020
  */
-public class HexGameController implements EscapeGameManager<HexCoordinate> {
+public class SquareGameController implements EscapeGameManager<SquareCoordinate> {
 
-	HexBoard board;
+	private SquareBoard board;
 	PieceTypeInitializer[] pt;
 
 	/**
-	 * Description
+	 * Constructor
 	 * 
 	 * @param board
+	 * @param initializers
 	 */
-	public HexGameController(HexBoard board, PieceTypeInitializer[] pt,
+	SquareGameController(SquareBoard board, PieceTypeInitializer[] pt,
 			LocationInitializer... initializers) {
 		this.board = board;
 		this.pt = pt;
@@ -37,7 +38,7 @@ public class HexGameController implements EscapeGameManager<HexCoordinate> {
 			return;
 		}
 		for (LocationInitializer li : initializers) {
-			HexCoordinate c = makeCoordinate(li.x, li.y);
+			SquareCoordinate c = makeCoordinate(li.x, li.y);
 			if (li.pieceName != null) {
 				board.putPieceAt(new EscapePiece(li.player, li.pieceName), c);
 			}
@@ -52,8 +53,10 @@ public class HexGameController implements EscapeGameManager<HexCoordinate> {
 	 * escape.board.coordinate.Coordinate)
 	 */
 	@Override
-	public boolean move(HexCoordinate from, HexCoordinate to) {
-		// TODO Auto-generated method stub
+	public boolean move(SquareCoordinate from, SquareCoordinate to) {
+		int distance = from.distanceTo(to);
+		EscapePiece p = board.getPieceAt(from);
+		
 		return false;
 	}
 
@@ -61,7 +64,7 @@ public class HexGameController implements EscapeGameManager<HexCoordinate> {
 	 * @see escape.EscapeGameManager#getPieceAt(escape.board.coordinate.Coordinate)
 	 */
 	@Override
-	public EscapePiece getPieceAt(HexCoordinate coordinate) {
+	public EscapePiece getPieceAt(SquareCoordinate coordinate) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -70,8 +73,8 @@ public class HexGameController implements EscapeGameManager<HexCoordinate> {
 	 * @see escape.EscapeGameManager#makeCoordinate(int, int)
 	 */
 	@Override
-	public HexCoordinate makeCoordinate(int x, int y) {
-		return HexCoordinate.makeCoordinate(x, y);
+	public SquareCoordinate makeCoordinate(int x, int y) {
+		return SquareCoordinate.makeCoordinate(x, y);
 	}
 
 }
