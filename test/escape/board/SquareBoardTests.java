@@ -48,5 +48,41 @@ public class SquareBoardTests {
 				Arguments.of(false, 2, 4, 5, 6),
 				Arguments.of(true, 2, 4, 1, 4));
 	}
+	
+	/**
+	 * test diagonal movement
+	 *
+	 */
+	@ParameterizedTest
+	@MethodSource("diagonalProvider")
+	void diagonalTests(boolean expected, int x1, int y1, int x2, int y2) {
+		assertEquals(expected,
+				emg.move(emg.makeCoordinate(x1, y1), emg.makeCoordinate(x2, y2)));
+	}
+
+	static Stream<Arguments> diagonalProvider() {
+		return Stream.of(
+				Arguments.of(true, 18, 15, 21, 18),
+				Arguments.of(false, 18, 15, 6, 17),
+				Arguments.of(true, 18, 15, 21, 16));
+	}
+	
+//	/**
+//	 * test Omni movement
+//	 *
+//	 */
+//	@ParameterizedTest
+//	@MethodSource("omniProvider")
+//	void omniTests(boolean expected, int x1, int y1, int x2, int y2) {
+//		assertEquals(expected,
+//				emg.move(emg.makeCoordinate(x1, y1), emg.makeCoordinate(x2, y2)));
+//	}
+//
+//	static Stream<Arguments> omniProvider() {
+//		return Stream.of(
+//				Arguments.of(true, 18, 15, 21, 18),
+//				Arguments.of(false, 18, 15, 6, 17),
+//				Arguments.of(true, 18, 15, 21, 16));
+//	}
 
 }

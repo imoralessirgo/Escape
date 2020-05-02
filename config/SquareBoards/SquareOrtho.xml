@@ -15,11 +15,33 @@
         <locationType>BLOCK</locationType>
     </locationInitializers>
         <locationInitializers>
+        <x>21</x>
+        <y>15</y>
+        <locationType>BLOCK</locationType>
+    </locationInitializers>
+        <locationInitializers>
+        <x>20</x>
+        <y>15</y>
+        <locationType>BLOCK</locationType>
+    </locationInitializers>
+        <locationInitializers>
+        <x>19</x>
+        <y>16</y>
+        <locationType>BLOCK</locationType>
+    </locationInitializers>
+        <locationInitializers>
         <x>2</x>
         <y>4</y>
         <locationType>CLEAR</locationType>
         <player>PLAYER1</player>
         <pieceName>FROG</pieceName>
+    </locationInitializers>
+     <locationInitializers>
+        <x>18</x>
+        <y>15</y>
+        <locationType>CLEAR</locationType>
+        <player>PLAYER1</player>
+        <pieceName>HORSE</pieceName>
     </locationInitializers>
     
     <!-- Piece items, an array of pieceTypes, 1 or more -->
@@ -33,8 +55,13 @@
         </attributes>
     </pieceTypes>
     <pieceTypes>
-        <movementPattern>ORTHOGONAL</movementPattern>
+        <movementPattern>DIAGONAL</movementPattern>
         <pieceName>HORSE</pieceName>
+        <attributes>
+            <id>DISTANCE</id>
+            <attrType>INTEGER</attrType>
+            <intValue>8</intValue>
+        </attributes>
         <attributes>
             <id>UNBLOCK</id>
             <attrType>BOOLEAN</attrType>
