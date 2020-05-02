@@ -9,9 +9,10 @@
 package escape;
 
 import static escape.board.LocationType.CLEAR;
+import java.util.HashMap;
 import escape.board.SquareBoard;
 import escape.board.coordinate.*;
-import escape.piece.EscapePiece;
+import escape.piece.*;
 import escape.util.*;
 
 /**
@@ -22,7 +23,7 @@ import escape.util.*;
 public class SquareGameController implements EscapeGameManager<SquareCoordinate> {
 
 	private SquareBoard board;
-	PieceTypeInitializer[] pt;
+	HashMap<PieceName, PieceTypeInitializer> pieceAttributes;
 
 	/**
 	 * Constructor
@@ -33,7 +34,12 @@ public class SquareGameController implements EscapeGameManager<SquareCoordinate>
 	SquareGameController(SquareBoard board, PieceTypeInitializer[] pt,
 			LocationInitializer... initializers) {
 		this.board = board;
-		this.pt = pt;
+		if (pt != null) {
+			this.pieceAttributes = new HashMap<PieceName, PieceTypeInitializer>();
+			for (PieceTypeInitializer p : pt) {
+				pieceAttributes.put(p.getPieceName(), p);
+			}
+		}
 		if (initializers == null) {
 			return;
 		}
@@ -55,8 +61,11 @@ public class SquareGameController implements EscapeGameManager<SquareCoordinate>
 	@Override
 	public boolean move(SquareCoordinate from, SquareCoordinate to) {
 		int distance = from.distanceTo(to);
+		if (distance == 0) {
+			return false;
+		}
 		EscapePiece p = getPieceAt(from);
-		
+
 		return false;
 	}
 
