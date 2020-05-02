@@ -13,6 +13,7 @@ import java.util.HashMap;
 import escape.board.SquareBoard;
 import escape.board.coordinate.*;
 import escape.piece.*;
+import escape.rule.PathFind;
 import escape.util.*;
 
 /**
@@ -65,8 +66,7 @@ public class SquareGameController implements EscapeGameManager<SquareCoordinate>
 			return false;
 		}
 		EscapePiece p = getPieceAt(from);
-
-		return false;
+		return PathFind.canMove(from, to, pieceAttributes.get(p.getName()), board);
 	}
 
 	/*

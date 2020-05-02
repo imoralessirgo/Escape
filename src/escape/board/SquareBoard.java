@@ -73,7 +73,18 @@ public class SquareBoard implements Board<SquareCoordinate> {
 		}
 	}
 
-	private boolean inBounds(SquareCoordinate c) {
+	public LocationType getLocationType(SquareCoordinate c) {
+		if (inBounds(c)) {
+			if(squares.get(c) == null) {
+				squares.put(c, LocationType.CLEAR);
+			}
+				return squares.get(c);
+		} else {
+			throw new EscapeException("getType: Coordinate out of board bounds");
+		}
+	}
+	
+	public boolean inBounds(SquareCoordinate c) {
 		return c.getX() <= xMax && c.getY() <= yMax && c.getX() > 0 && c.getY() > 0;
 	}
 }
