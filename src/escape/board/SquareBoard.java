@@ -65,6 +65,20 @@ public class SquareBoard implements Board<SquareCoordinate> {
 		}
 	}
 
+	public void removePieceAt(SquareCoordinate c) {
+		if(this.getPieceAt(c) != null) {
+			pieces.remove(c);
+		}else {
+			throw new EscapeException("removePiece: Coordinate has no piece");
+		}
+	}
+	
+	/**
+	 * 
+	 * Description
+	 * @param c
+	 * @param lt
+	 */
 	public void setLocationType(SquareCoordinate c, LocationType lt) {
 		if (inBounds(c)) {
 			squares.put(c, lt);

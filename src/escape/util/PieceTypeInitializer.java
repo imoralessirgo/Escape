@@ -71,15 +71,16 @@ public class PieceTypeInitializer {
 			this.attrType = attrType;
 		}
 
-		/*
-		 * @see java.lang.Object#toString()
-		 */
-		@Override
-		public String toString() {
-			return "PieceAttribute [id=" + id + ", attrType=" + attrType
-					+ ", intValue=" + intValue + ", booleanValue=" + booleanValue
-					+ "]";
-		}
+		// not in use
+		// /*
+		// * @see java.lang.Object#toString()
+		// */
+		// @Override
+		// public String toString() {
+		// return "PieceAttribute [id=" + id + ", attrType=" + attrType
+		// + ", intValue=" + intValue + ", booleanValue=" + booleanValue
+		// + "]";
+		// }
 	}
 
 	private PieceName pieceName;
@@ -134,14 +135,15 @@ public class PieceTypeInitializer {
 		this.attributes = attributes;
 	}
 
-	/*
-	 * @see java.lang.Object#toString()
-	 */
-	@Override
-	public String toString() {
-		return "PieceTypeInitializer [pieceName=" + pieceName + ", movementPattern="
-				+ movementPattern + ", attributes=" + Arrays.toString(attributes)
-				+ "]";
-	}
+	// not in use
+	// /*
+	// * @see java.lang.Object#toString()
+	// */
+	// @Override
+	// public String toString() {
+	// return "PieceTypeInitializer [pieceName=" + pieceName + ", movementPattern="
+	// + movementPattern + ", attributes=" + Arrays.toString(attributes)
+	// + "]";
+	// }
 
 }

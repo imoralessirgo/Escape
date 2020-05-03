@@ -35,13 +35,14 @@ public class LocationInitializer {
 		this.pieceName = pieceName;
 	}
 
-	/*
-	 * @see java.lang.Object#toString()
-	 */
-	@Override
-	public String toString() {
-		return "LocationInitializer [x=" + x + ", y=" + y + ", locationType="
-				+ locationType + ", player=" + player + ", pieceName=" + pieceName
-				+ "]";
-	}
+// not in use
+//	/*
+//	 * @see java.lang.Object#toString()
+//	 */
+//	@Override
+//	public String toString() {
+//		return "LocationInitializer [x=" + x + ", y=" + y + ", locationType="
+//				+ locationType + ", player=" + player + ", pieceName=" + pieceName
+//				+ "]";
+//	}
 }

@@ -66,7 +66,20 @@ public class SquareGameController implements EscapeGameManager<SquareCoordinate>
 			return false;
 		}
 		EscapePiece p = getPieceAt(from);
-		return PathFind.canMove(from, to, pieceAttributes.get(p.getName()), board);
+		if (p == null) { // no piece at from
+			return false;
+		}
+		if (PathFind.canMove(from, to, pieceAttributes.get(p.getName()), board)) {
+			// capture check
+			if (board.getPieceAt(to) == null || (board.getPieceAt(to)
+					.getPlayer() != board.getPieceAt(from).getPlayer())) {
+				board.removePieceAt(from);
+				board.putPieceAt(p, to);
+				return true;
+			}
+			return false;
+		}
+		return false;
 	}
 
 	/*

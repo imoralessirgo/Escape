@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<escapeGameInitializer>
+	<coordinateType>SQUARE</coordinateType>
+    <!-- Board items -->
+    <xMax>8</xMax>
+    <yMax>8</yMax>
+    <locationInitializers> <!-- An array of these, 0 or more -->
+        <x>2</x>
+        <y>2</y>
+        <locationType>CLEAR</locationType>
+        <pieceName>FROG</pieceName>
+        <playerName>PLAYER1</playerName>
+    </locationInitializers>
+    <locationInitializers>
+        <x>8</x>
+        <y>8</y>
+        <locationType>EXIT</locationType>
+    </locationInitializers>
+    <locationInitializers> <!-- An array of these, 0 or more -->
+        <x>5</x>
+        <y>5</y>
+        <locationType>CLEAR</locationType>
+    </locationInitializers>
+    <locationInitializers> <!-- An array of these, 0 or more -->
+        <x>6</x>
+        <y>6</y>
+        <locationType>CLEAR</locationType>
+        <pieceName>FROG</pieceName>
+        <playerName>PLAYER2</playerName>
+    </locationInitializers>
+    
+    
+    <!-- Piece items, an array of pieceTypes, 1 or more -->
+    <pieceTypes>
+        <movementPattern>ORTHOGONAL</movementPattern>
+        <pieceName>FROG</pieceName>
+        <attributes>
+            <id>JUMP</id>
+            <attrType>BOOLEAN</attrType>
+            <booleanValue>true</booleanValue>
+        </attributes>
+        <attributes>
+            <id>DISTANCE</id>
+            <attrType>INTEGER</attrType>
+            <intValue>100</intValue>
+        </attributes>
+        <attributes>
+            <id>UNBLOCK</id>
+            <attrType>BOOLEAN</attrType>
+            <booleanValue>false</booleanValue>
+        </attributes>
+    </pieceTypes>
+    <pieceTypes>
+        <movementPattern>ORTHOGONAL</movementPattern>
+        <pieceName>HORSE</pieceName>
+        <attributes>
+            <id>UNBLOCK</id>
+            <attrType>BOOLEAN</attrType>
+            <booleanValue>false</booleanValue>
+        </attributes>
+        <attributes>
+       	    <id>FLY</id>
+            <attrType>INTEGER</attrType>
+            <intValue>10</intValue>
+        </attributes>
+    </pieceTypes>
+</escapeGameInitializer>

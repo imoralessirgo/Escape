@@ -26,16 +26,17 @@ public class EscapeException extends RuntimeException {
 		super(message);
 	}
 
-	/**
-	 * Use this constructor if the exception were caused by something like a
-	 * NullPointerException and you want to provide that for debugging purposes.
-	 * 
-	 * @param message
-	 *            a meaningful message describing the problem
-	 * @param cause
-	 *            the exception that caused the problem
-	 */
-	public EscapeException(String message, Throwable cause) {
-		super(message, cause);
-	}
+// not in use	
+//	/**
+//	 * Use this constructor if the exception were caused by something like a
+//	 * NullPointerException and you want to provide that for debugging purposes.
+//	 * 
+//	 * @param message
+//	 *            a meaningful message describing the problem
+//	 * @param cause
+//	 *            the exception that caused the problem
+//	 */
+//	public EscapeException(String message, Throwable cause) {
+//		super(message, cause);
+//	}
 }

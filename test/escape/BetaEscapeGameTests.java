@@ -12,6 +12,9 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.io.File;
 import org.junit.jupiter.api.Test;
 import escape.*;
+import escape.board.LocationType;
+import escape.piece.*;
+import escape.util.LocationInitializer;
 
 /**
  * Description
@@ -27,6 +30,8 @@ class BetaEscapeGameTests {
 	 */
 	@Test
 	void squareTest() throws Exception {
+		LocationInitializer li = new LocationInitializer(1, 1, LocationType.BLOCK,
+				Player.PLAYER1, PieceName.FOX);
 		EscapeGameBuilder egb = new EscapeGameBuilder(
 				new File("config/SampleEscapeGame.xml"));
 		EscapeGameManager emg = egb.makeGameManager();

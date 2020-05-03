@@ -59,6 +59,7 @@ public class PathFind {
 	 */
 	public static boolean canMove(Coordinate from, Coordinate to,
 			PieceTypeInitializer pt, Board b) {
+		dest = to;
 		path = new HashMap<Integer, HashSet<Coordinate>>();
 		HashSet<Coordinate> nodes = new HashSet<Coordinate>();
 		nodes.add(from);
@@ -70,11 +71,20 @@ public class PathFind {
 		for (i = 0; i < distance; i++) {
 			nodes = path.get(i);
 			path.put(i + 2, new HashSet<Coordinate>());
-			if (nodes == null) {
+			if (nodes.isEmpty() && path.get(i + 1).isEmpty()) {
 				return false;
+			}
+			if (nodes.isEmpty()) {
+				i++;
+				nodes = path.get(i);
+				path.put(i + 2, new HashSet<Coordinate>());
+			}
+			if (nodes.contains(to)) {
+				return true;
 			}
 			HashSet<Coordinate> validCoords = new HashSet<Coordinate>();
 			switch (pt.getMovementPattern()) {
+				
 				case DIAGONAL:
 					validCoords.addAll(diagonalPath(path.get(i)));
 					if (validCoords.contains(to)) {
@@ -83,10 +93,31 @@ public class PathFind {
 					validCoords.addAll(path.get(i + 1));
 					path.put(i + 1, validCoords);
 					break;
+					
 				case LINEAR: // problematic
-					break;
+					for(int[] dir : ortho) {
+						if(checkLinear((SquareCoordinate) from, dir, distance) == true) {
+							return true;
+						}
+					}
+					for(int[] dir : diagonal) {
+						if(checkLinear((SquareCoordinate) from, dir, distance) == true) {
+							return true;
+						}
+					}
+					return false;
+					
 				case OMNI:
+					// look at both ortho and diagonal
+					validCoords.addAll(orthoPath(path.get(i)));
+					validCoords.addAll(diagonalPath(path.get(i)));
+					if (validCoords.contains(to)) {
+						return true;
+					} // made it to destination
+					validCoords.addAll(path.get(i + 1));
+					path.put(i + 1, validCoords);
 					break;
+					
 				case ORTHOGONAL:
 					validCoords.addAll(orthoPath(path.get(i)));
 					if (validCoords.contains(to)) {
@@ -95,6 +126,7 @@ public class PathFind {
 					validCoords.addAll(path.get(i + 1));
 					path.put(i + 1, validCoords);
 					break;
+					
 				default:
 					throw new EscapeException(
 							"squarePathFind: Invalid Movement Pattern found");
@@ -162,6 +194,9 @@ public class PathFind {
 			return false;
 		}
 		if (sb.getPieceAt(sc) != null) {
+			if (dest.equals(sc)) {
+				return true;
+			}
 			if (canFly()) {
 				return true;
 			} else if (canJump()) {
@@ -191,14 +226,14 @@ public class PathFind {
 	private static boolean canJump() {
 		for (PieceAttribute p : pieceAtt) {
 			if (p.getId() == PieceAttributeID.JUMP) {
-				return true;
+				return p.isBooleanValue();
 			}
 		}
 		return false;
 	}
 
 	/**
-	 * Description
+	 * This function will ad the
 	 * 
 	 * @param c
 	 */
@@ -208,7 +243,9 @@ public class PathFind {
 				.makeCoordinate(curr.getX() + currDir[0], curr.getY() + currDir[1]);
 		SquareBoard sb = (SquareBoard) board;
 		HashSet<Coordinate> hs = path.get(i + 2);
-
+		if (!sb.inBounds(neighbour)) {
+			return;
+		}
 		if (sb.getLocationType(curr) == LocationType.EXIT) {
 			// only valid to fly over or end at an exit
 			if (canFly() || dest.equals(neighbour)) {
@@ -220,13 +257,17 @@ public class PathFind {
 		} else if (sb.getLocationType(neighbour) == LocationType.BLOCK) {
 			// trying to move to a blocked position without unblock capabilities
 			// is invalid
-			if ((canFly() || canUnblock()) && !dest.equals(curr)) {
+			if ((canFly() || canUnblock()) && !dest.equals(neighbour)) {
 				hs.add(neighbour);
 				path.put(i + 2, hs);
 				return;
 			} else
 				return;
-		} else if (sb.getPieceAt(neighbour) != null && !neighbour.equals(dest)) {
+		} else if (sb.getPieceAt(neighbour) != null) {
+			if (!neighbour.equals(dest))
+				return;
+			hs.add(neighbour);
+			path.put(i + 2, hs);
 			return;
 		}
 		hs.add(neighbour);
@@ -260,5 +301,81 @@ public class PathFind {
 			}
 		}
 		throw new EscapeException("This piece has no distance or fly attribute");
+	}
+
+	private static boolean checkLinear(SquareCoordinate sc, int[] direction,
+			int maxDistance) {
+		for (int j = 0; j < maxDistance; j++) {
+			sc = SquareCoordinate.makeCoordinate(sc.getX() + direction [0], sc.getY() + direction[1]);
+			if(sc.equals(dest)) {return true;}
+			if(linearIsValid(sc, direction) != true) {
+				break;
+			}
+		}
+		return false;
+	}
+
+	private static boolean linearIsValid(SquareCoordinate sc, int[] dir) {
+		SquareBoard sb = (SquareBoard) board;
+		if (!sb.inBounds(sc)) {
+			return false;
+		}
+		if (sb.getPieceAt(sc) != null) {
+			if (canFly()) {
+				return true;
+			} else if (canJump()) {
+				SquareCoordinate next = SquareCoordinate.makeCoordinate(sc.getX() + dir [0], sc.getY() + dir[1]);
+				return jumpFromLinear(sc, next);
+			} else
+				return false;
+		}
+		if (sb.getLocationType(sc) == LocationType.EXIT) {
+			// only valid to fly over or end at an exit
+			if (canFly() || dest.equals(sc))
+				return true;
+			else
+				return false;
+		}
+		if (sb.getLocationType(sc) == LocationType.BLOCK) {
+			// trying to move to a blocked position without unblock capabilities
+			// is invalid
+			if ((canFly() || canUnblock()) && !dest.equals(sc))
+				return true;
+			else
+				return false;
+		}
+		return true;
+	}
+	
+	
+	/**
+	 * This function will ad the
+	 * 
+	 * @param c
+	 */
+	private static boolean jumpFromLinear(SquareCoordinate curr, SquareCoordinate neighbour) {
+		SquareBoard sb = (SquareBoard) board;
+		if (!sb.inBounds(neighbour)) {
+			return false;
+		}
+		if (sb.getLocationType(curr) == LocationType.EXIT) {
+			// only valid to fly over or end at an exit
+			if (canFly() || dest.equals(neighbour)) {
+				return true;
+			} else
+				return false;
+		} else if (sb.getLocationType(neighbour) == LocationType.BLOCK) {
+			// trying to move to a blocked position without unblock capabilities
+			// is invalid
+			if ((canFly() || canUnblock()) && !dest.equals(neighbour)) {
+				return true;
+			} else
+				return false;
+		} else if (sb.getPieceAt(neighbour) != null) {
+			if (!neighbour.equals(dest))
+				return false;
+			return true;
+		}
+		return true;
 	}
 }
