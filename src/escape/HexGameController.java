@@ -13,7 +13,7 @@ import java.util.HashMap;
 import escape.board.*;
 import escape.board.coordinate.*;
 import escape.piece.*;
-import escape.rule.OrthoPathFind;
+import escape.rule.*;
 import escape.util.*;
 
 /**
@@ -69,7 +69,7 @@ public class HexGameController implements EscapeGameManager<HexCoordinate> {
 			return false;
 		}
 		if(board.getLocationType(to) == LocationType.BLOCK) {return false;}
-		if (OrthoPathFind.canMove(from, to, pieceAttributes.get(p.getName()), board)) {
+		if (HexPathFind.canMove(from, to, pieceAttributes.get(p.getName()), board)) {
 			// capture check
 			if (board.getPieceAt(to) == null || (board.getPieceAt(to)
 					.getPlayer() != board.getPieceAt(from).getPlayer())) {
