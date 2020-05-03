@@ -40,6 +40,14 @@ public class HexBoard implements Board<HexCoordinate> {
 	public EscapePiece getPieceAt(HexCoordinate coord) {
 		return pieces.get(coord);
 	}
+	
+	public void removePieceAt(HexCoordinate c) {
+		if(this.getPieceAt(c) != null) {
+			pieces.remove(c);
+		}else {
+			throw new EscapeException("removePiece: Coordinate has no piece");
+		}
+	}
 
 	/*
 	 * @see escape.board.Board#putPieceAt(escape.piece.EscapePiece,
@@ -60,6 +68,13 @@ public class HexBoard implements Board<HexCoordinate> {
 
 	public void setLocationType(HexCoordinate c, LocationType lt) {
 		hexagons.put(c, lt);
+	}
+	
+	public LocationType getLocationType(HexCoordinate c) {
+			if(hexagons.get(c) == null) {
+				hexagons.put(c, LocationType.CLEAR);
+			}
+				return hexagons.get(c);
 	}
 
 }

@@ -21,7 +21,7 @@ import escape.util.PieceTypeInitializer.PieceAttribute;
  * 
  * @version May 2, 2020
  */
-public class PathFind {
+public class SquarePathFind{
 	private static HashMap<Integer, HashSet<Coordinate>> path; // store valid paths
 	private static Board board; // current game board
 	private static PieceAttribute[] pieceAtt; // pieceAttributes for current piece

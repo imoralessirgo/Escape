@@ -10,10 +10,10 @@ package escape;
 
 import static escape.board.LocationType.CLEAR;
 import java.util.HashMap;
-import escape.board.SquareBoard;
+import escape.board.*;
 import escape.board.coordinate.*;
 import escape.piece.*;
-import escape.rule.PathFind;
+import escape.rule.SquarePathFind;
 import escape.util.*;
 
 /**
@@ -69,7 +69,8 @@ public class SquareGameController implements EscapeGameManager<SquareCoordinate>
 		if (p == null) { // no piece at from
 			return false;
 		}
-		if (PathFind.canMove(from, to, pieceAttributes.get(p.getName()), board)) {
+		if(board.getLocationType(to) == LocationType.BLOCK) {return false;}
+		if (SquarePathFind.canMove(from, to, pieceAttributes.get(p.getName()), board)) {
 			// capture check
 			if (board.getPieceAt(to) == null || (board.getPieceAt(to)
 					.getPlayer() != board.getPieceAt(from).getPlayer())) {

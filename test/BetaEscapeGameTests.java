@@ -305,82 +305,82 @@ class BetaEscapeGameTests
 	    
 	}
 	
-//	@Test
-//	void SquareLinearMasterTest() throws Exception {
-//		EscapeGameBuilder egb = new EscapeGameBuilder(new File("config/SquareLinear.xml"));
-//		EscapeGameManager emg = egb.makeGameManager();
-//		// Exercise the game now: make moves, check the board, etc.
-//		
-//		//jump over two pieces -> false
-//		assertFalse(emg.move(emg.makeCoordinate(1, 2), emg.makeCoordinate(4, 2)));
-//		
-//		//jump over one piece at time -> true
-//		assertNull(emg.getPieceAt(emg.makeCoordinate(4, 2)));
-//		assertTrue(emg.move(emg.makeCoordinate(2, 2), emg.makeCoordinate(4, 2)));
-//		assertNotNull(emg.getPieceAt(emg.makeCoordinate(4, 2)));
-//		emg = egb.makeGameManager();//reset board
-//		
-//		//jump over one piece at time, multi times -> true
-//		assertTrue(emg.move(emg.makeCoordinate(2, 2), emg.makeCoordinate(6, 2)));
-//		
-//		emg = egb.makeGameManager();//reset board
-//		//capture enemy piece ->
-//		assertTrue(emg.move(emg.makeCoordinate(2, 2), emg.makeCoordinate(3, 2)));
-//		
-//		emg = egb.makeGameManager();//reset board
-//		//unblock false -> can't land on block
-//		assertFalse(emg.move(emg.makeCoordinate(1, 2), emg.makeCoordinate(1, 3)));
-//		
-//		//unblock false -> can't pass over block
-//		assertFalse(emg.move(emg.makeCoordinate(1, 2), emg.makeCoordinate(1, 4)));
-//		
-//		//jump over one piece to then capture enemy piece -> true
-//	 	assertTrue(emg.move(emg.makeCoordinate(1, 2), emg.makeCoordinate(3, 2)));
-//		
-//		emg = egb.makeGameManager();//reset board
-//		//unblock true -> can't land on block
-//		assertFalse(emg.move(emg.makeCoordinate(3, 2), emg.makeCoordinate(3, 3)));
-//		
-//		//unblock true -> can pass over  block
-//		assertTrue(emg.move(emg.makeCoordinate(3, 2), emg.makeCoordinate(3, 5)));
-//		
-//		//jump false -> can't jump
-//		assertFalse(emg.move(emg.makeCoordinate(2, 7), emg.makeCoordinate(4, 7)));
-//		
-//		//Fly -> can't end on block
-//		assertFalse(emg.move(emg.makeCoordinate(1, 7), emg.makeCoordinate(1, 6)));
-//		
-//		//Fly -> can jump many pieces 
-//	    assertTrue(emg.move(emg.makeCoordinate(1, 7), emg.makeCoordinate(4, 7)));
-//		
-//	    emg = egb.makeGameManager();//reset board
-//	    //Fly -> can't go past distance set (5)
-//	    assertFalse(emg.move(emg.makeCoordinate(1, 7), emg.makeCoordinate(8, 7)));
-//	    
-//	    //Fly -> can go to max distance set (5)
-//	    assertTrue(emg.move(emg.makeCoordinate(1, 7), emg.makeCoordinate(6, 2)));
-//	   
-//	    //Distance -> can't go past distance set (4)
-//	    assertFalse(emg.move(emg.makeCoordinate(8, 1), emg.makeCoordinate(8, 8)));
-//	    
-//	    //Distance -> can go to max distance set (4)
-//	    assertTrue(emg.move(emg.makeCoordinate(8, 1), emg.makeCoordinate(8, 5)));
-//	    //Exit removes piece
-//	    assertNull(emg.getPieceAt(emg.makeCoordinate(8, 5)));
-//	    
-//	    //cant do multi directions
-//	    assertFalse(emg.move(emg.makeCoordinate(8, 1), emg.makeCoordinate(6, 4)));
-//	    assertFalse(emg.move(emg.makeCoordinate(8, 6), emg.makeCoordinate(4, 5)));
-//	    
-//	    //can move diagonal
-//	    assertTrue(emg.move(emg.makeCoordinate(4, 4), emg.makeCoordinate(8, 8)));
-//	    
-//	    //can't pass over an exit
-//	    assertFalse(emg.move(emg.makeCoordinate(10, 1), emg.makeCoordinate(10, 5)));
-//	    
-//	    //FLY -> can pass over an exit
-//	    assertTrue(emg.move(emg.makeCoordinate(9, 1), emg.makeCoordinate(9, 6)));
-//	}
+	@Test
+	void SquareLinearMasterTest() throws Exception {
+		EscapeGameBuilder egb = new EscapeGameBuilder(new File("config/SquareLinear.xml"));
+		EscapeGameManager emg = egb.makeGameManager();
+		// Exercise the game now: make moves, check the board, etc.
+		
+		//jump over two pieces -> false
+		assertFalse(emg.move(emg.makeCoordinate(1, 2), emg.makeCoordinate(4, 2)));
+		
+		//jump over one piece at time -> true
+		assertNull(emg.getPieceAt(emg.makeCoordinate(4, 2)));
+		assertTrue(emg.move(emg.makeCoordinate(2, 2), emg.makeCoordinate(4, 2)));
+		assertNotNull(emg.getPieceAt(emg.makeCoordinate(4, 2)));
+		emg = egb.makeGameManager();//reset board
+		
+		//jump over one piece at time, multi times -> true
+		assertTrue(emg.move(emg.makeCoordinate(2, 2), emg.makeCoordinate(6, 2)));
+		
+		emg = egb.makeGameManager();//reset board
+		//capture enemy piece ->
+		assertTrue(emg.move(emg.makeCoordinate(2, 2), emg.makeCoordinate(3, 2)));
+		
+		emg = egb.makeGameManager();//reset board
+		//unblock false -> can't land on block
+		assertFalse(emg.move(emg.makeCoordinate(1, 2), emg.makeCoordinate(1, 3)));
+		
+		//unblock false -> can't pass over block
+		assertFalse(emg.move(emg.makeCoordinate(1, 2), emg.makeCoordinate(1, 4)));
+		
+		//jump over one piece to then capture enemy piece -> true
+	 	assertTrue(emg.move(emg.makeCoordinate(1, 2), emg.makeCoordinate(3, 2)));
+		
+		emg = egb.makeGameManager();//reset board
+		//unblock true -> can't land on block
+		assertFalse(emg.move(emg.makeCoordinate(3, 2), emg.makeCoordinate(3, 3)));
+		
+		//unblock true -> can pass over  block
+		assertTrue(emg.move(emg.makeCoordinate(3, 2), emg.makeCoordinate(3, 5)));
+		
+		//jump false -> can't jump
+		assertFalse(emg.move(emg.makeCoordinate(2, 7), emg.makeCoordinate(4, 7)));
+		
+		//Fly -> can't end on block
+		assertFalse(emg.move(emg.makeCoordinate(1, 7), emg.makeCoordinate(1, 6)));
+		
+		//Fly -> can jump many pieces 
+	    assertTrue(emg.move(emg.makeCoordinate(1, 7), emg.makeCoordinate(4, 7)));
+		
+	    emg = egb.makeGameManager();//reset board
+	    //Fly -> can't go past distance set (5)
+	    assertFalse(emg.move(emg.makeCoordinate(1, 7), emg.makeCoordinate(8, 7)));
+	    
+	    //Fly -> can go to max distance set (5)
+	    assertTrue(emg.move(emg.makeCoordinate(1, 7), emg.makeCoordinate(6, 2)));
+	   
+	    //Distance -> can't go past distance set (4)
+	    assertFalse(emg.move(emg.makeCoordinate(8, 1), emg.makeCoordinate(8, 8)));
+	    
+	    //Distance -> can go to max distance set (4)
+	    assertTrue(emg.move(emg.makeCoordinate(8, 1), emg.makeCoordinate(8, 5)));
+	    //Exit removes piece
+	    assertNull(emg.getPieceAt(emg.makeCoordinate(8, 5)));
+	    
+	    //cant do multi directions
+	    assertFalse(emg.move(emg.makeCoordinate(8, 1), emg.makeCoordinate(6, 4)));
+	    assertFalse(emg.move(emg.makeCoordinate(8, 6), emg.makeCoordinate(4, 5)));
+	    
+	    //can move diagonal
+	    assertTrue(emg.move(emg.makeCoordinate(4, 4), emg.makeCoordinate(8, 8)));
+	    
+	    //can't pass over an exit
+	    assertFalse(emg.move(emg.makeCoordinate(10, 1), emg.makeCoordinate(10, 5)));
+	    
+	    //FLY -> can pass over an exit
+	    assertTrue(emg.move(emg.makeCoordinate(9, 1), emg.makeCoordinate(9, 6)));
+	}
 	
 	@Test
 	void SquareOrthoMasterTest() throws Exception {
@@ -539,236 +539,236 @@ class BetaEscapeGameTests
 	  
 	}
 	
-//	@Test
-//	void OrthoSquareOrthoMasterTest() throws Exception {
-//		EscapeGameBuilder egb = new EscapeGameBuilder(new File("config/OrthoSquareOrtho.xml"));
-//		EscapeGameManager emg = egb.makeGameManager();
-//		// Exercise the game now: make moves, check the board, etc.
-//		
+	@Test
+	void OrthoSquareOrthoMasterTest() throws Exception {
+		EscapeGameBuilder egb = new EscapeGameBuilder(new File("config/OrthoSquareOrtho.xml"));
+		EscapeGameManager emg = egb.makeGameManager();
+		// Exercise the game now: make moves, check the board, etc.
+		
 //		//jump over two pieces -> false
-//		assertFalse(emg.move(emg.makeCoordinate(1, 2), emg.makeCoordinate(4, 2)));
-//		
-//		//jump over one piece at time -> true
-//		assertNull(emg.getPieceAt(emg.makeCoordinate(4, 2)));
-//		assertTrue(emg.move(emg.makeCoordinate(2, 2), emg.makeCoordinate(4, 2)));
-//		assertNotNull(emg.getPieceAt(emg.makeCoordinate(4, 2)));
-//		emg = egb.makeGameManager();//reset board
-//		
-//		//jump over one piece at time, multi times -> true
-//		assertTrue(emg.move(emg.makeCoordinate(2, 2), emg.makeCoordinate(6, 2)));
-//		
-//		emg = egb.makeGameManager();//reset board
-//		//capture enemy piece ->
-//		assertTrue(emg.move(emg.makeCoordinate(2, 2), emg.makeCoordinate(3, 2)));
-//		
-//		emg = egb.makeGameManager();//reset board
-//		//unblock false -> can't land on block
-//		assertFalse(emg.move(emg.makeCoordinate(1, 2), emg.makeCoordinate(1, 3)));
-//		
-//		//unblock false -> can't pass over block
-//		assertFalse(emg.move(emg.makeCoordinate(1, 2), emg.makeCoordinate(1, 4)));
-//		
-//		//jump over one piece to then capture enemy piece -> true
-//	 	assertTrue(emg.move(emg.makeCoordinate(1, 2), emg.makeCoordinate(3, 2)));
-//		
-//		emg = egb.makeGameManager();//reset board
-//		//unblock true -> can't land on block
-//		assertFalse(emg.move(emg.makeCoordinate(3, 2), emg.makeCoordinate(3, 3)));
-//		
-//		//unblock true -> can pass over  block
-//		assertTrue(emg.move(emg.makeCoordinate(3, 2), emg.makeCoordinate(3, 5)));
-//		
-//		//jump false -> can't jump
-//		assertFalse(emg.move(emg.makeCoordinate(2, 7), emg.makeCoordinate(4, 7)));
-//		
-//		//Fly -> can't end on block
-//		assertFalse(emg.move(emg.makeCoordinate(1, 7), emg.makeCoordinate(1, 6)));
-//		
-//		//Fly -> can jump many pieces 
-//	    assertTrue(emg.move(emg.makeCoordinate(1, 7), emg.makeCoordinate(4, 7)));
-//		
-//	    emg = egb.makeGameManager();//reset board
-//	    //Fly -> can't go past distance set (5)
-//	    assertFalse(emg.move(emg.makeCoordinate(1, 7), emg.makeCoordinate(8, 7)));
-//	    
-//	    //Fly -> can go to max distance set (5)
-//	    assertTrue(emg.move(emg.makeCoordinate(1, 7), emg.makeCoordinate(3, 5)));
-//	   
-//	    //Distance -> can't go past distance set (4)
-//	    assertFalse(emg.move(emg.makeCoordinate(6, 3), emg.makeCoordinate(8, 8)));
-//	    
-//	    //Distance -> can go to max distance set (4)
-//	    assertTrue(emg.move(emg.makeCoordinate(6, 3), emg.makeCoordinate(8, 5)));
-//	    
-//	    //Exit removes piece
-//	    assertNull(emg.getPieceAt(emg.makeCoordinate(8, 5)));
-//	    
-//	    //can't move diagonal
-//	    assertFalse(emg.move(emg.makeCoordinate(4, 4), emg.makeCoordinate(8, 8)));
-//	    
-//	    //can't pass over an exit
-//	    assertFalse(emg.move(emg.makeCoordinate(10, 1), emg.makeCoordinate(10, 5)));
-//	    
-//	    //FLY -> can pass over an exit
-//	    assertTrue(emg.move(emg.makeCoordinate(9, 1), emg.makeCoordinate(9, 6)));
-//	}
-//	
-//	@Test
-//	void OrthoSquareOmniMasterTest() throws Exception {
-//		EscapeGameBuilder egb = new EscapeGameBuilder(new File("config/OrthoSquareOmni.xml"));
-//		EscapeGameManager emg = egb.makeGameManager();
-//		// Exercise the game now: make moves, check the board, etc.
-//		
-//		//jump over two pieces -> false
-//		assertFalse(emg.move(emg.makeCoordinate(1, 2), emg.makeCoordinate(4, 2)));
-//		
-//		//jump over one piece at time -> true
-//		assertNull(emg.getPieceAt(emg.makeCoordinate(4, 2)));
-//		assertTrue(emg.move(emg.makeCoordinate(2, 2), emg.makeCoordinate(4, 2)));
-//		assertNotNull(emg.getPieceAt(emg.makeCoordinate(4, 2)));
-//		emg = egb.makeGameManager();//reset board
-//		
-//		//jump over one piece at time, multi times -> true
-//		assertTrue(emg.move(emg.makeCoordinate(2, 2), emg.makeCoordinate(6, 2)));
-//		
-//		emg = egb.makeGameManager();//reset board
-//		//capture enemy piece ->
-//		assertTrue(emg.move(emg.makeCoordinate(2, 2), emg.makeCoordinate(3, 2)));
-//		
-//		emg = egb.makeGameManager();//reset board
-//		//unblock false -> can't land on block
-//		assertFalse(emg.move(emg.makeCoordinate(1, 2), emg.makeCoordinate(1, 3)));
-//		
-//		//unblock false -> can't pass over block
-//		assertFalse(emg.move(emg.makeCoordinate(1, 2), emg.makeCoordinate(1, 4)));
-//		
-//		//jump over one piece to then capture enemy piece -> true
-//	 	assertTrue(emg.move(emg.makeCoordinate(1, 2), emg.makeCoordinate(3, 2)));
-//		
-//		emg = egb.makeGameManager();//reset board
-//		//unblock true -> can't land on block
-//		assertFalse(emg.move(emg.makeCoordinate(3, 2), emg.makeCoordinate(3, 3)));
-//		
-//		//unblock true -> can pass over  block
-//		assertTrue(emg.move(emg.makeCoordinate(3, 2), emg.makeCoordinate(3, 5)));
-//		
-//		//jump false -> can't jump
-//		assertFalse(emg.move(emg.makeCoordinate(2, 7), emg.makeCoordinate(4, 7)));
-//		
-//		//Fly -> can't end on block
-//		assertFalse(emg.move(emg.makeCoordinate(1, 7), emg.makeCoordinate(1, 6)));
-//		
-//		//Fly -> can jump many pieces 
-//	    assertTrue(emg.move(emg.makeCoordinate(1, 7), emg.makeCoordinate(4, 7)));
-//		
-//	    emg = egb.makeGameManager();//reset board
-//	    //Fly -> can't go past distance set (5)
-//	    assertFalse(emg.move(emg.makeCoordinate(1, 7), emg.makeCoordinate(8, 7)));
-//	    
-//	    //Fly -> can go to max distance set (5)
-//	    assertTrue(emg.move(emg.makeCoordinate(1, 7), emg.makeCoordinate(3, 5)));
-//	   
-//	    //Distance -> can't go past distance set (4)
-//	    assertFalse(emg.move(emg.makeCoordinate(6, 3), emg.makeCoordinate(8, 8)));
-//	    
-//	    //Distance -> can go to max distance set (4)
-//	    assertTrue(emg.move(emg.makeCoordinate(6, 3), emg.makeCoordinate(8, 5)));
-//	    
-//	    //Exit removes piece
-//	    assertNull(emg.getPieceAt(emg.makeCoordinate(8, 5)));
-//	    
-//	    //can't move diagonal
-//	    assertFalse(emg.move(emg.makeCoordinate(4, 4), emg.makeCoordinate(8, 8)));
-//	    
-//	    emg = egb.makeGameManager();//reset board
-//	    //can't pass over an exit
-//	    assertFalse(emg.move(emg.makeCoordinate(10, 1), emg.makeCoordinate(10, 5)));
-//	    
-//	    //FLY -> can pass over an exit
-//	    assertTrue(emg.move(emg.makeCoordinate(9, 1), emg.makeCoordinate(9, 6)));
-//	    
-//	}
-//	
-//	@Test
-//	void OrthoSquareLinearMasterTest() throws Exception {
-//		EscapeGameBuilder egb = new EscapeGameBuilder(new File("config/OrthoSquareLinear.xml"));
-//		EscapeGameManager emg = egb.makeGameManager();
-//		// Exercise the game now: make moves, check the board, etc.
-//		
-//		//jump over two pieces -> false
-//		assertFalse(emg.move(emg.makeCoordinate(1, 2), emg.makeCoordinate(4, 2)));
-//		
-//		//jump over one piece at time -> true
-//		assertNull(emg.getPieceAt(emg.makeCoordinate(4, 2)));
-//		assertTrue(emg.move(emg.makeCoordinate(2, 2), emg.makeCoordinate(4, 2)));
-//		assertNotNull(emg.getPieceAt(emg.makeCoordinate(4, 2)));
-//		emg = egb.makeGameManager();//reset board
-//		
-//		//jump over one piece at time, multi times -> true
-//		assertTrue(emg.move(emg.makeCoordinate(2, 2), emg.makeCoordinate(6, 2)));
-//		
-//		emg = egb.makeGameManager();//reset board
-//		//capture enemy piece ->
-//		assertTrue(emg.move(emg.makeCoordinate(2, 2), emg.makeCoordinate(3, 2)));
-//		
-//		emg = egb.makeGameManager();//reset board
-//		//unblock false -> can't land on block
-//		assertFalse(emg.move(emg.makeCoordinate(1, 2), emg.makeCoordinate(1, 3)));
-//		
-//		//unblock false -> can't pass over block
-//		assertFalse(emg.move(emg.makeCoordinate(1, 2), emg.makeCoordinate(1, 4)));
-//		
-//		//jump over one piece to then capture enemy piece -> true
-//	 	assertTrue(emg.move(emg.makeCoordinate(1, 2), emg.makeCoordinate(3, 2)));
-//		
-//		emg = egb.makeGameManager();//reset board
-//		//unblock true -> can't land on block
-//		assertFalse(emg.move(emg.makeCoordinate(3, 2), emg.makeCoordinate(3, 3)));
-//		
-//		//unblock true -> can pass over  block
-//		assertTrue(emg.move(emg.makeCoordinate(3, 2), emg.makeCoordinate(3, 5)));
-//		
-//		//jump false -> can't jump
-//		assertFalse(emg.move(emg.makeCoordinate(2, 7), emg.makeCoordinate(4, 7)));
-//		
-//		//Fly -> can't end on block
-//		assertFalse(emg.move(emg.makeCoordinate(1, 7), emg.makeCoordinate(1, 6)));
-//		
-//		//Fly -> can jump many pieces 
-//	    assertTrue(emg.move(emg.makeCoordinate(1, 7), emg.makeCoordinate(4, 7)));
-//		
-//	    emg = egb.makeGameManager();//reset board
-//	    //Fly -> can't go past distance set (5)
-//	    assertFalse(emg.move(emg.makeCoordinate(1, 7), emg.makeCoordinate(8, 7)));
-//	    
-//	    //Fly -> can go to max distance set (5)
-//	    assertTrue(emg.move(emg.makeCoordinate(1, 7), emg.makeCoordinate(6, 7)));
-//	   
-//	    //Distance -> can't go past distance set (4)
-//	    assertFalse(emg.move(emg.makeCoordinate(8, 1), emg.makeCoordinate(8, 8)));
-//	    
-//	    //Distance -> can go to max distance set (4)
-//	    assertTrue(emg.move(emg.makeCoordinate(8, 1), emg.makeCoordinate(8, 5)));
-//	    
-//	    //Exit removes piece
-//	    assertNull(emg.getPieceAt(emg.makeCoordinate(8, 5)));
-//	    
-//	    //cant do multi directions
-//	    assertFalse(emg.move(emg.makeCoordinate(8, 1), emg.makeCoordinate(6, 4)));
-//	    assertFalse(emg.move(emg.makeCoordinate(8, 6), emg.makeCoordinate(4, 5)));
-//	    assertFalse(emg.move(emg.makeCoordinate(8, 1), emg.makeCoordinate(4, 5)));
-//	    
-//	    //can't move diagonal
-//	    assertFalse(emg.move(emg.makeCoordinate(4, 4), emg.makeCoordinate(8, 8)));
-//	    
-//	    emg = egb.makeGameManager();//reset board
-//	    //can't pass over an exit
-//	    assertFalse(emg.move(emg.makeCoordinate(10, 1), emg.makeCoordinate(10, 5)));
-//	    
-//	    //FLY -> can pass over an exit
-//	    assertTrue(emg.move(emg.makeCoordinate(9, 1), emg.makeCoordinate(9, 6)));
-//	    
-//	}
+		assertFalse(emg.move(emg.makeCoordinate(1, 2), emg.makeCoordinate(4, 2)));
+		
+		//jump over one piece at time -> true
+		assertNull(emg.getPieceAt(emg.makeCoordinate(4, 2)));
+		assertTrue(emg.move(emg.makeCoordinate(2, 2), emg.makeCoordinate(4, 2)));
+		assertNotNull(emg.getPieceAt(emg.makeCoordinate(4, 2)));
+		emg = egb.makeGameManager();//reset board
+		
+		//jump over one piece at time, multi times -> true
+		assertTrue(emg.move(emg.makeCoordinate(2, 2), emg.makeCoordinate(6, 2)));
+		
+		emg = egb.makeGameManager();//reset board
+		//capture enemy piece ->
+		assertTrue(emg.move(emg.makeCoordinate(2, 2), emg.makeCoordinate(3, 2)));
+		
+		emg = egb.makeGameManager();//reset board
+		//unblock false -> can't land on block
+		assertFalse(emg.move(emg.makeCoordinate(1, 2), emg.makeCoordinate(1, 3)));
+		
+		//unblock false -> can't pass over block
+		assertFalse(emg.move(emg.makeCoordinate(1, 2), emg.makeCoordinate(1, 4)));
+		
+		//jump over one piece to then capture enemy piece -> true
+	 	assertTrue(emg.move(emg.makeCoordinate(1, 2), emg.makeCoordinate(3, 2)));
+		
+		emg = egb.makeGameManager();//reset board
+		//unblock true -> can't land on block
+		assertFalse(emg.move(emg.makeCoordinate(3, 2), emg.makeCoordinate(3, 3)));
+		
+		//unblock true -> can pass over  block
+		assertTrue(emg.move(emg.makeCoordinate(3, 2), emg.makeCoordinate(3, 5)));
+		
+		//jump false -> can't jump
+		assertFalse(emg.move(emg.makeCoordinate(2, 7), emg.makeCoordinate(4, 7)));
+		
+		//Fly -> can't end on block
+		assertFalse(emg.move(emg.makeCoordinate(1, 7), emg.makeCoordinate(1, 6)));
+		
+		//Fly -> can jump many pieces 
+	    assertTrue(emg.move(emg.makeCoordinate(1, 7), emg.makeCoordinate(4, 7)));
+		
+	    emg = egb.makeGameManager();//reset board
+	    //Fly -> can't go past distance set (5)
+	    assertFalse(emg.move(emg.makeCoordinate(1, 7), emg.makeCoordinate(8, 7)));
+	    
+	    //Fly -> can go to max distance set (5)
+	    assertTrue(emg.move(emg.makeCoordinate(1, 7), emg.makeCoordinate(3, 5)));
+	   
+	    //Distance -> can't go past distance set (4)
+	    assertFalse(emg.move(emg.makeCoordinate(6, 3), emg.makeCoordinate(8, 8)));
+	    
+	    //Distance -> can go to max distance set (4)
+	    assertTrue(emg.move(emg.makeCoordinate(6, 3), emg.makeCoordinate(8, 5)));
+	    
+	    //Exit removes piece
+	    assertNull(emg.getPieceAt(emg.makeCoordinate(8, 5)));
+	    
+	    //can't move diagonal
+	    assertFalse(emg.move(emg.makeCoordinate(4, 4), emg.makeCoordinate(8, 8)));
+	    
+	    //can't pass over an exit
+	    assertFalse(emg.move(emg.makeCoordinate(10, 1), emg.makeCoordinate(10, 5)));
+	    
+	    //FLY -> can pass over an exit
+	    assertTrue(emg.move(emg.makeCoordinate(9, 1), emg.makeCoordinate(9, 6)));
+	}
+	
+	@Test
+	void OrthoSquareOmniMasterTest() throws Exception {
+		EscapeGameBuilder egb = new EscapeGameBuilder(new File("config/OrthoSquareOmni.xml"));
+		EscapeGameManager emg = egb.makeGameManager();
+		// Exercise the game now: make moves, check the board, etc.
+		
+		//jump over two pieces -> false
+		assertFalse(emg.move(emg.makeCoordinate(1, 2), emg.makeCoordinate(4, 2)));
+		
+		//jump over one piece at time -> true
+		assertNull(emg.getPieceAt(emg.makeCoordinate(4, 2)));
+		assertTrue(emg.move(emg.makeCoordinate(2, 2), emg.makeCoordinate(4, 2)));
+		assertNotNull(emg.getPieceAt(emg.makeCoordinate(4, 2)));
+		emg = egb.makeGameManager();//reset board
+		
+		//jump over one piece at time, multi times -> true
+		assertTrue(emg.move(emg.makeCoordinate(2, 2), emg.makeCoordinate(6, 2)));
+		
+		emg = egb.makeGameManager();//reset board
+		//capture enemy piece ->
+		assertTrue(emg.move(emg.makeCoordinate(2, 2), emg.makeCoordinate(3, 2)));
+		
+		emg = egb.makeGameManager();//reset board
+		//unblock false -> can't land on block
+		assertFalse(emg.move(emg.makeCoordinate(1, 2), emg.makeCoordinate(1, 3)));
+		
+		//unblock false -> can't pass over block
+		assertFalse(emg.move(emg.makeCoordinate(1, 2), emg.makeCoordinate(1, 4)));
+		
+		//jump over one piece to then capture enemy piece -> true
+	 	assertTrue(emg.move(emg.makeCoordinate(1, 2), emg.makeCoordinate(3, 2)));
+		
+		emg = egb.makeGameManager();//reset board
+		//unblock true -> can't land on block
+		assertFalse(emg.move(emg.makeCoordinate(3, 2), emg.makeCoordinate(3, 3)));
+		
+		//unblock true -> can pass over  block
+		assertTrue(emg.move(emg.makeCoordinate(3, 2), emg.makeCoordinate(3, 5)));
+		
+		//jump false -> can't jump
+		assertFalse(emg.move(emg.makeCoordinate(2, 7), emg.makeCoordinate(4, 7)));
+		
+		//Fly -> can't end on block
+		assertFalse(emg.move(emg.makeCoordinate(1, 7), emg.makeCoordinate(1, 6)));
+		
+		//Fly -> can jump many pieces 
+	    assertTrue(emg.move(emg.makeCoordinate(1, 7), emg.makeCoordinate(4, 7)));
+		
+	    emg = egb.makeGameManager();//reset board
+	    //Fly -> can't go past distance set (5)
+	    assertFalse(emg.move(emg.makeCoordinate(1, 7), emg.makeCoordinate(8, 7)));
+	    
+	    //Fly -> can go to max distance set (5)
+	    assertTrue(emg.move(emg.makeCoordinate(1, 7), emg.makeCoordinate(3, 5)));
+	   
+	    //Distance -> can't go past distance set (4)
+	    assertFalse(emg.move(emg.makeCoordinate(6, 3), emg.makeCoordinate(8, 8)));
+	    
+	    //Distance -> can go to max distance set (4)
+	    assertTrue(emg.move(emg.makeCoordinate(6, 3), emg.makeCoordinate(8, 5)));
+	    
+	    //Exit removes piece
+	    assertNull(emg.getPieceAt(emg.makeCoordinate(8, 5)));
+	    
+	    //can't move diagonal
+	    assertFalse(emg.move(emg.makeCoordinate(4, 4), emg.makeCoordinate(8, 8)));
+	    
+	    emg = egb.makeGameManager();//reset board
+	    //can't pass over an exit
+	    assertFalse(emg.move(emg.makeCoordinate(10, 1), emg.makeCoordinate(10, 5)));
+	    
+	    //FLY -> can pass over an exit
+	    assertTrue(emg.move(emg.makeCoordinate(9, 1), emg.makeCoordinate(9, 6)));
+	    
+	}
+	
+	@Test
+	void OrthoSquareLinearMasterTest() throws Exception {
+		EscapeGameBuilder egb = new EscapeGameBuilder(new File("config/OrthoSquareLinear.xml"));
+		EscapeGameManager emg = egb.makeGameManager();
+		// Exercise the game now: make moves, check the board, etc.
+		
+		//jump over two pieces -> false
+		assertFalse(emg.move(emg.makeCoordinate(1, 2), emg.makeCoordinate(4, 2)));
+		
+		//jump over one piece at time -> true
+		assertNull(emg.getPieceAt(emg.makeCoordinate(4, 2)));
+		assertTrue(emg.move(emg.makeCoordinate(2, 2), emg.makeCoordinate(4, 2)));
+		assertNotNull(emg.getPieceAt(emg.makeCoordinate(4, 2)));
+		emg = egb.makeGameManager();//reset board
+		
+		//jump over one piece at time, multi times -> true
+		assertTrue(emg.move(emg.makeCoordinate(2, 2), emg.makeCoordinate(6, 2)));
+		
+		emg = egb.makeGameManager();//reset board
+		//capture enemy piece ->
+		assertTrue(emg.move(emg.makeCoordinate(2, 2), emg.makeCoordinate(3, 2)));
+		
+		emg = egb.makeGameManager();//reset board
+		//unblock false -> can't land on block
+		assertFalse(emg.move(emg.makeCoordinate(1, 2), emg.makeCoordinate(1, 3)));
+		
+		//unblock false -> can't pass over block
+		assertFalse(emg.move(emg.makeCoordinate(1, 2), emg.makeCoordinate(1, 4)));
+		
+		//jump over one piece to then capture enemy piece -> true
+	 	assertTrue(emg.move(emg.makeCoordinate(1, 2), emg.makeCoordinate(3, 2)));
+		
+		emg = egb.makeGameManager();//reset board
+		//unblock true -> can't land on block
+		assertFalse(emg.move(emg.makeCoordinate(3, 2), emg.makeCoordinate(3, 3)));
+		
+		//unblock true -> can pass over  block
+		assertTrue(emg.move(emg.makeCoordinate(3, 2), emg.makeCoordinate(3, 5)));
+		
+		//jump false -> can't jump
+		assertFalse(emg.move(emg.makeCoordinate(2, 7), emg.makeCoordinate(4, 7)));
+		
+		//Fly -> can't end on block
+		assertFalse(emg.move(emg.makeCoordinate(1, 7), emg.makeCoordinate(1, 6)));
+		
+		//Fly -> can jump many pieces 
+	    assertTrue(emg.move(emg.makeCoordinate(1, 7), emg.makeCoordinate(4, 7)));
+		
+	    emg = egb.makeGameManager();//reset board
+	    //Fly -> can't go past distance set (5)
+	    assertFalse(emg.move(emg.makeCoordinate(1, 7), emg.makeCoordinate(8, 7)));
+	    
+	    //Fly -> can go to max distance set (5)
+	    assertTrue(emg.move(emg.makeCoordinate(1, 7), emg.makeCoordinate(6, 7)));
+	   
+	    //Distance -> can't go past distance set (4)
+	    assertFalse(emg.move(emg.makeCoordinate(8, 1), emg.makeCoordinate(8, 8)));
+	    
+	    //Distance -> can go to max distance set (4)
+	    assertTrue(emg.move(emg.makeCoordinate(8, 1), emg.makeCoordinate(8, 5)));
+	    
+	    //Exit removes piece
+	    assertNull(emg.getPieceAt(emg.makeCoordinate(8, 5)));
+	    
+	    //cant do multi directions
+	    assertFalse(emg.move(emg.makeCoordinate(8, 1), emg.makeCoordinate(6, 4)));
+	    assertFalse(emg.move(emg.makeCoordinate(8, 6), emg.makeCoordinate(4, 5)));
+	    assertFalse(emg.move(emg.makeCoordinate(8, 1), emg.makeCoordinate(4, 5)));
+	    
+	    //can't move diagonal
+	    assertFalse(emg.move(emg.makeCoordinate(4, 4), emg.makeCoordinate(8, 8)));
+	    
+	    emg = egb.makeGameManager();//reset board
+	    //can't pass over an exit
+	    assertFalse(emg.move(emg.makeCoordinate(10, 1), emg.makeCoordinate(10, 5)));
+	    
+	    //FLY -> can pass over an exit
+	    assertTrue(emg.move(emg.makeCoordinate(9, 1), emg.makeCoordinate(9, 6)));
+	    
+	}
 //	
 //	@Test
 //	void HexOmniMasterTest() throws Exception {

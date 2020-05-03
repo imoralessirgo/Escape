@@ -13,9 +13,11 @@
 package escape;
 
 import static escape.board.LocationType.CLEAR;
+import java.util.HashMap;
 import escape.board.*;
 import escape.board.coordinate.*;
-import escape.piece.EscapePiece;
+import escape.piece.*;
+import escape.rule.*;
 import escape.util.*;
 
 /**
@@ -25,7 +27,7 @@ import escape.util.*;
 public class OrthoGameController implements EscapeGameManager<OrthoSquareCoordinate> {
 
 	OrthoSquareBoard board;
-	PieceTypeInitializer[] pt;
+	HashMap<PieceName, PieceTypeInitializer> pieceAttributes;
 	
 	/**
 	 * Constructor
@@ -34,7 +36,12 @@ public class OrthoGameController implements EscapeGameManager<OrthoSquareCoordin
 	 */
 	OrthoGameController(OrthoSquareBoard board, PieceTypeInitializer[] pt, LocationInitializer... initializers) {
 		this.board = board;
-		this.pt = pt;
+		if (pt != null) {
+			this.pieceAttributes = new HashMap<PieceName, PieceTypeInitializer>();
+			for (PieceTypeInitializer p : pt) {
+				pieceAttributes.put(p.getPieceName(), p);
+			}
+		}
 		if(initializers == null) {return;}
 		for (LocationInitializer li : initializers) {
 			OrthoSquareCoordinate c = makeCoordinate(li.x, li.y);
@@ -52,7 +59,24 @@ public class OrthoGameController implements EscapeGameManager<OrthoSquareCoordin
 	 */
 	@Override
 	public boolean move(OrthoSquareCoordinate from, OrthoSquareCoordinate to) {
-		// TODO Auto-generated method stub
+		int distance = from.distanceTo(to);
+		if (distance == 0) {
+			return false;
+		}
+		EscapePiece p = getPieceAt(from);
+		if (p == null) { // no piece at from
+			return false;
+		}
+		if(board.getLocationType(to) == LocationType.BLOCK) {return false;}
+		if (OrthoPathFind.canMove(from, to, pieceAttributes.get(p.getName()), board)) {
+			// capture check
+			if (board.getPieceAt(to) == null || (board.getPieceAt(to)
+					.getPlayer() != board.getPieceAt(from).getPlayer())) {
+				board.removePieceAt(from);
+				board.putPieceAt(p, to);
+				return true;
+			}
+		}
 		return false;
 	}
 
@@ -61,8 +85,7 @@ public class OrthoGameController implements EscapeGameManager<OrthoSquareCoordin
 	 */
 	@Override
 	public EscapePiece getPieceAt(OrthoSquareCoordinate coordinate) {
-		// TODO Auto-generated method stub
-		return null;
+		return board.getPieceAt(coordinate);
 	}
 
 	/*

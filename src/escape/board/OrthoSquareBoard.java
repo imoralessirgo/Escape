@@ -65,6 +65,14 @@ public class OrthoSquareBoard implements Board<OrthoSquareCoordinate> {
 		}
 	}
 
+	public void removePieceAt(OrthoSquareCoordinate c) {
+		if(this.getPieceAt(c) != null) {
+			pieces.remove(c);
+		}else {
+			throw new EscapeException("removePiece: Coordinate has no piece");
+		}
+	}
+	
 	/**
 	 * maps location type to coordinate
 	 * 
@@ -81,7 +89,18 @@ public class OrthoSquareBoard implements Board<OrthoSquareCoordinate> {
 		}
 	}
 
-	private boolean inBounds(OrthoSquareCoordinate c) {
+	public LocationType getLocationType(OrthoSquareCoordinate c) {
+		if (inBounds(c)) {
+			if(squares.get(c) == null) {
+				squares.put(c, LocationType.CLEAR);
+			}
+				return squares.get(c);
+		} else {
+			throw new EscapeException("getType: Coordinate out of board bounds");
+		}
+	}
+	
+	public boolean inBounds(OrthoSquareCoordinate c) {
 		return c.getX() <= xMax && c.getY() <= yMax && c.getX() > 0 && c.getY() > 0;
 	}
 }
