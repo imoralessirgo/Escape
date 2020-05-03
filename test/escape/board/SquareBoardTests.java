@@ -45,6 +45,7 @@ public class SquareBoardTests {
 	static Stream<Arguments> othoProvider() {
 		return Stream.of(
 				Arguments.of(true, 2, 4, 5, 4),
+				Arguments.of(false, 2, 4, 2, 4),
 				Arguments.of(false, 2, 4, 5, 6),
 				Arguments.of(true, 2, 4, 1, 4));
 	}

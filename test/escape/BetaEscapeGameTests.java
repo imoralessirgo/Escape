@@ -58,5 +58,5 @@ class BetaEscapeGameTests {
 		EscapeGameManager emg = egb.makeGameManager();
 		assertTrue(emg instanceof HexGameController);
 	}
-
+	
 }

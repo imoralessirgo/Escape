@@ -22,7 +22,13 @@ import escape.util.PieceTypeInitializer.PieceAttribute;
  * @version May 2, 2020
  */
 public class PathFind {
-	private static HashMap<Integer, LinkedList<Coordinate>> path;
+	private static HashMap<Integer, HashSet<Coordinate>> path; // store valid paths
+	private static Board board; // current game board
+	private static PieceAttribute[] pieceAtt; // pieceAttributes for current piece
+	private static int i; // current dsistance from origin
+	private static Coordinate dest;
+	private static int[] currDir;
+
 	private static final List<int[]> ortho = Arrays.asList(new int[] {
 			0, 1 // NORTH
 	}, new int[] {
@@ -41,32 +47,42 @@ public class PathFind {
 	}, new int[] {
 			-1, -1 // SOUTHWEST
 	});
-	private static Board board;
-	private static PieceAttribute[] pieceAtt;
 
-	public static boolean canMove(Coordinate from, Coordinate to, PieceTypeInitializer pt,
-			Board b) {
-		path = new HashMap<Integer, LinkedList<Coordinate>>();
-		LinkedList<Coordinate> nodes = new LinkedList<Coordinate>();
+	/**
+	 * Description
+	 * 
+	 * @param from
+	 * @param to
+	 * @param pt
+	 * @param b
+	 * @return
+	 */
+	public static boolean canMove(Coordinate from, Coordinate to,
+			PieceTypeInitializer pt, Board b) {
+		path = new HashMap<Integer, HashSet<Coordinate>>();
+		HashSet<Coordinate> nodes = new HashSet<Coordinate>();
 		nodes.add(from);
 		path.put(0, nodes);
+		path.put(1, new HashSet<Coordinate>());
 		board = b;
 		pieceAtt = pt.getAttributes();
 		int distance = getMaxTravelDistance();
-		for (int i = 0; i < distance; i++) {
+		for (i = 0; i < distance; i++) {
 			nodes = path.get(i);
+			path.put(i + 2, new HashSet<Coordinate>());
 			if (nodes == null) {
 				return false;
 			}
-			LinkedList<Coordinate> validCoords = new LinkedList<Coordinate>();
+			HashSet<Coordinate> validCoords = new HashSet<Coordinate>();
 			switch (pt.getMovementPattern()) {
-				case DIAGONAL:					
-				validCoords.addAll(diagonalPath(path.get(i)));
-				if (validCoords.contains(to)) {
-					return true;
-				} // made it to destination
-				path.put(i + 1, validCoords);
-				break;
+				case DIAGONAL:
+					validCoords.addAll(diagonalPath(path.get(i)));
+					if (validCoords.contains(to)) {
+						return true;
+					} // made it to destination
+					validCoords.addAll(path.get(i + 1));
+					path.put(i + 1, validCoords);
+					break;
 				case LINEAR: // problematic
 					break;
 				case OMNI:
@@ -76,21 +92,31 @@ public class PathFind {
 					if (validCoords.contains(to)) {
 						return true;
 					} // made it to destination
+					validCoords.addAll(path.get(i + 1));
 					path.put(i + 1, validCoords);
 					break;
 				default:
-					throw new EscapeException("Invalid Movement Pattern found");
+					throw new EscapeException(
+							"squarePathFind: Invalid Movement Pattern found");
 			}
 		}
 
 		return false;
+
 	}
 
-	static private LinkedList<Coordinate> orthoPath(LinkedList<Coordinate> coordinates) {
-		LinkedList<Coordinate> validCoords = new LinkedList<Coordinate>();
+	/**
+	 * Description
+	 * 
+	 * @param coordinates
+	 * @return
+	 */
+	static private HashSet<Coordinate> orthoPath(HashSet<Coordinate> coordinates) {
+		HashSet<Coordinate> validCoords = new HashSet<Coordinate>();
 		for (Coordinate c : coordinates) {
 			SquareCoordinate sc = (SquareCoordinate) c;
 			for (int[] n : ortho) {
+				currDir = n;
 				SquareCoordinate neighbour = SquareCoordinate
 						.makeCoordinate(sc.getX() + n[0], sc.getY() + n[1]);
 				if (isValid(neighbour)) {
@@ -101,11 +127,19 @@ public class PathFind {
 		return validCoords;
 	}
 
-	static private LinkedList<Coordinate> diagonalPath(LinkedList<Coordinate> coordinates) {
-		LinkedList<Coordinate> validCoords = new LinkedList<Coordinate>();
+	/**
+	 * Description
+	 * 
+	 * @param coordinates
+	 * @return
+	 */
+	static private HashSet<Coordinate> diagonalPath(
+			HashSet<Coordinate> coordinates) {
+		HashSet<Coordinate> validCoords = new HashSet<Coordinate>();
 		for (Coordinate c : coordinates) {
 			SquareCoordinate sc = (SquareCoordinate) c;
 			for (int[] n : diagonal) {
+				currDir = n;
 				SquareCoordinate neighbour = SquareCoordinate
 						.makeCoordinate(sc.getX() + n[0], sc.getY() + n[1]);
 				if (isValid(neighbour)) {
@@ -116,25 +150,40 @@ public class PathFind {
 		return validCoords;
 	}
 
+	/**
+	 * Description
+	 * 
+	 * @param sc
+	 * @return
+	 */
 	private static boolean isValid(SquareCoordinate sc) {
 		SquareBoard sb = (SquareBoard) board;
-		if(!sb.inBounds(sc)) {
+		if (!sb.inBounds(sc)) {
 			return false;
 		}
-		if (sb.getPieceAt(sc) != null
-				|| sb.getLocationType(sc) == LocationType.BLOCK) {
-			if (canJump() || canFly()) {
+		if (sb.getPieceAt(sc) != null) {
+			if (canFly()) {
 				return true;
-			}
+			} else if (canJump()) {
+				jumpFrom(sc);
+				return false;
+			} else
+				return false;
 		}
 		if (sb.getLocationType(sc) == LocationType.EXIT) {
-			// trying to move over an exit is invalid
-			return false;
-		} 
-		if (sb.getLocationType(sc) == LocationType.BLOCK && !canUnblock()) {
+			// only valid to fly over or end at an exit
+			if (canFly() || dest.equals(sc))
+				return true;
+			else
+				return false;
+		}
+		if (sb.getLocationType(sc) == LocationType.BLOCK) {
 			// trying to move to a blocked position without unblock capabilities
 			// is invalid
-			return false;
+			if ((canFly() || canUnblock()) && !dest.equals(sc))
+				return true;
+			else
+				return false;
 		}
 		return true;
 	}
@@ -146,6 +195,43 @@ public class PathFind {
 			}
 		}
 		return false;
+	}
+
+	/**
+	 * Description
+	 * 
+	 * @param c
+	 */
+	private static void jumpFrom(Coordinate c) {
+		SquareCoordinate curr = (SquareCoordinate) c;
+		SquareCoordinate neighbour = SquareCoordinate
+				.makeCoordinate(curr.getX() + currDir[0], curr.getY() + currDir[1]);
+		SquareBoard sb = (SquareBoard) board;
+		HashSet<Coordinate> hs = path.get(i + 2);
+
+		if (sb.getLocationType(curr) == LocationType.EXIT) {
+			// only valid to fly over or end at an exit
+			if (canFly() || dest.equals(neighbour)) {
+				hs.add(neighbour);
+				path.put(i + 2, hs);
+				return;
+			} else
+				return;
+		} else if (sb.getLocationType(neighbour) == LocationType.BLOCK) {
+			// trying to move to a blocked position without unblock capabilities
+			// is invalid
+			if ((canFly() || canUnblock()) && !dest.equals(curr)) {
+				hs.add(neighbour);
+				path.put(i + 2, hs);
+				return;
+			} else
+				return;
+		} else if (sb.getPieceAt(neighbour) != null && !neighbour.equals(dest)) {
+			return;
+		}
+		hs.add(neighbour);
+		path.put(i + 2, hs);
+		return;
 	}
 
 	private static boolean canFly() {
@@ -165,10 +251,11 @@ public class PathFind {
 		}
 		return false;
 	}
-	
+
 	private static int getMaxTravelDistance() {
 		for (PieceAttribute p : pieceAtt) {
-			if (p.getId() == PieceAttributeID.FLY || p.getId() == PieceAttributeID.DISTANCE) {
+			if (p.getId() == PieceAttributeID.FLY
+					|| p.getId() == PieceAttributeID.DISTANCE) {
 				return p.getIntValue();
 			}
 		}
