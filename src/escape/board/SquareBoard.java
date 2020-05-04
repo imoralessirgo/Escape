@@ -51,10 +51,10 @@ public class SquareBoard implements Board<SquareCoordinate> {
 	public void putPieceAt(EscapePiece p, SquareCoordinate coord)
 			throws EscapeException {
 		if (inBounds(coord)) {
-			if(p == null) {
+			if (p == null) {
 				squares.remove(coord);
 				pieces.remove(coord);
-			}else if (squares.get(coord) == LocationType.BLOCK) {
+			} else if (squares.get(coord) == LocationType.BLOCK) {
 				throw new EscapeException("putPiece: Coordinate blocked");
 			} else if (squares.get(coord) != LocationType.EXIT) {
 				pieces.put(coord, p);
@@ -65,19 +65,26 @@ public class SquareBoard implements Board<SquareCoordinate> {
 		}
 	}
 
+	/**
+	 * Remove piece at the given coordinate
+	 * 
+	 * @param c
+	 */
 	public void removePieceAt(SquareCoordinate c) {
-		if(this.getPieceAt(c) != null) {
+		if (this.getPieceAt(c) != null) {
 			pieces.remove(c);
-		}else {
+		} else {
 			throw new EscapeException("removePiece: Coordinate has no piece");
 		}
 	}
-	
+
 	/**
+	 * maps location type to coordinate
 	 * 
-	 * Description
 	 * @param c
+	 *            coordinate
 	 * @param lt
+	 *            location type
 	 */
 	public void setLocationType(SquareCoordinate c, LocationType lt) {
 		if (inBounds(c)) {
@@ -87,17 +94,29 @@ public class SquareBoard implements Board<SquareCoordinate> {
 		}
 	}
 
+	/**
+	 * Get location type for given coordinate
+	 * 
+	 * @param c
+	 * @param lt
+	 */
 	public LocationType getLocationType(SquareCoordinate c) {
 		if (inBounds(c)) {
-			if(squares.get(c) == null) {
+			if (squares.get(c) == null) {
 				squares.put(c, LocationType.CLEAR);
 			}
-				return squares.get(c);
+			return squares.get(c);
 		} else {
 			throw new EscapeException("getType: Coordinate out of board bounds");
 		}
 	}
-	
+
+	/**
+	 * Check if given coordinate is within board bounds
+	 * 
+	 * @param c
+	 * @return
+	 */
 	public boolean inBounds(SquareCoordinate c) {
 		return c.getX() <= xMax && c.getY() <= yMax && c.getX() > 0 && c.getY() > 0;
 	}

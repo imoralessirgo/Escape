@@ -65,6 +65,11 @@ public class OrthoSquareBoard implements Board<OrthoSquareCoordinate> {
 		}
 	}
 
+	/**
+	 * Remove piece at the given coordinate
+	 * 
+	 * @param c
+	 */
 	public void removePieceAt(OrthoSquareCoordinate c) {
 		if(this.getPieceAt(c) != null) {
 			pieces.remove(c);
@@ -89,6 +94,12 @@ public class OrthoSquareBoard implements Board<OrthoSquareCoordinate> {
 		}
 	}
 
+	/**
+	 * Get location type for given coordinate
+	 * 
+	 * @param c
+	 * @param lt
+	 */
 	public LocationType getLocationType(OrthoSquareCoordinate c) {
 		if (inBounds(c)) {
 			if(squares.get(c) == null) {
@@ -100,6 +111,12 @@ public class OrthoSquareBoard implements Board<OrthoSquareCoordinate> {
 		}
 	}
 	
+	/**
+	 * Check if given coordinate is within board bounds
+	 * 
+	 * @param c
+	 * @return
+	 */
 	public boolean inBounds(OrthoSquareCoordinate c) {
 		return c.getX() <= xMax && c.getY() <= yMax && c.getX() > 0 && c.getY() > 0;
 	}

@@ -1,0 +1,23 @@
+==== BETA ====
+BetaEscapeGameTests
+
+SampleEscapeGame instanceof SquareGameController : true
+SampleEscapeGame3 instanceof OrthoGameController : true
+SampleEscapeGame2 instanceof HexGameController : true
+
+
+SquareBoard ___ DiagonalMovement
+FROG Distance 5 UNBLOCK & JUMP
+(5,4) -> (4,3) : False // can't land at blocked
+(5,4) -> (3,2) : True // can unblock 
+(5,4) -> (7,6) : True // can capture
+(5,4) -> (9,8) : True // can land at exit
+(5,4) -> (9,8) : True // can land at exit
+(5,4) -> (13,12) : False // exceeds distance
+ 
+
+SquareBoard ___ OrthoMovement
+FROG Distance 5 no unblock jump or fly
+(2,4) -> (5,4) : True
+(2,4) -> (5,6) : False
+(2,4) -> (1,4) : True

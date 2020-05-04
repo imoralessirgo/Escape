@@ -64,18 +64,6 @@ FakeBoard
 
 
 
-==== BETA ====
-BetaEscapeGameTests
 
-SampleEscapeGame instanceof SquareGameController : true
-SampleEscapeGame3 instanceof OrthoGameController : true
-SampleEscapeGame2 instanceof HexGameController : true
-
-
-SquareBoard ___ OrthoMovement
-FROG Distance 5 no unblock jump or fly
-(2,4) -> (5,4) : True
-(2,4) -> (5,6) : False
-(2,4) -> (1,4) : True
 
 

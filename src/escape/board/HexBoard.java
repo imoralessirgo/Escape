@@ -41,6 +41,11 @@ public class HexBoard implements Board<HexCoordinate> {
 		return pieces.get(coord);
 	}
 	
+	/**
+	 * Remove piece at the given coordinate
+	 * 
+	 * @param c
+	 */
 	public void removePieceAt(HexCoordinate c) {
 		if(this.getPieceAt(c) != null) {
 			pieces.remove(c);
@@ -70,6 +75,12 @@ public class HexBoard implements Board<HexCoordinate> {
 		hexagons.put(c, lt);
 	}
 	
+	/**
+	 * Get location type for given coordinate
+	 * 
+	 * @param c
+	 * @param lt
+	 */
 	public LocationType getLocationType(HexCoordinate c) {
 			if(hexagons.get(c) == null) {
 				hexagons.put(c, LocationType.CLEAR);
