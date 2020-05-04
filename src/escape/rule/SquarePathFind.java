@@ -193,7 +193,7 @@ public class SquarePathFind {
 				}
 			}
 		}
-		return validCoords;
+		return validCoords; 
 	}
 
 	/**

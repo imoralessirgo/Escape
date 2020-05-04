@@ -14,6 +14,11 @@
 		<y>5</y>
 		<locationType>BLOCK</locationType>
 	</locationInitializers>
+		<locationInitializers>
+		<x>11</x>
+		<y>8</y>
+		<locationType>BLOCK</locationType>
+	</locationInitializers>
 	<locationInitializers>
 		<x>9</x>
 		<y>8</y>
@@ -63,12 +68,12 @@
 		<attributes>
 			<id>JUMP</id>
 			<attrType>BOOLEAN</attrType>
-			<intValue>true</intValue>
+			<booleanValue>true</booleanValue>
 		</attributes>
 		<attributes>
 			<id>UNBLOCK</id>
 			<attrType>BOOLEAN</attrType>
-			<intValue>true</intValue>
+			<booleanValue>true</booleanValue>
 		</attributes>
 	</pieceTypes>
 	<pieceTypes>

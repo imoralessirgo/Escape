@@ -15,10 +15,14 @@ package escape.square;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import java.io.File;
 import java.util.stream.Stream;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.*;
 import escape.*;
+import escape.exception.EscapeException;
+
+
+
 
 /**
  * Description
@@ -30,10 +34,11 @@ public class SquareDiagonalTests {
 	@BeforeEach
 	public void resetBoard() throws Exception {
 		EscapeGameBuilder egb = new EscapeGameBuilder(
-				new File("config/SquareBoards/SquareOrtho.xml"));
+				new File("config/SquareBoards/SquareDiagonal.xml"));
 		emg = egb.makeGameManager();
 	}
 
+	
 	
 	/**
 	 * test diagonal movement
@@ -48,9 +53,25 @@ public class SquareDiagonalTests {
 
 	static Stream<Arguments> diagonalProvider() {
 		return Stream.of(
-				Arguments.of(true, 18, 15, 21, 18),
-				Arguments.of(false, 18, 15, 6, 17),
-				Arguments.of(true, 18, 15, 21, 16));
+				// frog
+				Arguments.of(false, 5,4,4,3),
+				Arguments.of(true, 5,4,3,2),
+				Arguments.of(true, 5,4,7,6),
+				Arguments.of(true, 5,4,9,8),
+				Arguments.of(false, 5,4,13,12),
+				// horse
+				Arguments.of(false, 18,15,10,7),
+				Arguments.of(false, 18,15,19,15)
+//				Arguments.of(false, 18,15,25,22)
+//				Arguments.of(false, 18,15,13,12)
+				);
+	}
+	
+	@Test
+	public void exceptionTests() {
+
+		Assertions.assertThrows(EscapeException.class,
+				() -> {emg.move(emg.makeCoordinate(18, 15), emg.makeCoordinate(25, 22));});
 	}
 	
 
