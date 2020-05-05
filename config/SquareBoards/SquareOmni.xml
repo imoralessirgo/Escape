@@ -35,11 +35,6 @@
 		<locationType>BLOCK</locationType>
 	</locationInitializers>
 		<locationInitializers>
-		<x>5</x>
-		<y>20</y>
-		<locationType>BLOCK</locationType>
-	</locationInitializers>
-		<locationInitializers>
 		<x>4</x>
 		<y>19</y>
 		<locationType>BLOCK</locationType>
@@ -55,11 +50,31 @@
 		<locationType>BLOCK</locationType>
 	</locationInitializers>
 		<locationInitializers>
+		<x>6</x>
+		<y>18</y>
+		<locationType>BLOCK</locationType>
+	</locationInitializers>
+		<locationInitializers>
+		<x>6</x>
+		<y>20</y>
+		<locationType>BLOCK</locationType>
+	</locationInitializers>
+		<locationInitializers>
+		<x>4</x>
+		<y>18</y>
+		<locationType>BLOCK</locationType>
+	</locationInitializers>
+		<locationInitializers>
+		<x>4</x>
+		<y>20</y>
+		<locationType>BLOCK</locationType>
+	</locationInitializers>
+		<locationInitializers>
 		<x>5</x>
 		<y>19</y>
 		<locationType>CLEAR</locationType>
 		<player>PLAYER1</player>
-		<pieceName>FROG</pieceName>
+		<pieceName>SNAIL</pieceName>
 	</locationInitializers>
 	<locationInitializers>
 		<x>2</x>
@@ -89,6 +104,13 @@
 		<player>PLAYER1</player>
 		<pieceName>SNAIL</pieceName>
 	</locationInitializers>
+		<locationInitializers>
+		<x>5</x>
+		<y>20</y>
+		<locationType>CLEAR</locationType>
+		<player>PLAYER1</player>
+		<pieceName>SNAIL</pieceName>
+	</locationInitializers>
 	<locationInitializers>
 		<x>22</x>
 		<y>1</y>
@@ -96,10 +118,23 @@
 		<player>PLAYER1</player>
 		<pieceName>SNAIL</pieceName>
 	</locationInitializers>
-
+		<locationInitializers>
+		<x>21</x>
+		<y>1</y>
+		<locationType>CLEAR</locationType>
+		<player>PLAYER1</player>
+		<pieceName>SNAIL</pieceName>
+	</locationInitializers>
+	<locationInitializers>
+		<x>20</x>
+		<y>1</y>
+		<locationType>CLEAR</locationType>
+		<player>PLAYER1</player>
+		<pieceName>SNAIL</pieceName>
+	</locationInitializers>
 	<!-- Piece items, an array of pieceTypes, 1 or more -->
 	<pieceTypes>
-		<movementPattern>ORTHOGONAL</movementPattern>
+		<movementPattern>OMNI</movementPattern>
 		<pieceName>FROG</pieceName>
 		<attributes>
 			<id>DISTANCE</id>
@@ -113,7 +148,7 @@
 		</attributes>
 	</pieceTypes>
 	<pieceTypes>
-		<movementPattern>ORTHOGONAL</movementPattern>
+		<movementPattern>OMNI</movementPattern>
 		<pieceName>HORSE</pieceName>
 		<attributes>
 			<id>DISTANCE</id>
@@ -127,7 +162,7 @@
 		</attributes>
 	</pieceTypes>
 	<pieceTypes>
-		<movementPattern>ORTHOGONAL</movementPattern>
+		<movementPattern>OMNI</movementPattern>
 		<pieceName>SNAIL</pieceName>
 		<attributes>
 			<id>DISTANCE</id>

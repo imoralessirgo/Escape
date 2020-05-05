@@ -15,69 +15,54 @@ package escape.square;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import java.io.File;
 import java.util.stream.Stream;
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.*;
 import escape.*;
-import escape.exception.EscapeException;
-
-
-
 
 /**
  * Description
  * @version May 4, 2020
  */
-public class SquareDiagonalTests {
+public class SquareOmniTests {
 	EscapeGameManager emg;
 
 	@BeforeEach
 	public void resetBoard() throws Exception {
 		EscapeGameBuilder egb = new EscapeGameBuilder(
-				new File("config/SquareBoards/SquareDiagonal.xml"));
+				new File("config/SquareBoards/SquareOmni.xml"));
 		emg = egb.makeGameManager();
 	}
 
-	
-	
 	/**
-	 * test diagonal movement
+	 * test Orthogonal movement
 	 *
 	 */
 	@ParameterizedTest
-	@MethodSource("diagonalProvider")
-	void diagonalTests(boolean expected, int x1, int y1, int x2, int y2) {
+	@MethodSource("omniProvider")
+	void omniTests(boolean expected, int x1, int y1, int x2, int y2) {
 		assertEquals(expected,
 				emg.move(emg.makeCoordinate(x1, y1), emg.makeCoordinate(x2, y2)));
 	}
 
-	static Stream<Arguments> diagonalProvider() {
+	static Stream<Arguments> omniProvider() {
 		return Stream.of(
 				// frog
-				Arguments.of(false, 5,4,4,3),
-				Arguments.of(true, 5,4,3,2),
-				Arguments.of(true, 5,4,7,6),
-				Arguments.of(true, 5,4,9,8),
-				Arguments.of(false, 5,4,13,12),
+				Arguments.of(true, 2, 4, 5, 4),
+				Arguments.of(false, 2, 4, 2, 4),
+				Arguments.of(false, 2, 4, 5, 6),
+				Arguments.of(true, 2, 4, 1,4),
+				Arguments.of(true, 2, 4, 1, 5),
 				// horse
-				Arguments.of(false, 18,15,10,7),
-				Arguments.of(false, 18,15,19,15),
-				Arguments.of(true, 18,15,20,19),
-				// snail
-				Arguments.of(true, 7,10,10,7),
-				Arguments.of(false, 7,10,11,8),
-				Arguments.of(true, 7,10,9,12)
-				
+				Arguments.of(true, 18,15,22,15),
+				//snail
+				Arguments.of(true, 22, 2, 17,2),
+				Arguments.of(false, 22, 2, 22,1),
+				Arguments.of(true, 5, 19, 5, 23),
+				Arguments.of(false, 20, 1, 22,1),
+				Arguments.of(true, 22, 2, 22,4)
 				
 				);
 	}
-	
-	@Test
-	public void exceptionTests() {
-
-		Assertions.assertThrows(EscapeException.class,
-				() -> {emg.move(emg.makeCoordinate(18, 15), emg.makeCoordinate(25, 22));});
-	}
-	
 
 }

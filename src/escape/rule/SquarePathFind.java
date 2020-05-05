@@ -253,7 +253,7 @@ public class SquarePathFind {
 		if (!sb.inBounds(neighbour)) { // jumping out of bounds
 			return;
 		}
-		if (sb.getLocationType(curr) == LocationType.EXIT) {
+		if (sb.getLocationType(neighbour) == LocationType.EXIT) {
 			// only valid to fly over or end at an exit
 			if (canFly() || dest.equals(neighbour)) {
 				hs.add(neighbour);
@@ -358,7 +358,7 @@ public class SquarePathFind {
 		if (!sb.inBounds(neighbour)) {
 			return false;
 		}
-		if (sb.getLocationType(curr) == LocationType.EXIT) {
+		if (sb.getLocationType(neighbour) == LocationType.EXIT) {
 			// only valid to fly over or end at an exit
 			if (canFly() || dest.equals(neighbour)) {
 				return true;

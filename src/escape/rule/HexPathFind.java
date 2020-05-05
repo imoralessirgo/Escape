@@ -189,7 +189,7 @@ public class HexPathFind {
 				.makeCoordinate(curr.getX() + currDir[0], curr.getY() + currDir[1]);
 		HexBoard sb = (HexBoard) board;
 		HashSet<Coordinate> hs = path.get(i + 2);
-		if (sb.getLocationType(curr) == LocationType.EXIT) {
+		if (sb.getLocationType(neighbour) == LocationType.EXIT) {
 			// only valid to fly over or end at an exit
 			if (canFly() || dest.equals(neighbour)) {
 				hs.add(neighbour);
@@ -288,7 +288,7 @@ public class HexPathFind {
 	private static boolean jumpFromLinear(HexCoordinate curr,
 			HexCoordinate neighbour) {
 		HexBoard sb = (HexBoard) board;
-		if (sb.getLocationType(curr) == LocationType.EXIT) {
+		if (sb.getLocationType(neighbour) == LocationType.EXIT) {
 			// only valid to fly over or end at an exit
 			if (canFly() || dest.equals(neighbour)) {
 				return true;

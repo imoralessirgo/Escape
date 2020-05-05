@@ -16,14 +16,61 @@ FROG Distance 5 UNBLOCK & JUMP
  HORSE Distance 8 no unblock jump or fly
 (18,15) -> (10,7) : False // can't land due to blocked
 (18,15) -> (19,15) : False // can move to south coord 
-(18,15) -> (25,22) : True // can capture
-(18,15) -> (9,8) : True // can land at exit
-(18,15) -> (13,12) : False // exceeds distance
-
+(18,15) -> (20,19) : True // check can't jump 
+SNAIL Fly 10 UNBLOCK
+(7,10) -> (10,7) : True // fly over exit
+(7,10) -> (11,8) : False // end at blocked 
+(7,10) -> (9,12) : True // fly over enemy piece
 
 
 SquareBoard ___ OrthoMovement
 FROG Distance 5 no unblock jump or fly
-(2,4) -> (5,4) : True
-(2,4) -> (5,6) : False
-(2,4) -> (1,4) : True
+(2,4) -> (5,4) : True // valid dest
+(2,4) -> (2,4) : False // same coord
+(2,4) -> (5,6) : False // blocked
+(2,4) -> (1,4) : True // valid
+(2,4) -> (1,5) : True // Diagonal
+(5,19) -> (5,23) : True // bllocked all dir
+HORSE
+Distance 8 Unblock
+(18,15) -> (22,15) : True // unblock 2 in a row
+SNAIL
+Distance 8 Jump
+(22,2) -> (22,4) : True // Jump to Exit
+(22,2) -> (17,2) : True // jump out of board 
+
+
+
+SquareBoard ___ LinearMovement
+FROG Distance 5 UNBLOCK & JUMP
+(5,4) -> (4,3) : False // can't land at blocked
+(5,4) -> (3,2) : True // can unblock 
+(5,4) -> (7,6) : True // can capture
+(5,4) -> (9,8) : True // can land at exit
+(5,4) -> (13,12) : False // exceeds distance
+ HORSE Distance 8 no unblock jump or fly
+(18,15) -> (10,7) : False // can't land due to blocked
+(18,15) -> (19,15) : False // can move to south coord 
+(18,15) -> (20,19) : True // check can't jump 
+SNAIL Fly 10 UNBLOCK
+(7,10) -> (10,7) : True // fly over exit
+(7,10) -> (11,8) : False // end at blocked 
+(7,10) -> (9,12) : True // fly over enemy piece
+
+SquareBoard ___ OmniMovement
+FROG Distance 5 no unblock jump or fly
+(2,4) -> (5,4) : True // valid dest
+(2,4) -> (2,4) : False // same coord
+(2,4) -> (5,6) : False // blocked
+(2,4) -> (1,4) : True // valid
+(2,4) -> (1,5) : True // Diagonal
+HORSE
+Distance 8 Unblock
+(18,15) -> (22,15) : True // unblock 2 in a row
+SNAIL
+Distance 8 Jump
+(22,2) -> (17,2) : True // jump out of board 
+(22,2) -> (22,1) : False // Jump to my own piece
+(5,19) -> (5,23) : True // Jump only option
+(20,1) -> (22,1) : False // land at piece
+(22,2) -> (22,4) : True // Jump to Exit

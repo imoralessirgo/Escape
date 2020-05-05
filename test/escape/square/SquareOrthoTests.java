@@ -44,10 +44,20 @@ public class SquareOrthoTests {
 
 	static Stream<Arguments> othoProvider() {
 		return Stream.of(
+				// frog
 				Arguments.of(true, 2, 4, 5, 4),
 				Arguments.of(false, 2, 4, 2, 4),
 				Arguments.of(false, 2, 4, 5, 6),
-				Arguments.of(true, 2, 4, 1, 4));
+				Arguments.of(true, 2, 4, 1,4),
+				Arguments.of(true, 2, 4, 1, 5),
+				Arguments.of(false, 5, 19, 5, 23),
+				// horse
+				Arguments.of(true, 18,15,22,15),
+				//snail
+				Arguments.of(true, 22, 2, 17,2),
+				Arguments.of(true, 22, 2, 22,4)
+				
+				);
 	}
 
 }
