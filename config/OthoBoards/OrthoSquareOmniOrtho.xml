@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <escapeGameInitializer>
-	<coordinateType>SQUARE</coordinateType>
+	<coordinateType>ORTHOSQUARE</coordinateType>
 	<!-- Board items -->
 	<xMax>24</xMax>
 	<yMax>24</yMax>
@@ -42,6 +42,11 @@
 		<locationInitializers>
 		<x>6</x>
 		<y>19</y>
+		<locationType>BLOCK</locationType>
+	</locationInitializers>
+	<locationInitializers>
+		<x>16</x>
+		<y>15</y>
 		<locationType>BLOCK</locationType>
 	</locationInitializers>
 		<locationInitializers>
@@ -150,15 +155,32 @@
 		<pieceName>SNAIL</pieceName>
 	</locationInitializers>
 		<locationInitializers>
+		<x>17</x>
+		<y>15</y>
+		<locationType>CLEAR</locationType>
+		<player>PLAYER1</player>
+		<pieceName>FOX</pieceName>
+	</locationInitializers>
+			<locationInitializers>
 		<x>22</x>
 		<y>8</y>
 		<locationType>CLEAR</locationType>
 		<player>PLAYER1</player>
 		<pieceName>FOX</pieceName>
+	</locationInitializers>			
+	<locationInitializers>
+		<x>1</x>
+		<y>24</y>
+		<locationType>CLEAR</locationType>
+		<player>PLAYER1</player>
+		<pieceName>HUMMINGBIRD</pieceName>
 	</locationInitializers>
+	
+
+	
 	<!-- Piece items, an array of pieceTypes, 1 or more -->
 	<pieceTypes>
-		<movementPattern>LINEAR</movementPattern>
+		<movementPattern>OMNI</movementPattern>
 		<pieceName>FROG</pieceName>
 		<attributes>
 			<id>DISTANCE</id>
@@ -172,7 +194,7 @@
 		</attributes>
 	</pieceTypes>
 	<pieceTypes>
-		<movementPattern>LINEAR</movementPattern>
+		<movementPattern>OMNI</movementPattern>
 		<pieceName>HORSE</pieceName>
 		<attributes>
 			<id>DISTANCE</id>
@@ -184,9 +206,14 @@
 			<attrType>BOOLEAN</attrType>
 			<booleanValue>true</booleanValue>
 		</attributes>
+				<attributes>
+			<id>JUMP</id>
+			<attrType>BOOLEAN</attrType>
+			<booleanValue>true</booleanValue>
+		</attributes>
 	</pieceTypes>
 	<pieceTypes>
-		<movementPattern>LINEAR</movementPattern>
+		<movementPattern>ORTHOGONAL</movementPattern>
 		<pieceName>SNAIL</pieceName>
 		<attributes>
 			<id>DISTANCE</id>
@@ -205,7 +232,7 @@
 		</attributes>
 	</pieceTypes>
 		<pieceTypes>
-		<movementPattern>LINEAR</movementPattern>
+		<movementPattern>ORTHOGONAL</movementPattern>
 		<pieceName>FOX</pieceName>
 		<attributes>
 			<id>FLY</id>
@@ -223,4 +250,24 @@
 			<booleanValue>false</booleanValue>
 		</attributes>
 	</pieceTypes>
+			<pieceTypes>
+		<movementPattern>DIAGONAL</movementPattern>
+		<pieceName>HUMMINGBIRD</pieceName>
+		<attributes>
+			<id>FLY</id>
+			<attrType>INTEGER</attrType>
+			<intValue>8</intValue>
+		</attributes>
+		<attributes>
+			<id>UNBLOCK</id>
+			<attrType>BOOLEAN</attrType>
+			<booleanValue>false</booleanValue>
+		</attributes>
+		<attributes>
+			<id>JUMP</id>
+			<attrType>BOOLEAN</attrType>
+			<booleanValue>false</booleanValue>
+		</attributes>
+	</pieceTypes>
+	
 </escapeGameInitializer>
