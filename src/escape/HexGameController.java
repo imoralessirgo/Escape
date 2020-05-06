@@ -9,7 +9,7 @@
 package escape;
 
 import static escape.board.LocationType.CLEAR;
-import java.util.HashMap;
+import java.util.*;
 import escape.board.*;
 import escape.board.coordinate.*;
 import escape.exception.EscapeException;
@@ -38,7 +38,10 @@ public class HexGameController implements EscapeGameManager<HexCoordinate> {
 		if (pt != null) {
 			this.pieceAttributes = new HashMap<PieceName, PieceTypeInitializer>();
 			for (PieceTypeInitializer p : pt) {
-				pieceAttributes.put(p.getPieceName(), p);
+				if (!Arrays.asList(PieceName.values()).contains(p.getPieceName()))
+					throw new EscapeException("GameController: invalid pieceName");
+				else
+					pieceAttributes.put(p.getPieceName(), p);
 			}
 		}else {
 			throw new EscapeException("GameController: No piece attributes provided");

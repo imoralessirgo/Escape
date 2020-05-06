@@ -9,7 +9,7 @@
 package escape;
 
 import static escape.board.LocationType.CLEAR;
-import java.util.HashMap;
+import java.util.*;
 import escape.board.*;
 import escape.board.coordinate.*;
 import escape.exception.EscapeException;
@@ -39,10 +39,14 @@ public class SquareGameController implements EscapeGameManager<SquareCoordinate>
 		if (pt != null) {
 			this.pieceAttributes = new HashMap<PieceName, PieceTypeInitializer>();
 			for (PieceTypeInitializer p : pt) {
-				pieceAttributes.put(p.getPieceName(), p);
+				if (!Arrays.asList(PieceName.values()).contains(p.getPieceName()))
+					throw new EscapeException("GameController: invalid pieceName");
+				else
+					pieceAttributes.put(p.getPieceName(), p);
 			}
-		}else {
-			throw new EscapeException("GameController: No piece attributes provided");
+		} else {
+			throw new EscapeException(
+					"GameController: No piece attributes provided");
 		}
 		if (initializers == null) {
 			return;
@@ -72,13 +76,16 @@ public class SquareGameController implements EscapeGameManager<SquareCoordinate>
 		if (p == null) { // no piece at from
 			return false;
 		}
-		if(board.getLocationType(to) == LocationType.BLOCK) {return false;}
-		if (SquarePathFind.canMove(from, to, pieceAttributes.get(p.getName()), board)) {
+		if (board.getLocationType(to) == LocationType.BLOCK) {
+			return false;
+		}
+		if (SquarePathFind.canMove(from, to, pieceAttributes.get(p.getName()),
+				board)) {
 			// capture and exit check
-			if(board.getLocationType(to) == LocationType.EXIT) {
+			if (board.getLocationType(to) == LocationType.EXIT) {
 				board.removePieceAt(from);
 				return true;
-			}else if (board.getPieceAt(to) == null || (board.getPieceAt(to)
+			} else if (board.getPieceAt(to) == null || (board.getPieceAt(to)
 					.getPlayer() != board.getPieceAt(from).getPlayer())) {
 				board.removePieceAt(from);
 				board.putPieceAt(p, to);

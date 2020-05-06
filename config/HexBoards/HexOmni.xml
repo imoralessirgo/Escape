@@ -291,7 +291,7 @@
         </attributes>
     </pieceTypes>
     <pieceTypes>
-        <movementPattern>OMNI</movementPattern>
+        <movementPattern>DIAGONAL</movementPattern>
         <pieceName>HUMMINGBIRD</pieceName>
         <attributes>
             <id>DISTANCE</id>

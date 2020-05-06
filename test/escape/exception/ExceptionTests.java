@@ -67,4 +67,46 @@ public class ExceptionTests {
 		Assertions.assertThrows(EscapeException.class,
 				() -> {egb.makeGameManager();});
 	}
+	
+	/**
+	 * invalid piecename
+	 * 
+	 * @throws Exception
+	 */
+	@Test
+	void square2Test() throws Exception {
+		LocationInitializer li = new LocationInitializer(1, 1, LocationType.BLOCK,
+				Player.PLAYER1, PieceName.FOX);
+		EscapeGameBuilder egb = new EscapeGameBuilder(
+				new File("config/Exceptions/SampleEscapeGame4.xml"));
+		Assertions.assertThrows(EscapeException.class,
+				() -> {egb.makeGameManager();});
+	}
+
+	/**
+	 * invalid piecename
+	 * 
+	 * @throws Exception
+	 */
+	@Test
+	void ortho2Test() throws Exception {
+		EscapeGameBuilder egb = new EscapeGameBuilder(
+				new File("config/Exceptions/SampleEscapeGame6.xml"));
+		Assertions.assertThrows(EscapeException.class,
+				() -> {egb.makeGameManager();});
+	}
+
+	/**
+	 * invalid piecename
+	 * 
+	 * @throws Exception
+	 */
+	@Test
+	void hex2Test() throws Exception {
+		EscapeGameBuilder egb = new EscapeGameBuilder(
+				new File("config/Exceptions/SampleEscapeGame5.xml"));
+
+		Assertions.assertThrows(EscapeException.class,
+				() -> {egb.makeGameManager();});
+	}
 }
