@@ -67,18 +67,4 @@ public class ExceptionTests {
 		Assertions.assertThrows(EscapeException.class,
 				() -> {egb.makeGameManager();});
 	}
-	
-	/**
-	 * test proper controller for board
-	 * 
-	 * @throws Exception
-	 */
-	@Test
-	void invalidTest() throws Exception {
-		EscapeGameBuilder egb = new EscapeGameBuilder(
-				new File("config/Exceptions/SampleEscapeGame4.xml"));
-
-		Assertions.assertThrows(EscapeException.class,
-				() -> {egb.makeGameManager();});
-	}
 }

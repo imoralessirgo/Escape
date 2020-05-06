@@ -63,14 +63,7 @@ public class HexOmniTests {
 				Arguments.of(true, 0, 1, 0, -1),
 				Arguments.of(false, 0, 1, -3, 8),
 				Arguments.of(true, 0, 1, -3, 5)
-		// Hummingbird
 
-		// Arguments.of(true, 2, -1, 0, -1),
-		// Arguments.of(false, -1, 2, 22,1),
-		// Arguments.of(false, 22, 2, 22,4),
-		// // fox
-		// Arguments.of(true, 22, 8, 22,4),
-		// Arguments.of(true, 22, 8, 23,8)
 
 		);
 	}

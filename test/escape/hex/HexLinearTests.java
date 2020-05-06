@@ -69,8 +69,6 @@ public class HexLinearTests {
 				Arguments.of(true, 0, 1, 0, -1),
 				Arguments.of(false, 0, 1, -3, 8),
 				Arguments.of(false, 0, 1, -3, 5)
-				// Hummingbird
-				
 				
 				);
 	}
