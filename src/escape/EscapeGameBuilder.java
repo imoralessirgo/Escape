@@ -69,8 +69,6 @@ public class EscapeGameBuilder {
 						gameInitializer.getPieceTypes(),
 						gameInitializer.getLocationInitializers());
 				break;
-			default:
-				throw new EscapeException("Invalid board type");
 		}
 		return gameController;
 	}

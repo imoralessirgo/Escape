@@ -106,8 +106,7 @@ FROG Distance 5 no unblock jump or fly
 (2,4) -> (5,6) : False // blocked
 (2,4) -> (1,4) : True // valid
 (2,4) -> (1,5) : False // no Diagonal
-HORSE
-Distance 8 Unblock
+HORSE Distance 8 Unblock
 (18,15) -> (22,15) : True // unblock 2 in a row
 SNAIL Distance 8 Jump
 (22,2) -> (17,2) : True // jump out of board 
@@ -119,4 +118,40 @@ FOX FLY 8
 (22,8) -> (17,2) : True // land at exit w FLY
 (22,8) -> (23,) : False // land at exit no jump
 
+
+HexBoard____OmniMovement
+FROG Distance 100 Jump
+(2,-3) -> (2,0) : False // can't jump over two pieces
+(2,-2) -> (2,0) : True // jump over enemy piece
+(2,-2) -> (2,2) : True // 2 jumps
+(2,-2) -> (2,-1) : True // capture
+(2,-3) -> (1,-3) : False // end in blocked
+(2,-3) -> (0,-3) : False // jump over blocked
+HORSE Distance 3 Jump
+
+SNAIL Distance 10 Unblock
+FOX Fly 5
+(0,1) -> (-3,4) : True // fly over multiple
+(0,1) -> (0,-1) : True // fly over blocked
+(0,1) -> (-3,8) : False // exceed distance
+(0,1) -> (-3,5) : True // meet distance
+
+
+HexBoard____OmniMovement
+FROG Distance 100 Jump
+(2,-3) -> (2,0) : False // can't jump over two pieces
+(2,-2) -> (2,0) : True // jump over enemy piece
+(2,-2) -> (2,2) : True // 2 jumps
+(2,-2) -> (2,-1) : True // capture
+(2,-3) -> (1,-3) : False // end in blocked
+(2,-3) -> (0,-3) : False // jump over blocked
+HORSE Distance 3 Jump
+
+SNAIL Distance 10 Unblock
+
+FOX Fly 5
+(0,1) -> (-3,4) : True // fly over multiple
+(0,1) -> (0,-1) : True // fly over blocked
+(0,1) -> (-3,8) : False // exceed distance
+(0,1) -> (-3,5) : False // non linear
 

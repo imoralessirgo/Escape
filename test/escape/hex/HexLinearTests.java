@@ -31,7 +31,7 @@ public class HexLinearTests {
 	@BeforeEach
 	public void resetBoard() throws Exception {
 		EscapeGameBuilder egb = new EscapeGameBuilder(
-				new File("config/OthoBoards/OrthoSquareLinear.xml"));
+				new File("config/HexBoards/HexLinear.xml"));
 		emg = egb.makeGameManager();
 	}
 
@@ -48,23 +48,29 @@ public class HexLinearTests {
 
 	static Stream<Arguments> linearProvider() {
 		return Stream.of(
-				Arguments.of(false, 2, -3, 2, 0)
-//				Arguments.of(false, 2, 4, 2, 4),
-//				Arguments.of(false, 2, 4, 5, 6),
-//				Arguments.of(true, 2, 4, 1,4),
-//				Arguments.of(false, 2, 4, 1, 5),
-//				// horse
-//				Arguments.of(true, 18,15,22,15),
-//				Arguments.of(true, 18,15,15,15),
-//				//snail
-//				Arguments.of(true, 22, 2, 17,2),
-//				Arguments.of(false, 22, 2, 22,1),
-//				Arguments.of(true, 5, 19, 5, 23),
-//				Arguments.of(false, 20, 1, 22,1),
-//				Arguments.of(true, 22, 2, 22,4),
-//				// fox
-//				Arguments.of(true, 22, 8, 22,4),
-//				Arguments.of(true, 22, 8, 23,8)
+				
+				// Frog
+				Arguments.of(false, 2, -3, 2, 0),
+				Arguments.of(true, 2,-2, 2, 0),
+				Arguments.of(true, 2, -2, 2, 2),
+				Arguments.of(true, 2, -2, 2, -1),
+				Arguments.of(true, 2, -3, 2, -1),
+				Arguments.of(false, 2,-3,1,-3),
+				Arguments.of(false, 2, -3, 0,-3),
+				// Horse
+				Arguments.of(true, -3, -2, -5, 0),
+				Arguments.of(true, -3, -2, 0, -5),
+
+				// Snail
+				Arguments.of(false, 2, -1, 3, -1),
+				Arguments.of(true, 2, -1, 0, -1),
+				// Fox
+				Arguments.of(true, 0, 1, -3, 4),
+				Arguments.of(true, 0, 1, 0, -1),
+				Arguments.of(false, 0, 1, -3, 8),
+				Arguments.of(false, 0, 1, -3, 5)
+				// Hummingbird
+				
 				
 				);
 	}

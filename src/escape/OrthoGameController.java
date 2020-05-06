@@ -16,6 +16,7 @@ import static escape.board.LocationType.CLEAR;
 import java.util.HashMap;
 import escape.board.*;
 import escape.board.coordinate.*;
+import escape.exception.EscapeException;
 import escape.piece.*;
 import escape.rule.*;
 import escape.util.*;
@@ -41,6 +42,8 @@ public class OrthoGameController implements EscapeGameManager<OrthoSquareCoordin
 			for (PieceTypeInitializer p : pt) {
 				pieceAttributes.put(p.getPieceName(), p);
 			}
+		}else {
+			throw new EscapeException("GameController: No piece attributes provided");
 		}
 		if(initializers == null) {return;}
 		for (LocationInitializer li : initializers) {
@@ -69,8 +72,11 @@ public class OrthoGameController implements EscapeGameManager<OrthoSquareCoordin
 		}
 		if(board.getLocationType(to) == LocationType.BLOCK) {return false;}
 		if (OrthoPathFind.canMove(from, to, pieceAttributes.get(p.getName()), board)) {
-			// capture check
-			if (board.getPieceAt(to) == null || (board.getPieceAt(to)
+			// capture and exit check
+			if(board.getLocationType(to) == LocationType.EXIT) {
+				board.removePieceAt(from);
+				return true;
+			}else if (board.getPieceAt(to) == null || (board.getPieceAt(to)
 					.getPlayer() != board.getPieceAt(from).getPlayer())) {
 				board.removePieceAt(from);
 				board.putPieceAt(p, to);

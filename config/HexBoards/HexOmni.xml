@@ -135,7 +135,26 @@
         <pieceName>FOX</pieceName>
         <player>PLAYER2</player>
     </locationInitializers>
-    
+        <locationInitializers>
+        <x>-4</x>
+        <y>0</y>
+        <locationType>BLOCK</locationType>
+    </locationInitializers>
+        <locationInitializers>
+        <x>-3</x>
+        <y>-1</y>
+        <locationType>BLOCK</locationType>
+    </locationInitializers>
+        <locationInitializers>
+        <x>-2</x>
+        <y>-2</y>
+        <locationType>BLOCK</locationType>
+    </locationInitializers>
+        <locationInitializers>
+        <x>-1</x>
+        <y>-4</y>
+        <locationType>BLOCK</locationType>
+    </locationInitializers>
     <locationInitializers>
         <x>-1</x>
         <y>0</y>
@@ -163,12 +182,32 @@
         <y>2</y>
         <locationType>EXIT</locationType>
     </locationInitializers>
-    
+            <locationInitializers>
+        <x>-2</x>
+        <y>-3</y>
+        <locationType>CLEAR</locationType>
+        <pieceName>SNAIL</pieceName>
+        <player>PLAYER2</player>
+    </locationInitializers>
      <locationInitializers>
         <x>0</x>
         <y>3</y>
         <locationType>CLEAR</locationType>
         <pieceName>FOX</pieceName>
+        <player>PLAYER2</player>
+    </locationInitializers>
+         <locationInitializers>
+        <x>-4</x>
+        <y>-1</y>
+        <locationType>CLEAR</locationType>
+        <pieceName>FOX</pieceName>
+        <player>PLAYER2</player>
+    </locationInitializers>
+         <locationInitializers>
+        <x>-3</x>
+        <y>-2</y>
+        <locationType>CLEAR</locationType>
+        <pieceName>HORSE</pieceName>
         <player>PLAYER2</player>
     </locationInitializers>
     
@@ -205,7 +244,7 @@
         <attributes>
             <id>UNBLOCK</id>
             <attrType>BOOLEAN</attrType>
-            <booleanValue>false</booleanValue>
+            <booleanValue>true</booleanValue>
         </attributes>
         <attributes>
             <id>DISTANCE</id>
@@ -215,7 +254,7 @@
          <attributes>
             <id>JUMP</id>
             <attrType>BOOLEAN</attrType>
-            <booleanValue>false</booleanValue>
+            <booleanValue>true</booleanValue>
         </attributes>
     </pieceTypes>
     <pieceTypes>
