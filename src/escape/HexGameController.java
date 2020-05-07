@@ -24,8 +24,8 @@ import escape.util.*;
  */
 public class HexGameController implements EscapeGameManager<HexCoordinate> {
 
-	HexBoard board;
-	HashMap<PieceName, PieceTypeInitializer> pieceAttributes;
+	private HexBoard board;
+	private HashMap<PieceName, PieceTypeInitializer> pieceAttributes;
 
 	/**
 	 * Description

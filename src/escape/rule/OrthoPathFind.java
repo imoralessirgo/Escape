@@ -64,9 +64,12 @@ public class OrthoPathFind {
 		path.put(1, new HashSet<Coordinate>());
 		board = b;
 		pieceAtt = pt.getAttributes();
+		validPieceAtt();
 		int distance = getMaxTravelDistance();
-		
-		
+		if (distance < 0)
+			throw new EscapeException(
+					"pathfind: Negative Fly or Distance attribute");
+
 		// search for path
 		for (i = 0; i < distance; i++) {
 			nodes = path.get(i);
@@ -87,7 +90,7 @@ public class OrthoPathFind {
 			HashSet<Coordinate> validCoords = new HashSet<Coordinate>();
 			switch (pt.getMovementPattern()) {
 
-				case LINEAR: 
+				case LINEAR:
 					// search linear in orthogonal directions
 					for (int[] dir : ortho) {
 						if (checkLinear((OrthoSquareCoordinate) from, dir,
@@ -97,8 +100,9 @@ public class OrthoPathFind {
 					}
 					return false;
 
-				case OMNI: case ORTHOGONAL:
-					// look at ortho 
+				case OMNI:
+				case ORTHOGONAL:
+					// look at ortho
 					validCoords.addAll(orthoPath(path.get(i)));
 					if (validCoords.contains(to)) {
 						return true;
@@ -181,10 +185,11 @@ public class OrthoPathFind {
 	}
 
 	/**
-	 * This function will add the valid landing position
-	 * if any ehwn jumping from the given coordinate
+	 * This function will add the valid landing position if any ehwn jumping from the
+	 * given coordinate
 	 * 
-	 * @param c coordinate to be jumped over
+	 * @param c
+	 *            coordinate to be jumped over
 	 */
 	private static void jumpFrom(Coordinate c) {
 		OrthoSquareCoordinate curr = (OrthoSquareCoordinate) c;
@@ -192,7 +197,7 @@ public class OrthoPathFind {
 				.makeCoordinate(curr.getX() + currDir[0], curr.getY() + currDir[1]);
 		OrthoSquareBoard sb = (OrthoSquareBoard) board;
 		HashSet<Coordinate> hs = path.get(i + 2);
-		if (!sb.inBounds(neighbour)) {  // jumping out of bounds
+		if (!sb.inBounds(neighbour)) { // jumping out of bounds
 			return;
 		}
 		if (sb.getLocationType(neighbour) == LocationType.EXIT) {
@@ -213,7 +218,7 @@ public class OrthoPathFind {
 			} else
 				return;
 		} else if (sb.getPieceAt(neighbour) != null) {
-			if (!neighbour.equals(dest))  // jump onto a piece
+			if (!neighbour.equals(dest)) // jump onto a piece
 				return;
 			hs.add(neighbour); // capture
 			path.put(i + 2, hs);
@@ -225,9 +230,8 @@ public class OrthoPathFind {
 	}
 
 	/**
-	 * linear path find
-	 *
-	 * Description
+	 * linear path find Description
+	 * 
 	 * @param sc
 	 * @param direction
 	 * @param maxDistance
@@ -249,9 +253,8 @@ public class OrthoPathFind {
 	}
 
 	/**
-	 * Linear version of is valid function
+	 * Linear version of is valid function Description
 	 * 
-	 * Description
 	 * @param sc
 	 * @param dir
 	 * @return
@@ -349,6 +352,16 @@ public class OrthoPathFind {
 			}
 		}
 		return false;
+	}
+
+	private static void validPieceAtt() {
+		if (canFly()) {
+			for (PieceAttribute p : pieceAtt) {
+				if (p.getId() == PieceAttributeID.DISTANCE)
+					throw new EscapeException(
+							"Pathfind: Piece has both distance and fly attriburte");
+			}
+		}
 	}
 
 	private static int getMaxTravelDistance() {

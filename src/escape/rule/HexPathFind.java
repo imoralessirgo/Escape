@@ -64,7 +64,10 @@ public class HexPathFind {
 		path.put(1, new HashSet<Coordinate>());
 		board = b;
 		pieceAtt = pt.getAttributes();
+		validPieceAtt();
 		int distance = getMaxTravelDistance();
+		if (distance < 0)
+			throw new EscapeException("pathfind: Negative Fly or Distance attribute");
 		
 		
 		// search for path
@@ -339,6 +342,16 @@ public class HexPathFind {
 			}
 		}
 		return false;
+	}
+	
+	private static void validPieceAtt() {
+		if (canFly()) {
+			for (PieceAttribute p : pieceAtt) {
+				if (p.getId() == PieceAttributeID.DISTANCE)
+					throw new EscapeException(
+							"Pathfind: Piece has both distance and fly attriburte");
+			}
+		}
 	}
 
 	private static int getMaxTravelDistance() {

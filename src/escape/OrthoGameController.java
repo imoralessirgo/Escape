@@ -27,8 +27,8 @@ import escape.util.*;
  */
 public class OrthoGameController implements EscapeGameManager<OrthoSquareCoordinate> {
 
-	OrthoSquareBoard board;
-	HashMap<PieceName, PieceTypeInitializer> pieceAttributes;
+	private OrthoSquareBoard board;
+	private HashMap<PieceName, PieceTypeInitializer> pieceAttributes;
 	
 	/**
 	 * Constructor

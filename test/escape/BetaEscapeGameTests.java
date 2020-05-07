@@ -10,9 +10,10 @@ package escape;
 
 import static org.junit.jupiter.api.Assertions.*;
 import java.io.File;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import escape.*;
 import escape.board.LocationType;
+import escape.exception.EscapeException;
 import escape.piece.*;
 import escape.util.LocationInitializer;
 
@@ -36,6 +37,10 @@ class BetaEscapeGameTests {
 				new File("config/SampleEscapeGame.xml"));
 		EscapeGameManager emg = egb.makeGameManager();
 		assertTrue(emg instanceof SquareGameController);
+		Assertions.assertThrows(EscapeException.class,
+				() -> {emg.move(emg.makeCoordinate(3,2), emg.makeCoordinate(2, 2));});
+		Assertions.assertThrows(EscapeException.class,
+				() -> {emg.move(emg.makeCoordinate(3,3), emg.makeCoordinate(2, 2));});
 	}
 
 	/**
@@ -49,6 +54,10 @@ class BetaEscapeGameTests {
 				new File("config/SampleEscapeGame3.xml"));
 		EscapeGameManager emg = egb.makeGameManager();
 		assertTrue(emg instanceof OrthoGameController);
+		Assertions.assertThrows(EscapeException.class,
+				() -> {emg.move(emg.makeCoordinate(3,2), emg.makeCoordinate(2, 2));});
+		Assertions.assertThrows(EscapeException.class,
+				() -> {emg.move(emg.makeCoordinate(3,3), emg.makeCoordinate(2, 2));});
 	}
 
 	/**
@@ -62,6 +71,10 @@ class BetaEscapeGameTests {
 				new File("config/SampleEscapeGame2.xml"));
 		EscapeGameManager emg = egb.makeGameManager();
 		assertTrue(emg instanceof HexGameController);
+		Assertions.assertThrows(EscapeException.class,
+				() -> {emg.move(emg.makeCoordinate(3,2), emg.makeCoordinate(2, 2));});
+		Assertions.assertThrows(EscapeException.class,
+				() -> {emg.move(emg.makeCoordinate(3,3), emg.makeCoordinate(2, 2));});
 	}
 	
 }
