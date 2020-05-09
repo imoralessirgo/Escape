@@ -114,6 +114,7 @@ public class HexPathFind {
 					throw new EscapeException(
 							"hexPathFind: Invalid Movement Pattern found");
 			}
+			if(path.get(i + 2).contains(to)){return true;}
 		}
 		// destination node was not found within pieces travel distance
 		return false;
@@ -194,7 +195,7 @@ public class HexPathFind {
 		HashSet<Coordinate> hs = path.get(i + 2);
 		if (sb.getLocationType(neighbour) == LocationType.EXIT) {
 			// only valid to fly over or end at an exit
-			if (canFly() || dest.equals(neighbour)) {
+			if (dest.equals(neighbour)) {
 				hs.add(neighbour);
 				path.put(i + 2, hs);
 				return;
@@ -203,7 +204,7 @@ public class HexPathFind {
 		} else if (sb.getLocationType(neighbour) == LocationType.BLOCK) {
 			// trying to move to a blocked position without unblock capabilities
 			// is invalid
-			if ((canFly() || canUnblock()) && !dest.equals(neighbour)) {
+			if ((canUnblock()) && !dest.equals(neighbour)) {
 				hs.add(neighbour);
 				path.put(i + 2, hs);
 				return;
@@ -293,7 +294,7 @@ public class HexPathFind {
 		HexBoard sb = (HexBoard) board;
 		if (sb.getLocationType(neighbour) == LocationType.EXIT) {
 			// only valid to fly over or end at an exit
-			if (canFly() || dest.equals(neighbour)) {
+			if (dest.equals(neighbour)) {
 				return true;
 			} else
 				return false;
@@ -301,7 +302,7 @@ public class HexPathFind {
 			// trying to move to a blockeOrthoSquareCoordinated position without unblock
 			// capabilities
 			// is invalid
-			if ((canFly() || canUnblock()) && !dest.equals(neighbour)) {
+			if ((canUnblock()) && !dest.equals(neighbour)) {
 				return true;
 			} else
 				return false;

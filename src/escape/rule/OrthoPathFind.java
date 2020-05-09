@@ -115,6 +115,7 @@ public class OrthoPathFind {
 					throw new EscapeException(
 							"orthoPathFind: Invalid Movement Pattern found");
 			}
+			if(path.get(i + 2).contains(to)){return true;}
 		}
 		// destination node was not found within pieces travel distance
 		return false;
@@ -202,7 +203,7 @@ public class OrthoPathFind {
 		}
 		if (sb.getLocationType(neighbour) == LocationType.EXIT) {
 			// only valid to fly over or end at an exit
-			if (canFly() || dest.equals(neighbour)) {
+			if (dest.equals(neighbour)) {
 				hs.add(neighbour);
 				path.put(i + 2, hs);
 				return;
@@ -211,7 +212,7 @@ public class OrthoPathFind {
 		} else if (sb.getLocationType(neighbour) == LocationType.BLOCK) {
 			// trying to move to a blocked position without unblock capabilities
 			// is invalid
-			if ((canFly() || canUnblock()) && !dest.equals(neighbour)) {
+			if ((canUnblock()) && !dest.equals(neighbour)) {
 				hs.add(neighbour);
 				path.put(i + 2, hs);
 				return;
@@ -305,14 +306,14 @@ public class OrthoPathFind {
 		}
 		if (sb.getLocationType(neighbour) == LocationType.EXIT) {
 			// only valid to fly over or end at an exit
-			if (canFly() || dest.equals(neighbour)) {
+			if (dest.equals(neighbour)) {
 				return true;
 			} else
 				return false;
 		} else if (sb.getLocationType(neighbour) == LocationType.BLOCK) {
 			// trying to move to a blocked position without unblock capabilities
 			// is invalid
-			if ((canFly() || canUnblock()) && !dest.equals(neighbour)) {
+			if ((canUnblock()) && !dest.equals(neighbour)) {
 				return true;
 			} else
 				return false;
