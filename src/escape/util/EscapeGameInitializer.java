@@ -111,6 +111,22 @@ public class EscapeGameInitializer {
 		this.pieceTypes = types;
 	}
 
+	/**
+	 * @return the rules
+	 */
+	public Rule[] getRules() {
+		return rules;
+	}
+
+	/**
+	 * @param rules the rules to set
+	 */
+	public void setRules(Rule[] rules) {
+		this.rules = rules;
+	}
+
+	
+	
 	// not in use
 	// /*
 	// * @see java.lang.Object#toString()
