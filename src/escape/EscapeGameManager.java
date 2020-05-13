@@ -7,8 +7,8 @@
  *******************************************************************************/
 package escape;
 
+import java.util.*;
 import escape.board.coordinate.Coordinate;
-import escape.exception.EscapeException;
 import escape.piece.EscapePiece;
 
 /**
@@ -19,6 +19,9 @@ import escape.piece.EscapePiece;
  * @version Mar 27, 2020
  */
 public interface EscapeGameManager<C extends Coordinate> {
+	
+
+	
 	/**
 	 * Make the move in the current game.
 	 * 
@@ -60,9 +63,7 @@ public interface EscapeGameManager<C extends Coordinate> {
 	 * @param observer
 	 * @return the observer
 	 */
-	default GameObserver addObserver(GameObserver observer) {
-		throw new EscapeException("Not implemented");
-	}
+	GameObserver addObserver(GameObserver observer);
 
 	/**
 	 * Remove an observer from this manager. The observer will no longer receive
@@ -72,7 +73,5 @@ public interface EscapeGameManager<C extends Coordinate> {
 	 * @return the observer that was removed or null if it had not previously been
 	 *         registered
 	 */
-	default GameObserver removeObserver(GameObserver observer) {
-		throw new EscapeException("Not implemented");
-	}
+	GameObserver removeObserver(GameObserver observer);
 }

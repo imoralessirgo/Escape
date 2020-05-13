@@ -6,7 +6,7 @@
  * http://www.eclipse.org/legal/epl-v10.html Copyright ©2016 Gary F. Pollice
  *******************************************************************************/
 
-package escape.rule;
+package escape.pathfind;
 
 import java.util.*;
 import escape.board.*;
@@ -17,45 +17,44 @@ import escape.util.PieceTypeInitializer;
 import escape.util.PieceTypeInitializer.PieceAttribute;
 
 /**
- * PathFinding helper for HexBoards
+ * PathFinding helper for SquareBoards
  * 
- * @version May 3, 2020
+ * @version May 2, 2020
  */
-public class HexPathFind {
+public class SquarePathFind {
 	private static HashMap<Integer, HashSet<Coordinate>> path; // store valid paths
 	private static Board board; // current game board
 	private static PieceAttribute[] pieceAtt; // pieceAttributes for current piece
 	private static int i; // current dsistance from origin
 	private static Coordinate dest;
-	private static int[] currDir;
+	private static int[] currDir; // direction I am currently moving in (for JUMPS)
 
-	// movement directions for hex boards
-	private static final List<int[]> hex = Arrays.asList(new int[] {
+	// movement directions for square boards
+	private static final List<int[]> ortho = Arrays.asList(new int[] {
 			0, 1 // NORTH
 	}, new int[] {
 			0, -1 // SOUTH
 	}, new int[] {
-			1, 0 // NEAST
+			1, 0 // EAST
 	}, new int[] {
-			1, -1 // SEAST
+			-1, 0 // WEST
+	});
+	private static final List<int[]> diagonal = Arrays.asList(new int[] {
+			1, 1 // NORTHEAST
 	}, new int[] {
-			-1, 1 // NWESt
+			1, -1 // NORTHWEST
 	}, new int[] {
-			-1, 0 // SWEST
+			-1, 1 // SOUTHEAST
+	}, new int[] {
+			-1, -1 // SOUTHWEST
 	});
 
 	/**
-	 * Description
 	 * 
-	 * @param from
-	 * @param to
-	 * @param pt
-	 * @param b
-	 * @return
 	 */
 	public static boolean canMove(Coordinate from, Coordinate to,
 			PieceTypeInitializer pt, Board b) {
-		// initialize all required values
+		// initialize all required values 
 		dest = to;
 		path = new HashMap<Integer, HashSet<Coordinate>>();
 		HashSet<Coordinate> nodes = new HashSet<Coordinate>();
@@ -84,16 +83,32 @@ public class HexPathFind {
 				nodes = path.get(i);
 				path.put(i + 2, new HashSet<Coordinate>());
 			}
-			if (nodes.contains(to)) {
+			if (nodes.contains(to)) { // if dest node was found exit
 				return true;
 			}
 			HashSet<Coordinate> validCoords = new HashSet<Coordinate>();
 			switch (pt.getMovementPattern()) {
 
-				case LINEAR: 
-					// search linear in all directions
-					for (int[] dir : hex) {
-						if (checkLinear((HexCoordinate) from, dir,
+				case DIAGONAL:
+					validCoords.addAll(diagonalPath(path.get(i)));
+					if (validCoords.contains(to)) {
+						return true;
+					} // made it to destination
+					validCoords.addAll(path.get(i + 1));
+					path.put(i + 1, validCoords);
+					break;
+
+				case LINEAR:
+					// search linear in orthogonal directions
+					for (int[] dir : ortho) {
+						if (checkLinear((SquareCoordinate) from, dir,
+								distance) == true) {
+							return true;
+						}
+					}
+					// search linear in diagonal directions
+					for (int[] dir : diagonal) {
+						if (checkLinear((SquareCoordinate) from, dir,
 								distance) == true) {
 							return true;
 						}
@@ -101,8 +116,18 @@ public class HexPathFind {
 					return false;
 
 				case OMNI:
-					// look at all neighbours
-					validCoords.addAll(hexPath(path.get(i)));
+					// look at both ortho and diagonal
+					validCoords.addAll(orthoPath(path.get(i)));
+					validCoords.addAll(diagonalPath(path.get(i)));
+					if (validCoords.contains(to)) {
+						return true;
+					} // made it to destination
+					validCoords.addAll(path.get(i + 1));
+					path.put(i + 1, validCoords);
+					break;
+
+				case ORTHOGONAL:
+					validCoords.addAll(orthoPath(path.get(i)));
 					if (validCoords.contains(to)) {
 						return true;
 					} // made it to destination
@@ -112,7 +137,7 @@ public class HexPathFind {
 
 				default:
 					throw new EscapeException(
-							"hexPathFind: Invalid Movement Pattern found");
+							"squarePathFind: Invalid Movement Pattern found");
 			}
 			if(path.get(i + 2).contains(to)){return true;}
 		}
@@ -121,18 +146,18 @@ public class HexPathFind {
 	}
 
 	/**
-	 * Checks hexagonal neighbours of the given coordinates
+	 * Checks orthogonal neighbours of the given coordinates
 	 * 
 	 * @param coordinates
 	 * @return set of valid neighbours
 	 */
-	static private HashSet<Coordinate> hexPath(HashSet<Coordinate> coordinates) {
+	static private HashSet<Coordinate> orthoPath(HashSet<Coordinate> coordinates) {
 		HashSet<Coordinate> validCoords = new HashSet<Coordinate>();
 		for (Coordinate c : coordinates) {
-			HexCoordinate sc = (HexCoordinate) c;
-			for (int[] n : hex) {
+			SquareCoordinate sc = (SquareCoordinate) c;
+			for (int[] n : ortho) {
 				currDir = n;
-				HexCoordinate neighbour = HexCoordinate
+				SquareCoordinate neighbour = SquareCoordinate
 						.makeCoordinate(sc.getX() + n[0], sc.getY() + n[1]);
 				if (isValid(neighbour)) {
 					validCoords.add(neighbour);
@@ -143,14 +168,40 @@ public class HexPathFind {
 	}
 
 	/**
+	 * Checks diagonal neighbours of the given coordinates
+	 * 
+	 * @param coordinates
+	 * @return set of valid neighbours
+	 */
+	static private HashSet<Coordinate> diagonalPath(
+			HashSet<Coordinate> coordinates) {
+		HashSet<Coordinate> validCoords = new HashSet<Coordinate>();
+		for (Coordinate c : coordinates) {
+			SquareCoordinate sc = (SquareCoordinate) c;
+			for (int[] n : diagonal) {
+				currDir = n;
+				SquareCoordinate neighbour = SquareCoordinate
+						.makeCoordinate(sc.getX() + n[0], sc.getY() + n[1]);
+				if (isValid(neighbour)) {
+					validCoords.add(neighbour);
+				}
+			}
+		}
+		return validCoords; 
+	}
+
+	/**
 	 * checks if given coordinate is a valid movement based on the current piece's
 	 * specific attributes
 	 * 
 	 * @param sc
 	 * @return boolean
 	 */
-	private static boolean isValid(HexCoordinate sc) {
-		HexBoard sb = (HexBoard) board;
+	private static boolean isValid(SquareCoordinate sc) {
+		SquareBoard sb = (SquareBoard) board;
+		if (!sb.inBounds(sc)) {
+			return false;
+		}
 		if (sb.getPieceAt(sc) != null) {
 			if (dest.equals(sc)) {
 				return true;
@@ -188,11 +239,14 @@ public class HexPathFind {
 	 * @param c coordinate to be jumped over
 	 */
 	private static void jumpFrom(Coordinate c) {
-		HexCoordinate curr = (HexCoordinate) c;
-		HexCoordinate neighbour = HexCoordinate
+		SquareCoordinate curr = (SquareCoordinate) c;
+		SquareCoordinate neighbour = SquareCoordinate
 				.makeCoordinate(curr.getX() + currDir[0], curr.getY() + currDir[1]);
-		HexBoard sb = (HexBoard) board;
+		SquareBoard sb = (SquareBoard) board;
 		HashSet<Coordinate> hs = path.get(i + 2);
+		if (!sb.inBounds(neighbour)) { // jumping out of bounds
+			return;
+		}
 		if (sb.getLocationType(neighbour) == LocationType.EXIT) {
 			// only valid to fly over or end at an exit
 			if (dest.equals(neighbour)) {
@@ -211,13 +265,13 @@ public class HexPathFind {
 			} else
 				return;
 		} else if (sb.getPieceAt(neighbour) != null) {
-			if (!neighbour.equals(dest))  // jump onto a piece
+			if (!neighbour.equals(dest)) // jump onto a piece
 				return;
-			hs.add(neighbour); // capture 
+			hs.add(neighbour); // capture
 			path.put(i + 2, hs);
 			return;
 		}
-		hs.add(neighbour); // empty coord
+		hs.add(neighbour); // empty coord 
 		path.put(i + 2, hs);
 		return;
 	}
@@ -231,10 +285,10 @@ public class HexPathFind {
 	 * @param maxDistance
 	 * @return boolean for path found
 	 */
-	private static boolean checkLinear(HexCoordinate sc, int[] direction,
+	private static boolean checkLinear(SquareCoordinate sc, int[] direction,
 			int maxDistance) {
 		for (int j = 0; j < maxDistance; j++) {
-			sc = HexCoordinate.makeCoordinate(sc.getX() + direction[0],
+			sc = SquareCoordinate.makeCoordinate(sc.getX() + direction[0],
 					sc.getY() + direction[1]);
 			if (sc.equals(dest)) {
 				return true;
@@ -245,7 +299,7 @@ public class HexPathFind {
 		}
 		return false;
 	}
-
+	
 	/**
 	 * Linear version of is valid function
 	 * 
@@ -254,14 +308,17 @@ public class HexPathFind {
 	 * @param dir
 	 * @return
 	 */
-	private static boolean linearIsValid(HexCoordinate sc, int[] dir) {
-		HexBoard sb = (HexBoard) board;
+	private static boolean linearIsValid(SquareCoordinate sc, int[] dir) {
+		SquareBoard sb = (SquareBoard) board;
+		if (!sb.inBounds(sc)) {
+			return false;
+		}
 		if (sb.getPieceAt(sc) != null) {
 			if (canFly()) {
 				return true;
 			} else if (canJump()) {
-				HexCoordinate next = HexCoordinate.makeCoordinate(sc.getX() + dir[0],
-						sc.getY() + dir[1]);
+				SquareCoordinate next = SquareCoordinate
+						.makeCoordinate(sc.getX() + dir[0], sc.getY() + dir[1]);
 				return jumpFromLinear(sc, next);
 			} else
 				return false;
@@ -289,9 +346,12 @@ public class HexPathFind {
 	 * 
 	 * @param c
 	 */
-	private static boolean jumpFromLinear(HexCoordinate curr,
-			HexCoordinate neighbour) {
-		HexBoard sb = (HexBoard) board;
+	private static boolean jumpFromLinear(SquareCoordinate curr,
+			SquareCoordinate neighbour) {
+		SquareBoard sb = (SquareBoard) board;
+		if (!sb.inBounds(neighbour)) {
+			return false;
+		}
 		if (sb.getLocationType(neighbour) == LocationType.EXIT) {
 			// only valid to fly over or end at an exit
 			if (dest.equals(neighbour)) {
@@ -299,8 +359,7 @@ public class HexPathFind {
 			} else
 				return false;
 		} else if (sb.getLocationType(neighbour) == LocationType.BLOCK) {
-			// trying to move to a blockeOrthoSquareCoordinated position without unblock
-			// capabilities
+			// trying to move to a blocked position without unblock capabilities
 			// is invalid
 			if ((canUnblock()) && !dest.equals(neighbour)) {
 				return true;
@@ -317,7 +376,6 @@ public class HexPathFind {
 	/**
 	 * PRIVATE STATIC HELPER METHODS
 	 **/
-
 	private static boolean canJump() {
 		for (PieceAttribute p : pieceAtt) {
 			if (p.getId() == PieceAttributeID.JUMP) {
@@ -354,7 +412,7 @@ public class HexPathFind {
 			}
 		}
 	}
-
+	
 	private static int getMaxTravelDistance() {
 		for (PieceAttribute p : pieceAtt) {
 			if (p.getId() == PieceAttributeID.FLY
@@ -364,5 +422,4 @@ public class HexPathFind {
 		}
 		throw new EscapeException("This piece has no distance or fly attribute");
 	}
-
 }

@@ -8,7 +8,6 @@
 
 package escape.util;
 
-import java.util.Arrays;
 import javax.xml.bind.annotation.XmlRootElement;
 import escape.board.coordinate.CoordinateID;
 import escape.rule.Rule;
@@ -125,18 +124,5 @@ public class EscapeGameInitializer {
 		this.rules = rules;
 	}
 
-	
-	
-	// not in use
-	// /*
-	// * @see java.lang.Object#toString()
-	// */
-	// @Override
-	// public String toString() {
-	// return "EscapeGameInitializer [xMax=" + xMax + ", yMax=" + yMax
-	// + ", coordinateType=" + coordinateType + ", locationInitializers="
-	// + Arrays.toString(locationInitializers) + ", types="
-	// + Arrays.toString(pieceTypes) + "]";
-	// }
 
 }

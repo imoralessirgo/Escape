@@ -55,18 +55,21 @@ public class EscapeGameBuilder {
 				gameController = new HexGameController(new HexBoard(
 						gameInitializer.getxMax(), gameInitializer.getyMax()),
 						gameInitializer.getPieceTypes(),
+						gameInitializer.getRules(),
 						gameInitializer.getLocationInitializers());
 				break;
 			case ORTHOSQUARE:
 				gameController = new OrthoGameController(new OrthoSquareBoard(
 						gameInitializer.getxMax(), gameInitializer.getyMax()),
 						gameInitializer.getPieceTypes(),
+						gameInitializer.getRules(),
 						gameInitializer.getLocationInitializers());
 				break;
 			case SQUARE:
 				gameController = new SquareGameController(new SquareBoard(
 						gameInitializer.getxMax(), gameInitializer.getyMax()),
 						gameInitializer.getPieceTypes(),
+						gameInitializer.getRules(),
 						gameInitializer.getLocationInitializers());
 				break;
 		}

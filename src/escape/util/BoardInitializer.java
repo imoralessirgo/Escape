@@ -7,7 +7,6 @@
  *******************************************************************************/
 package escape.util;
 
-import java.util.Arrays;
 import javax.xml.bind.annotation.*;
 import escape.board.coordinate.CoordinateID;
 

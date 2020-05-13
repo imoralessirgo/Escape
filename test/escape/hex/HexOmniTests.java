@@ -15,10 +15,6 @@ import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.*;
 import escape.*;
-import escape.board.LocationType;
-import escape.exception.EscapeException;
-import escape.piece.*;
-import escape.util.LocationInitializer;
 
 /**
  * Description
@@ -69,14 +65,4 @@ public class HexOmniTests {
 		);
 	}
 
-	/**
-	 * test proper controller for board
-	 * 
-	 * @throws Exception
-	 */
-	@Test
-	void exceptionTest() throws Exception {
-		Assertions.assertThrows(EscapeException.class,
-				() -> {emg.move(emg.makeCoordinate(-1, 0), emg.makeCoordinate(-5, -4));});
-	}
 }

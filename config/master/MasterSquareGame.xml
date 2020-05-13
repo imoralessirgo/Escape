@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <escapeGameInitializer>
+	<rules>
+		<id>REMOVE</id>
+	</rules>
 	<coordinateType>SQUARE</coordinateType>
     <!-- Board items -->
     <xMax>24</xMax>

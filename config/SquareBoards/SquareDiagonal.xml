@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <escapeGameInitializer>
 	<coordinateType>SQUARE</coordinateType>
+	<rules>
+		<id>REMOVE</id>
+	</rules>
 	<!-- Board items -->
 	<xMax>24</xMax>
 	<yMax>24</yMax>
@@ -14,7 +17,7 @@
 		<y>5</y>
 		<locationType>BLOCK</locationType>
 	</locationInitializers>
-		<locationInitializers>
+	<locationInitializers>
 		<x>11</x>
 		<y>8</y>
 		<locationType>BLOCK</locationType>
@@ -55,7 +58,7 @@
 		<player>PLAYER1</player>
 		<pieceName>HORSE</pieceName>
 	</locationInitializers>
-		<locationInitializers>
+	<locationInitializers>
 		<x>21</x>
 		<y>18</y>
 		<locationType>CLEAR</locationType>
@@ -69,7 +72,7 @@
 		<player>PLAYER1</player>
 		<pieceName>SNAIL</pieceName>
 	</locationInitializers>
-		<locationInitializers>
+	<locationInitializers>
 		<x>8</x>
 		<y>11</y>
 		<locationType>CLEAR</locationType>

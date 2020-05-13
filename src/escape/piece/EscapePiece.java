@@ -15,8 +15,13 @@ package escape.piece;
  * @version Mar 28, 2020
  */
 public class EscapePiece {
+
+
 	private final PieceName name;
 	private final Player player;
+	private int value;
+
+
 
 	/**
 	 * Constructor that takes the player and piece name.
@@ -55,5 +60,19 @@ public class EscapePiece {
 	 */
 	public Player getPlayer() {
 		return player;
+	}
+	
+	/**
+	 * @return the value
+	 */
+	public int getValue() {
+		return value;
+	}
+
+	/**
+	 * @param value the value to set
+	 */
+	public void setValue(int value) {
+		this.value = value;
 	}
 }

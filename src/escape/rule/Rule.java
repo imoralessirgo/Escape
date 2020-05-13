@@ -15,7 +15,7 @@ package escape.rule;
  */
 public class Rule {
 	RuleID id;
-	int intValue;
+	int intValue = 0;
 
 	public Rule() {
 	}
@@ -28,7 +28,8 @@ public class Rule {
 	}
 
 	/**
-	 * @param id the id to set
+	 * @param id
+	 *            the id to set
 	 */
 	public void setId(RuleID id) {
 		this.id = id;
@@ -42,7 +43,8 @@ public class Rule {
 	}
 
 	/**
-	 * @param intValue the intValue to set
+	 * @param intValue
+	 *            the intValue to set
 	 */
 	public void setIntValue(int intValue) {
 		this.intValue = intValue;

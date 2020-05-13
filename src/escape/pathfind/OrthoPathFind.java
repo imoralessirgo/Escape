@@ -6,7 +6,7 @@
  * http://www.eclipse.org/legal/epl-v10.html Copyright ©2016 Gary F. Pollice
  *******************************************************************************/
 
-package escape.rule;
+package escape.pathfind;
 
 import java.util.*;
 import escape.board.*;
@@ -41,17 +41,7 @@ public class OrthoPathFind {
 	});
 
 	/**
-	 * Calls appropriate methods for the piece's movement pattern
 	 * 
-	 * @param from
-	 *            origin coordinate
-	 * @param to
-	 *            destination coordinate
-	 * @param pt
-	 *            Attributes of current piece
-	 * @param b
-	 *            vurrent game board
-	 * @return boolean
 	 */
 	public static boolean canMove(Coordinate from, Coordinate to,
 			PieceTypeInitializer pt, Board b) {

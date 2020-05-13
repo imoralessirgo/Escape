@@ -70,9 +70,4 @@ public class OrthoOmniOrthoTests {
 				);
 	}
 	
-	@Test
-	public void exceptionTests() {
-		Assertions.assertThrows(EscapeException.class,
-				() -> {emg.move(emg.makeCoordinate(1, 24), emg.makeCoordinate(2, 23));});
-	}
 }
