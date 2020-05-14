@@ -1,6 +1,10 @@
+Exceptions
+Remove & PointConflict -> exception
+Invalid rule -> exception
+
+___________________________________________________________________________________________
+
 HexRules
-
-
 add game observer 
 
 
@@ -33,3 +37,47 @@ Remove game observer
 
 _______________________________________________________________________________________
 SquareRules
+
+add game observer 
+
+
+Point_Conflict
+(20,1) -> (21,1) : True // capture both same value
+pieceAt(20,1) = null : True // comfirm both removed
+pieceAt(21,1) = null : True // comfirm both removed
+(21,2) -> (21,1) : False // player2 s turn
+
+InvalidMoves
+(1,2) -> (2,4) : False // invalid move from player 2 from to are equal
+(1,1) -> (2,4) : False // invalid move from player 2 no piece at from
+(2,4) -> (1,4) : False // invalid move from player 2 invalid movement pattern for board
+
+END game
+(2,4) -> (2,5) : False // valid move from player TURN LIMIT
+
+PRINT TIE MESSAGE
+
+Remove game observer
+
+_______________________________________________________________________________________
+OrthoSquareRules
+
+add game observer 
+
+
+Point_Conflict
+(20,1) -> (21,1) : True // capture both same value
+pieceAt(20,1) = null : True // comfirm both removed
+(21,2) -> (21,1) : False // player2 s turn
+
+InvalidMoves
+(1,2) -> (2,4) : False // invalid move from player 2 from to are equal
+(1,1) -> (2,4) : False // invalid move from player 2 no piece at from
+(2,4) -> (1,4) : False // invalid move from player 2 invalid movement pattern for board
+
+END game
+(2,4) -> (2,5) : False // valid move from player TURN LIMIT
+
+PRINT TIE MESSAGE
+
+Remove game observer

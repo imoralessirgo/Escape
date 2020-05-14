@@ -72,6 +72,10 @@ public class SquareGameController extends GameController
 			this.notifyObservers("No piece at from location");
 			return false;
 		}
+		if(p.getPlayer() != currentPlayer) {
+			this.notifyObservers("It's" + currentPlayer.toString() + "'s turn");
+			return false;
+		}
 		if (board.getLocationType(to) == LocationType.BLOCK) {
 			this.notifyObservers("Destination is blocked");
 			return false;

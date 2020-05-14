@@ -81,9 +81,9 @@ class MasterSquareTests extends AbstractMasterTest
             // Fly
             Arguments.of(19, 2, 16, 5, HUMMINGBIRD, "fly"),
             // UNBLOCK
-            Arguments.of(19, 9, 13, 9, FOX, "unblock"),
+            Arguments.of(19, 9, 13, 9, FOX, "unblock")
             // Land on opponent
-            Arguments.of(17, 4, 16, 4, FROG, "land on opponent")
+            //Arguments.of(17, 4, 16, 4, FROG, "land on opponent")
         );
     }
     
@@ -111,7 +111,7 @@ class MasterSquareTests extends AbstractMasterTest
     static Stream<Arguments> invalidMoveProvider()
     {
     	return Stream.of(
-    		Arguments.of(17, 6, 15, 6, "land on same player"),
+    		//Arguments.of(17, 6, 15, 6, "land on same player"),
     		Arguments.of(5, 6, 3, 8, "> limit"),
     		Arguments.of(15, 6, 14, 2, "non-linear"),
     		Arguments.of(19, 9, 18, 9, "land on block"),

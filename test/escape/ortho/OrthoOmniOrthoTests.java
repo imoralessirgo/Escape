@@ -65,8 +65,9 @@ public class OrthoOmniOrthoTests {
 				Arguments.of(true, 22, 2, 22,4),
 				// fox
 				Arguments.of(true, 22, 8, 22,4),
-				Arguments.of(true, 22, 8, 23,8)
+				Arguments.of(true, 22, 8, 23,8),
 				
+				Arguments.of(true, 22, 1, 21,1)
 				);
 	}
 	

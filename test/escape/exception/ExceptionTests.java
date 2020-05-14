@@ -109,4 +109,30 @@ public class ExceptionTests {
 		Assertions.assertThrows(EscapeException.class,
 				() -> {egb.makeGameManager();});
 	}
+	
+	/**
+	 * test Remove & Point Conflict
+	 * 
+	 * @throws Exception
+	 */
+	@Test
+	void squareRuleTest() throws Exception {
+		EscapeGameBuilder egb = new EscapeGameBuilder(
+				new File("config/Exceptions/SampleEscapeGame7.xml"));
+		Assertions.assertThrows(EscapeException.class,
+				() -> {egb.makeGameManager();});
+	}
+	
+	/**
+	 * test invalid rule
+	 * 
+	 * @throws Exception
+	 */
+	@Test
+	void squareInvalidRuleTest() throws Exception {
+		EscapeGameBuilder egb = new EscapeGameBuilder(
+				new File("config/Exceptions/SampleEscapeGame8.xml"));
+		Assertions.assertThrows(EscapeException.class,
+				() -> {egb.makeGameManager();});
+	}
 }

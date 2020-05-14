@@ -25,12 +25,7 @@ import escape.piece.Player;
  * @version May 13, 2020
  */
 public class HexRules {
-	private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-	
-	@Before
-	public void setUpStreams() {
-	    System.setOut(new PrintStream(outContent));
-	}
+
 	
 	@Test
 	void scorePointConflictTest() {
@@ -56,6 +51,29 @@ public class HexRules {
 			assertTrue(emg.move(emg.makeCoordinate(2,2), emg.makeCoordinate(5,2))); // player 2 exit 
 			// print player 2 wins
 			assertFalse(emg.move(emg.makeCoordinate(4,-5), emg.makeCoordinate(4,-5))); // player 2 invalid
+
+			emg.removeObserver(go);
+			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@Test
+	void removePointLimitTest() {
+		GameObserver go = new TestObserver();
+		EscapeGameBuilder egb;
+		try {
+			egb = new EscapeGameBuilder(
+					new File("config/HexBoards/HexTurnLimitRemove.xml"));
+			EscapeGameManager emg = egb.makeGameManager();
+			emg.addObserver(go);
+			assertTrue(emg.move(emg.makeCoordinate(2, -3), emg.makeCoordinate(2, -1))); // player 1 move
+			assertTrue(emg.move(emg.makeCoordinate(1,2), emg.makeCoordinate(5, 2))); // player 2 move
+			// player 2 wins
+			assertFalse(emg.move(emg.makeCoordinate(-3,4), emg.makeCoordinate(-2, 3))); // player 1 move
+			// game over
 
 			emg.removeObserver(go);
 			

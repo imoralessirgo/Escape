@@ -32,7 +32,7 @@ public abstract class GameController<C extends Coordinate> {
 		put(Player.PLAYER2, 0);
 	}}; // scoreboard starts at 0
 	protected Player currentPlayer = Player.PLAYER1; // first move always player 1
-	protected boolean gameEnded = false;
+
 
 	
 	/**
@@ -104,18 +104,20 @@ public abstract class GameController<C extends Coordinate> {
 	} 
 	
 	protected boolean checkGameStatus() {
-		if(!hasRule(RuleID.SCORE) && !hasRule(RuleID.TURN_LIMIT)) {
+		if(!hasRule(RuleID.SCORE) && !hasRule(RuleID.TURN_LIMIT))
 			return false;
-		}
 		
 		if(hasRule(RuleID.SCORE)) {
 			int maxScore = gameRules.get(RuleID.SCORE);
-			if(scoreboard.get(Player.PLAYER1) >= maxScore)
+			if(scoreboard.get(Player.PLAYER1) >= maxScore) {
 				notifyObservers("Game Over: Player 1 wins!");
-			if(scoreboard.get(Player.PLAYER2) >= maxScore)
+				return true;
+			}if(scoreboard.get(Player.PLAYER2) >= maxScore) {
 				notifyObservers("Game Over: Player 2 wins!");
-			return false;
+				return true;
+			}
 		}
+		
 		
 		if(hasRule(RuleID.TURN_LIMIT)) {
 			if(currentTurn == gameRules.get(RuleID.TURN_LIMIT)) {
@@ -125,10 +127,12 @@ public abstract class GameController<C extends Coordinate> {
 					notifyObservers("Game Over: Player 2 wins!");
 				else 
 					notifyObservers("Game Over: It's a tie!");
+				return true;
 			}
 			return false;
 		}
-		return true;
+		
+		return false;
 	}
 	
 	protected void nextMove() {

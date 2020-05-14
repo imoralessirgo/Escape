@@ -4,9 +4,14 @@
 	<!-- Board items -->
 	<xMax>24</xMax>
 	<yMax>24</yMax>
-		<rules>
-		<id>REMOVE</id>
+	<rules>
+		<id>POINT_CONFLICT</id>
 	</rules>
+		<rules>
+		<id>TURN_LIMIT</id>
+		<intValue>1</intValue>
+	</rules>
+	
 	<locationInitializers> <!-- An array of these, 0 or more -->
 		<x>3</x>
 		<y>4</y>
@@ -15,16 +20,6 @@
 	<locationInitializers>
 		<x>5</x>
 		<y>6</y>
-		<locationType>BLOCK</locationType>
-	</locationInitializers>
-			<locationInitializers>
-		<x>23</x>
-		<y>8</y>
-		<locationType>EXIT</locationType>
-	</locationInitializers>
-		<locationInitializers>
-		<x>22</x>
-		<y>5</y>
 		<locationType>BLOCK</locationType>
 	</locationInitializers>
 	<locationInitializers>
@@ -45,11 +40,6 @@
 		<locationInitializers>
 		<x>6</x>
 		<y>19</y>
-		<locationType>BLOCK</locationType>
-	</locationInitializers>
-	<locationInitializers>
-		<x>16</x>
-		<y>15</y>
 		<locationType>BLOCK</locationType>
 	</locationInitializers>
 		<locationInitializers>
@@ -98,8 +88,15 @@
 		<x>2</x>
 		<y>4</y>
 		<locationType>CLEAR</locationType>
-		<player>PLAYER1</player>
+		<player>PLAYER2</player>
 		<pieceName>FROG</pieceName>
+	</locationInitializers>
+		<locationInitializers>
+		<x>1</x>
+		<y>2</y>
+		<locationType>CLEAR</locationType>
+		<player>PLAYER2</player>
+		<pieceName>FOX</pieceName>
 	</locationInitializers>
 	<locationInitializers>
 		<x>18</x>
@@ -141,14 +138,7 @@
 		<y>1</y>
 		<locationType>CLEAR</locationType>
 		<player>PLAYER2</player>
-		<pieceName>SNAIL</pieceName>
-	</locationInitializers>
-			<locationInitializers>
-		<x>22</x>
-		<y>6</y>
-		<locationType>CLEAR</locationType>
-		<player>PLAYER1</player>
-		<pieceName>SNAIL</pieceName>
+		<pieceName>HORSE</pieceName>
 	</locationInitializers>
 	<locationInitializers>
 		<x>20</x>
@@ -157,30 +147,6 @@
 		<player>PLAYER1</player>
 		<pieceName>SNAIL</pieceName>
 	</locationInitializers>
-		<locationInitializers>
-		<x>17</x>
-		<y>15</y>
-		<locationType>CLEAR</locationType>
-		<player>PLAYER1</player>
-		<pieceName>FOX</pieceName>
-	</locationInitializers>
-			<locationInitializers>
-		<x>22</x>
-		<y>8</y>
-		<locationType>CLEAR</locationType>
-		<player>PLAYER1</player>
-		<pieceName>FOX</pieceName>
-	</locationInitializers>			
-	<locationInitializers>
-		<x>1</x>
-		<y>24</y>
-		<locationType>CLEAR</locationType>
-		<player>PLAYER1</player>
-		<pieceName>HUMMINGBIRD</pieceName>
-	</locationInitializers>
-	
-
-	
 	<!-- Piece items, an array of pieceTypes, 1 or more -->
 	<pieceTypes>
 		<movementPattern>OMNI</movementPattern>
@@ -200,6 +166,11 @@
 		<movementPattern>OMNI</movementPattern>
 		<pieceName>HORSE</pieceName>
 		<attributes>
+			<id>VALUE</id>
+			<attrType>INTEGER</attrType>
+			<intValue>8</intValue>
+		</attributes>
+		<attributes>
 			<id>DISTANCE</id>
 			<attrType>INTEGER</attrType>
 			<intValue>8</intValue>
@@ -209,14 +180,9 @@
 			<attrType>BOOLEAN</attrType>
 			<booleanValue>true</booleanValue>
 		</attributes>
-				<attributes>
-			<id>JUMP</id>
-			<attrType>BOOLEAN</attrType>
-			<booleanValue>true</booleanValue>
-		</attributes>
 	</pieceTypes>
 	<pieceTypes>
-		<movementPattern>ORTHOGONAL</movementPattern>
+		<movementPattern>OMNI</movementPattern>
 		<pieceName>SNAIL</pieceName>
 		<attributes>
 			<id>DISTANCE</id>
@@ -235,42 +201,17 @@
 		</attributes>
 	</pieceTypes>
 		<pieceTypes>
-		<movementPattern>ORTHOGONAL</movementPattern>
+		<movementPattern>OMNI</movementPattern>
 		<pieceName>FOX</pieceName>
 		<attributes>
-			<id>FLY</id>
+			<id>DISTANCE</id>
 			<attrType>INTEGER</attrType>
-			<intValue>8</intValue>
+			<intValue>-5</intValue>
 		</attributes>
 		<attributes>
 			<id>UNBLOCK</id>
 			<attrType>BOOLEAN</attrType>
-			<booleanValue>false</booleanValue>
-		</attributes>
-		<attributes>
-			<id>JUMP</id>
-			<attrType>BOOLEAN</attrType>
-			<booleanValue>false</booleanValue>
+			<booleanValue>true</booleanValue>
 		</attributes>
 	</pieceTypes>
-			<pieceTypes>
-		<movementPattern>DIAGONAL</movementPattern>
-		<pieceName>HUMMINGBIRD</pieceName>
-		<attributes>
-			<id>FLY</id>
-			<attrType>INTEGER</attrType>
-			<intValue>8</intValue>
-		</attributes>
-		<attributes>
-			<id>UNBLOCK</id>
-			<attrType>BOOLEAN</attrType>
-			<booleanValue>false</booleanValue>
-		</attributes>
-		<attributes>
-			<id>JUMP</id>
-			<attrType>BOOLEAN</attrType>
-			<booleanValue>false</booleanValue>
-		</attributes>
-	</pieceTypes>
-	
 </escapeGameInitializer>
