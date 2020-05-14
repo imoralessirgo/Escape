@@ -61,6 +61,7 @@ public class OrthoGameController extends GameController
 	 */
 	@Override
 	public boolean move(OrthoSquareCoordinate from, OrthoSquareCoordinate to) {
+		if(this.checkGameStatus()) {return false;}
 		int distance = from.distanceTo(to);
 		if (distance == 0) {
 			this.notifyObservers("Piece can not move to itself");
@@ -85,6 +86,7 @@ public class OrthoGameController extends GameController
 							+ p.getValue();
 					this.scoreboard.put(currentPlayer, score);
 					board.removePieceAt(from);
+					this.nextMove();
 					return true;
 				} else if (board.getPieceAt(to) == null
 						|| (this.hasRule(RuleID.REMOVE)
@@ -92,14 +94,16 @@ public class OrthoGameController extends GameController
 										.getPieceAt(from).getPlayer())) {
 					board.removePieceAt(from);
 					board.putPieceAt(p, to);
+					this.nextMove();
 					return true;
 				}else if(this.hasRule(RuleID.POINT_CONFLICT)
 						&& board.getPieceAt(to).getPlayer() != board
 						.getPieceAt(from).getPlayer()) {
 					EscapePiece winner = this.pointConflict(board.getPieceAt(to), getPieceAt(from));
 					board.removePieceAt(from);
-					if(winner == null) {	board.removePieceAt(to); return true; }
+					if(winner == null) {	board.removePieceAt(to); this.nextMove(); return true; }
 					board.putPieceAt(winner, to);
+					this.nextMove();
 					return true;
 				}
 			}

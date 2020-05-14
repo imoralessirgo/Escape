@@ -47,8 +47,8 @@ public class HexOmniTests {
 				Arguments.of(false, 2, -3, 2, 0),
 				Arguments.of(true, 2, -2, 2, 0),
 				Arguments.of(true, 2, -2, 2, 2),
-				Arguments.of(true, 2, -2, 2, -1),
-				Arguments.of(true, 2, -3, 2, -1),
+				Arguments.of(false, 2, -2, 2, -1), //adjusted
+				Arguments.of(false, 2, -3, 2, -1),  // adjusted
 				Arguments.of(false, 2, -3, 1, -3),
 				Arguments.of(false, 2, -3, 0, -3),
 				// Horse

@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <escapeGameInitializer>
 	<coordinateType>HEX</coordinateType>
-	<!-- Game rules -->
 	<rules>
-		<id>REMOVE</id>
+		<id>POINT_CONFLICT</id>
+	</rules>
+	<rules>
+		<id>SCORE</id>
+		<intValue>5</intValue>
 	</rules>
 	<!-- Board items -->
 	<locationInitializers> <!-- An array of these, 0 or more -->
@@ -14,64 +17,11 @@
 		<player>PLAYER1</player>
 	</locationInitializers>
 	<locationInitializers>
-		<x>2</x>
-		<y>-4</y>
-		<locationType>BLOCK</locationType>
-	</locationInitializers>
-	<locationInitializers>
-		<x>1</x>
-		<y>-3</y>
-		<locationType>BLOCK</locationType>
-	</locationInitializers>
-	<locationInitializers>
-		<x>1</x>
-		<y>-2</y>
-		<locationType>BLOCK</locationType>
-	</locationInitializers>
-	<locationInitializers>
-		<x>1</x>
-		<y>-1</y>
-		<locationType>BLOCK</locationType>
-	</locationInitializers>
-	<locationInitializers>
-		<x>1</x>
-		<y>0</y>
-		<locationType>BLOCK</locationType>
-	</locationInitializers>
-	<locationInitializers>
-		<x>1</x>
-		<y>1</y>
-		<locationType>BLOCK</locationType>
-	</locationInitializers>
-	<locationInitializers>
-		<x>3</x>
-		<y>0</y>
-		<locationType>BLOCK</locationType>
-	</locationInitializers>
-	<locationInitializers>
-		<x>3</x>
-		<y>-1</y>
-		<locationType>BLOCK</locationType>
-	</locationInitializers>
-	<locationInitializers>
-		<x>3</x>
-		<y>-2</y>
-		<locationType>BLOCK</locationType>
-	</locationInitializers>
-	<locationInitializers>
-		<x>3</x>
-		<y>-3</y>
-		<locationType>BLOCK</locationType>
-	</locationInitializers>
-	<locationInitializers>
-		<x>3</x>
-		<y>-4</y>
-		<locationType>BLOCK</locationType>
-	</locationInitializers>
-	<locationInitializers>
-		<x>-1</x>
-		<y>-4</y>
-		<locationType>BLOCK</locationType>
+		<x>-3</x>
+		<y>4</y>
+		<locationType>CLEAR</locationType>
+		<pieceName>FROG</pieceName>
+		<player>PLAYER1</player>
 	</locationInitializers>
 	<locationInitializers>
 		<x>2</x>
@@ -85,16 +35,8 @@
 		<y>-1</y>
 		<locationType>CLEAR</locationType>
 		<pieceName>SNAIL</pieceName>
-		<player>PLAYER1</player>
-	</locationInitializers>
-	<locationInitializers>
-		<x>-2</x>
-		<y>-3</y>
-		<locationType>CLEAR</locationType>
-		<pieceName>SNAIL</pieceName>
 		<player>PLAYER2</player>
 	</locationInitializers>
-
 
 	<locationInitializers> <!-- An array of these, 0 or more -->
 		<x>0</x>
@@ -128,11 +70,7 @@
 		<y>2</y>
 		<locationType>BLOCK</locationType>
 	</locationInitializers>
-	<locationInitializers>
-		<x>-1</x>
-		<y>3</y>
-		<locationType>BLOCK</locationType>
-	</locationInitializers>
+
 	<locationInitializers>
 		<x>-2</x>
 		<y>4</y>
@@ -152,7 +90,26 @@
 		<pieceName>FOX</pieceName>
 		<player>PLAYER2</player>
 	</locationInitializers>
-
+	<locationInitializers>
+		<x>-4</x>
+		<y>0</y>
+		<locationType>BLOCK</locationType>
+	</locationInitializers>
+	<locationInitializers>
+		<x>-3</x>
+		<y>-1</y>
+		<locationType>BLOCK</locationType>
+	</locationInitializers>
+	<locationInitializers>
+		<x>-2</x>
+		<y>-2</y>
+		<locationType>BLOCK</locationType>
+	</locationInitializers>
+	<locationInitializers>
+		<x>-1</x>
+		<y>-4</y>
+		<locationType>BLOCK</locationType>
+	</locationInitializers>
 	<locationInitializers>
 		<x>-1</x>
 		<y>0</y>
@@ -180,7 +137,20 @@
 		<y>2</y>
 		<locationType>EXIT</locationType>
 	</locationInitializers>
-
+	<locationInitializers>
+		<x>-2</x>
+		<y>-3</y>
+		<locationType>CLEAR</locationType>
+		<pieceName>SNAIL</pieceName>
+		<player>PLAYER2</player>
+	</locationInitializers>
+		<locationInitializers>
+		<x>4</x>
+		<y>-5</y>
+		<locationType>CLEAR</locationType>
+		<pieceName>HORSE</pieceName>
+		<player>PLAYER2</player>
+	</locationInitializers>
 	<locationInitializers>
 		<x>0</x>
 		<y>3</y>
@@ -212,7 +182,7 @@
 
 	<!-- Piece items, an array of pieceTypes, 1 or more -->
 	<pieceTypes>
-		<movementPattern>LINEAR</movementPattern>
+		<movementPattern>OMNI</movementPattern>
 		<pieceName>FROG</pieceName>
 		<attributes>
 			<id>JUMP</id>
@@ -231,7 +201,7 @@
 		</attributes>
 	</pieceTypes>
 	<pieceTypes>
-		<movementPattern>LINEAR</movementPattern>
+		<movementPattern>DIAGONAL</movementPattern>
 		<pieceName>HORSE</pieceName>
 		<attributes>
 			<id>UNBLOCK</id>
@@ -250,7 +220,7 @@
 		</attributes>
 	</pieceTypes>
 	<pieceTypes>
-		<movementPattern>LINEAR</movementPattern>
+		<movementPattern>OMNI</movementPattern>
 		<pieceName>SNAIL</pieceName>
 		<attributes>
 			<id>UNBLOCK</id>
@@ -269,12 +239,17 @@
 		</attributes>
 	</pieceTypes>
 	<pieceTypes>
-		<movementPattern>LINEAR</movementPattern>
+		<movementPattern>OMNI</movementPattern>
 		<pieceName>FOX</pieceName>
 		<attributes>
 			<id>UNBLOCK</id>
 			<attrType>BOOLEAN</attrType>
 			<booleanValue>false</booleanValue>
+		</attributes>
+						<attributes>
+			<id>VALUE</id>
+			<attrType>INTEGER</attrType>
+			<intValue>6</intValue>
 		</attributes>
 		<attributes>
 			<id>FLY</id>
@@ -283,12 +258,17 @@
 		</attributes>
 	</pieceTypes>
 	<pieceTypes>
-		<movementPattern>LINEAR</movementPattern>
+		<movementPattern>OMNI</movementPattern>
 		<pieceName>HUMMINGBIRD</pieceName>
 		<attributes>
 			<id>DISTANCE</id>
 			<attrType>INTEGER</attrType>
 			<intValue>4</intValue>
+		</attributes>
+				<attributes>
+			<id>VALUE</id>
+			<attrType>INTEGER</attrType>
+			<intValue>6</intValue>
 		</attributes>
 	</pieceTypes>
 </escapeGameInitializer>

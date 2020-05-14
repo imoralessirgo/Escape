@@ -53,14 +53,13 @@ public class HexLinearTests {
 				Arguments.of(false, 2, -3, 2, 0),
 				Arguments.of(true, 2,-2, 2, 0),
 				Arguments.of(true, 2, -2, 2, 2),
-				Arguments.of(true, 2, -2, 2, -1),
-				Arguments.of(true, 2, -3, 2, -1),
+				Arguments.of(false, 2, -2, 2, -1), // adj
+				Arguments.of(false, 2, -3, 2, -1), // adj
 				Arguments.of(false, 2,-3,1,-3),
 				Arguments.of(false, 2, -3, 0,-3),
 				// Horse
 				Arguments.of(true, -3, -2, -5, 0),
 				Arguments.of(true, -3, -2, 0, -5),
-
 				// Snail
 				Arguments.of(false, 2, -1, 3, -1),
 				Arguments.of(true, 2, -1, 0, -1),

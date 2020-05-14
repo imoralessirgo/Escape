@@ -15,7 +15,7 @@
     </locationInitializers>
     <locationInitializers>
         <x>-4</x><y>5</y>
-        <player>PLAYER2</player><pieceName>FROG</pieceName>
+        <player>PLAYER1</player><pieceName>FROG</pieceName>
     </locationInitializers>
     <locationInitializers>
         <x>-1</x><y>0</y>
@@ -23,7 +23,7 @@
     </locationInitializers>
     <locationInitializers>
         <x>-1</x><y>-1</y>
-        <player>PLAYER2</player><pieceName>FROG</pieceName>
+        <player>PLAYER1</player><pieceName>FROG</pieceName>
     </locationInitializers>
     <locationInitializers>
         <x>-1</x><y>-2</y>
@@ -31,7 +31,7 @@
     </locationInitializers>
     <locationInitializers>
         <x>2</x><y>3</y>
-        <player>PLAYER2</player><pieceName>FOX</pieceName>
+        <player>PLAYER1</player><pieceName>FOX</pieceName>
     </locationInitializers>
     <locationInitializers>
         <x>-1</x><y>6</y>

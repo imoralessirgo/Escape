@@ -24,7 +24,7 @@ import escape.rule.*;
 public abstract class GameController<C extends Coordinate> {
 	
 	protected HashMap<PieceName, PieceTypeInitializer> pieceAttributes;
-	protected HashMap<RuleID, Integer> gameRules;
+	protected HashMap<RuleID, Integer> gameRules = new HashMap<RuleID, Integer>();
 	protected LinkedList<GameObserver> obs = new LinkedList<GameObserver>();
 	protected int currentTurn = 0; 
 	protected HashMap<Player, Integer> scoreboard = new HashMap<Player, Integer>(){{
@@ -62,7 +62,6 @@ public abstract class GameController<C extends Coordinate> {
 	 */
 	protected void setGameRules(Rule[] rules) {
 		if (rules != null) {
-			this.gameRules = new HashMap<RuleID, Integer>();
 			for (Rule r : rules) {
 				if (!Arrays.asList(RuleID.values()).contains(r.getId()))
 					throw new EscapeException("GameController: invalid ruleID");
@@ -105,6 +104,10 @@ public abstract class GameController<C extends Coordinate> {
 	} 
 	
 	protected boolean checkGameStatus() {
+		if(!hasRule(RuleID.SCORE) && !hasRule(RuleID.TURN_LIMIT)) {
+			return false;
+		}
+		
 		if(hasRule(RuleID.SCORE)) {
 			int maxScore = gameRules.get(RuleID.SCORE);
 			if(scoreboard.get(Player.PLAYER1) >= maxScore)
@@ -128,8 +131,17 @@ public abstract class GameController<C extends Coordinate> {
 		return true;
 	}
 	
+	protected void nextMove() {
+		if(currentPlayer == Player.PLAYER1) {
+			currentPlayer = Player.PLAYER2;
+		}else {
+			currentPlayer = Player.PLAYER1;
+			currentTurn++;
+		}
+		checkGameStatus();
+	}
 	protected boolean hasRule(RuleID id) {
-		if (gameRules != null && gameRules.get(id) != null)
+		if (!gameRules.isEmpty() && gameRules.get(id) != null)
 			return true;
 		return false;
 	}

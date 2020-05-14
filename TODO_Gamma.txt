@@ -1,0 +1,35 @@
+HexRules
+
+
+add game observer 
+
+
+Point_Conflict
+(2,-3) -> (2,-1) : True // capture both same value
+pieceAt(2,-3) = null : True // comfirm both removed
+pieceAt(2,-1) = null : True // comfirm both removed
+(-3,4) -> (-2,3) : False // player2 s turn
+
+IncrementTurn
+(1,2) -> (2,2) : True // valid move from player 2
+
+capture piece with higher value
+(-3,4) -> (-2,3) : True // capture both same value
+pieceAt(2,-3) = PLAYER2 : True // highest value stays
+
+InvalidMoves
+(4,-5) -> (4,-5) : False // invalid move from player 2 from to are equal
+(5,-5) -> (6,-5) : False // invalid move from player 2 no piece at from
+(4,-5) -> (5,-5) : False // invalid move from player 2 invalid movement pattern for board
+
+Win game
+(2,2) -> (5,2) : False // valid move from player 2 EXIT
+
+Move after Win 
+(4,-5) -> (4,-5) : False // invalid move from player 2 Game Ended
+
+Remove game observer
+
+
+_______________________________________________________________________________________
+SquareRules

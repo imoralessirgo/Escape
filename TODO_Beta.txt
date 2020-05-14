@@ -140,7 +140,7 @@ FOX Fly 5
 (0,1) -> (-3,5) : True // meet distance
 
 
-HexBoard____OmniMovement
+HexBoard___LinearMovement
 FROG Distance 100 Jump
 (2,-3) -> (2,0) : False // can't jump over two pieces
 (2,-2) -> (2,0) : True // jump over enemy piece
